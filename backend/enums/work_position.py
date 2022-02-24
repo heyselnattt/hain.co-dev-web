@@ -2,7 +2,8 @@ from enum import IntEnum
 
 
 class CanteenPosition(IntEnum):
-    pass
+    CASHIER = 0
+    CHEF = 1
 
 
 class AdminPosition(IntEnum):
