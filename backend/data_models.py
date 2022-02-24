@@ -1,8 +1,10 @@
 from pydantic import BaseModel, SecretStr, AnyUrl
-from typing import Optional
+from typing import Optional, Union
+import datetime as dt
 
 # enum types
 from enums.product_type import ProductType
+from enums.transaction_type import TransactionType
 from enums.work_position import CanteenPosition, AdminPosition
 
 """
@@ -49,3 +51,12 @@ class Product(BaseModel):
     product_stock: int
     product_type: ProductType
     product_is_active: bool
+
+
+class Transaction(BaseModel):
+    transaction_id: int
+    transaction_agent: Union[Customer, Admin, ]
+    transaction_description: str
+    transaction_type: TransactionType
+    transaction_amount: Optional[float]
+    transaction_date: dt.datetime
