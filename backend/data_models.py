@@ -4,6 +4,7 @@ import datetime as dt
 
 # enum types
 from enums.product_type import ProductType
+from enums.record_interval import RecordInterval
 from enums.transaction_type import TransactionType
 from enums.work_position import CanteenPosition, AdminPosition
 
@@ -55,8 +56,13 @@ class Product(BaseModel):
 
 class Transaction(BaseModel):
     transaction_id: int
-    transaction_agent: Union[Customer, Admin, ]
+    transaction_agent: Union[Customer, Admin, CanteenStaff]
     transaction_description: str
     transaction_type: TransactionType
     transaction_amount: Optional[float]
     transaction_date: dt.datetime
+
+
+class Record(BaseModel):
+    record_id: int
+    record_interval: RecordInterval
