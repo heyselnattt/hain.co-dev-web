@@ -1,6 +1,8 @@
 from pydantic import BaseModel, SecretStr
 from typing import Optional
 
+# enum types
+from enums.product_type import ProductType
 from enums.work_position import CanteenPosition, AdminPosition
 
 """
@@ -38,3 +40,11 @@ class Admin(BaseModel):
     admin_password: SecretStr
     admin_position: AdminPosition
 
+
+class Product(BaseModel):
+    product_id: int
+    product_name: str
+    product_price: float
+    product_image_link: str
+    product_stock: int
+    product_type: ProductType
