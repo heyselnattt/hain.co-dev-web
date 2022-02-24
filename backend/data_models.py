@@ -1,4 +1,4 @@
-from pydantic import BaseModel, SecretStr
+from pydantic import BaseModel, SecretStr, AnyUrl
 from typing import Optional
 
 # enum types
@@ -45,7 +45,7 @@ class Product(BaseModel):
     product_id: int
     product_name: str
     product_price: float
-    product_image_link: str
+    product_image_link: AnyUrl
     product_stock: int
     product_type: ProductType
     product_is_active: bool
