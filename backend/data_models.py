@@ -1,7 +1,7 @@
 from pydantic import BaseModel, SecretStr
 from typing import Optional
 
-from enums.work_position import CanteenPosition
+from enums.work_position import CanteenPosition, AdminPosition
 
 """
 
@@ -29,4 +29,12 @@ class CanteenStaff(BaseModel):
     staff_address: str
     staff_position: CanteenPosition
     staff_is_active: bool
+
+
+class Admin(BaseModel):
+    admin_id: int
+    admin_full_name: str
+    admin_username: str
+    admin_password: SecretStr
+    admin_position: AdminPosition
 
