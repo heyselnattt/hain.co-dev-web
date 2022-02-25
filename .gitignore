@@ -10,3 +10,9 @@ node_modules
 
 # Python venv
 venv
+
+# Extra py files
+**.pyc
+
+# Config files
+.idea
