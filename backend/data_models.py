@@ -47,6 +47,7 @@ class Product(BaseModel):
     product_image_link: AnyUrl
     product_stock: int
     product_type: ProductType
+    product_allergic_ingredients: list[str]
     product_is_active: bool
 
 
