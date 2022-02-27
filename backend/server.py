@@ -1,6 +1,11 @@
 from fastapi import FastAPI
 
-from data_models import Product, CanteenStaff, Customer
+from data_models import (
+    Product,
+    CanteenStaff,
+    Customer,
+    Admin, Transaction, Record
+)
 
 app = FastAPI()
 
@@ -43,13 +48,11 @@ Transaction
     get all - for table
     get 1 - for record
     post 1 - add record
-    put 1 - update record
     
 Record
     get all - for table
     get 1 - for record
     post 1 - add record
-    put 1 - update record
 """
 
 
@@ -121,4 +124,60 @@ def add_customer(id: int, customer: Customer) -> Customer:
 
 @app.put('customer/{id}')
 def update_customer(id: int, updated_customer: Customer) -> Customer:
+    pass
+
+
+# === ADMIN ===
+
+@app.get('/admin')
+def get_all_admin() -> list[Admin]:
+    pass
+
+
+@app.get('admin/{id}')
+def get_admin_by_id(id: int) -> Admin:
+    pass
+
+
+@app.post('admin/{id}')
+def add_admin(id: int, admin: Customer) -> Admin:
+    pass
+
+
+@app.put('admin/{id}')
+def update_admin(id: int, updated_admin: Customer) -> Admin:
+    pass
+
+
+# === TRANSACTION ===
+
+@app.get('/transaction')
+def get_all_transaction() -> list[Transaction]:
+    pass
+
+
+@app.get('transaction/{id}')
+def get_transaction_by_id(id: int) -> Transaction:
+    pass
+
+
+@app.post('transaction/{id}')
+def add_transaction(id: int, transaction: Transaction) -> Transaction:
+    pass
+
+
+# === RECORD ===
+
+@app.get('/record')
+def get_all_record() -> list[Record]:
+    pass
+
+
+@app.get('record/{id}')
+def get_record_by_id(id: int) -> Record:
+    pass
+
+
+@app.post('record/{id}')
+def add_record(id: int, updated_record: Record) -> Record:
     pass
