@@ -9,6 +9,6 @@ class TransactionType(IntEnum):
         BUY (int): A transaction from the walk in customers
         ADMIN (int): Transactions done by admins
     """
-    ORDER = 0
-    BUY = 1
-    ADMIN = 2
+    ORDER = 1
+    BUY = 2
+    ADMIN = 3
