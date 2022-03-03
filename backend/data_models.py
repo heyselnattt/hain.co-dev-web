@@ -35,7 +35,7 @@ class CanteenStaff(BaseModel):
 class Admin(BaseModel):
     admin_id: int
     admin_full_name: str
-    admin_username: str
+    admin_id_number: str
     admin_password: SecretStr
     admin_position: AdminPosition
 
@@ -53,7 +53,7 @@ class Product(BaseModel):
 
 class Transaction(BaseModel):
     transaction_id: int
-    transaction_agent: Union[Customer, Admin, CanteenStaff]
+    transaction_agent: str
     transaction_description: str
     transaction_type: TransactionType
     transaction_amount: Optional[float]
@@ -63,3 +63,5 @@ class Transaction(BaseModel):
 class Record(BaseModel):
     record_id: int
     record_interval: RecordInterval
+    # record_date ?
+

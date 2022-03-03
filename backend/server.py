@@ -90,17 +90,17 @@ def get_all_canteen_staff() -> list[CanteenStaff]:
     pass
 
 
-@app.get('staff/{id}')
+@app.get('/staff/{id}')
 def get_staff_by_id(id: int) -> CanteenStaff:
     pass
 
 
-@app.post('staff/{id}')
+@app.post('/staff/{id}')
 def add_staff(id: int, staff: CanteenStaff) -> CanteenStaff:
     pass
 
 
-@app.put('staff/{id}')
+@app.put('/staff/{id}')
 def update_staff(id: int, updated_staff: CanteenStaff) -> CanteenStaff:
     pass
 
@@ -112,17 +112,17 @@ def get_all_customer() -> list[Customer]:
     pass
 
 
-@app.get('customer/{id}')
+@app.get('/customer/{id}')
 def get_customer_by_id(id: int) -> Customer:
     pass
 
 
-@app.post('customer/{id}')
+@app.post('/customer/{id}')
 def add_customer(id: int, customer: Customer) -> Customer:
     pass
 
 
-@app.put('customer/{id}')
+@app.put('/customer/{id}')
 def update_customer(id: int, updated_customer: Customer) -> Customer:
     pass
 
@@ -134,17 +134,17 @@ def get_all_admin() -> list[Admin]:
     pass
 
 
-@app.get('admin/{id}')
+@app.get('/admin/{id}')
 def get_admin_by_id(id: int) -> Admin:
     pass
 
 
-@app.post('admin/{id}')
+@app.post('/admin/{id}')
 def add_admin(id: int, admin: Customer) -> Admin:
     pass
 
 
-@app.put('admin/{id}')
+@app.put('/admin/{id}')
 def update_admin(id: int, updated_admin: Customer) -> Admin:
     pass
 
