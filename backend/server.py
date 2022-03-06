@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from data_models import (
     Product,
@@ -10,50 +11,30 @@ from data_models import (
 app = FastAPI()
 
 
+# === TRUSTED HOSTS/REQUEST ORIGINS ===
+
+origins = [
+  'http://localhost:8080',
+  'http://localhost:3000'
+]
+
+
+# === ADD MIDDLEWARE TO APPLICATION ===
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 # === TESTING ===
+
 @app.get('/')
 def root():
     return {'message': 'Hello World'}
-
-
-"""
-Helpers
-    get next id
-
-Product
-    get all - to display as cards
-    get 1 - for record 
-    post 1 - add record
-    put 1 - update record
-    
-Canteen Staff
-    get all - to display as cards
-    get 1 - for record
-    post 1 - add record
-    put 1 - update record
-    
-Customer
-    get all - for table
-    get 1 - for record
-    post 1 - add record
-    put 1 - update record
-    
-Admin
-    get all - to display as cards
-    get 1 - for record
-    post 1 - add record
-    put 1 - update record
-    
-Transaction
-    get all - for table
-    get 1 - for record
-    post 1 - add record
-    
-Record
-    get all - for table
-    get 1 - for record
-    post 1 - add record
-"""
 
 
 # === HELPER FUNCTIONS ===
