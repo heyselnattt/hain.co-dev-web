@@ -16,7 +16,7 @@ class Customer(BaseModel):
     customer_last_name: str
     customer_contact_number: str
     customer_username: str
-    customer_password: SecretStr
+    customer_password: str
     customer_email: str
     customer_is_active: bool
 
@@ -26,7 +26,7 @@ class CanteenStaff(BaseModel):
     staff_full_name: str
     staff_contact_number: str
     staff_username: str
-    staff_password: SecretStr
+    staff_password: str
     staff_address: str
     staff_position: CanteenPosition
     staff_is_active: bool
@@ -35,8 +35,8 @@ class CanteenStaff(BaseModel):
 class Admin(BaseModel):
     admin_id: int
     admin_full_name: str
-    admin_id_number: str
-    admin_password: SecretStr
+    admin_username: str
+    admin_password: str
     admin_position: AdminPosition
 
 
@@ -44,10 +44,9 @@ class Product(BaseModel):
     product_id: int
     product_name: str
     product_price: float
-    product_image_link: AnyUrl
+    product_image_link: str
     product_stock: int
     product_type: ProductType
-    product_allergic_ingredients: list[str]
     product_is_active: bool
 
 
