@@ -22,8 +22,11 @@ class DatabaseOperator:
     def get_cursor(self):
         return self.conn.cursor()
 
-    def close(self):
+    def close_cursor(self):
         self.conn.cursor().close()
+
+    def close_connection(self):
+        self.conn.close()
 
     def commit(self):
         self.conn.commit()
