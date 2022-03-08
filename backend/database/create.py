@@ -8,7 +8,7 @@ pg_heroku = DatabaseOperator()
 cursor = pg_heroku.get_cursor()
 
 
-def add_admin(admin: Admin) -> Admin:
+def add_admin_to_database(admin: Admin) -> Admin:
     salt = create_salt()
     encrypted_password = encrypt_password(admin.admin_password, salt)
     try:
