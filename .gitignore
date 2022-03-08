@@ -19,3 +19,6 @@ venv
 
 # Secret files
 **/env.json
+
+# Misc folders
+uml
