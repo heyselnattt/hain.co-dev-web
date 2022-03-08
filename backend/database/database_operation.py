@@ -21,3 +21,17 @@ class DatabaseOperator:
 
     def get_cursor(self):
         return self.conn.cursor()
+
+    def close(self):
+        self.conn.cursor().close()
+
+    def commit(self):
+        self.conn.commit()
+
+    # def get_next_id(self, table: str):
+    #     sql = f'SELECT {table}_id FROM hainco_{table} ORDER BY id DESC LIMIT 1'
+    #     print(sql)
+    #     # cursor = self.get_cursor()
+    #     # cursor.execute(sql)
+    #     # max_id = cursor.fetchone()
+    #     # return int(max_id) + 1
