@@ -16,3 +16,6 @@ venv
 
 # Config files
 .idea
+
+# Secret files
+**/env.json
