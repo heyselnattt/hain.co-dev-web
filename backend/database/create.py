@@ -1,7 +1,7 @@
 import psycopg2
 
 from data_models import Admin
-from database.encrypt_decrypt import create_salt, encrypt_password
+from database.security import create_salt, encrypt_password
 from database_operation import DatabaseOperator
 
 pg_heroku = DatabaseOperator()
