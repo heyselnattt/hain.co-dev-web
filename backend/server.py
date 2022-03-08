@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from data_models import (
     Product,
-    CanteenStaff,
+    Staff,
     Customer,
     Admin, Transaction, Record
 )
@@ -37,11 +37,6 @@ def root():
     return {'message': 'Hello World'}
 
 
-# === HELPER FUNCTIONS ===
-def get_max_id(table_name: str) -> int:
-    pass
-
-
 # === PRODUCT ===
 
 @app.get('/product')
@@ -67,22 +62,22 @@ def update_product(id: int, updated_product: Product) -> Product:
 # === CANTEEN STAFF ===
 
 @app.get('/staff')
-def get_all_canteen_staff() -> list[CanteenStaff]:
+def get_all_canteen_staff() -> list[Staff]:
     pass
 
 
 @app.get('/staff/{id}')
-def get_staff_by_id(id: int) -> CanteenStaff:
+def get_staff_by_id(id: int) -> Staff:
     pass
 
 
 @app.post('/staff/{id}')
-def add_staff(id: int, staff: CanteenStaff) -> CanteenStaff:
+def add_staff(id: int, staff: Staff) -> Staff:
     pass
 
 
 @app.put('/staff/{id}')
-def update_staff(id: int, updated_staff: CanteenStaff) -> CanteenStaff:
+def update_staff(id: int, updated_staff: Staff) -> Staff:
     pass
 
 
