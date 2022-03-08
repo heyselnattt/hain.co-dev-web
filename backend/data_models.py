@@ -57,6 +57,3 @@ class Transaction(BaseModel):
 
 class Record(BaseModel):
     record_interval: RecordInterval
-    record_start_range: dt.date
-    record_end_range: dt.date
-
