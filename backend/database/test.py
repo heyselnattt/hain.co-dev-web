@@ -1,10 +1,9 @@
-from database_operation import DatabaseOperator
+from database.security import encrypt_password, decrypt_password
 
-pg_cloud = DatabaseOperator()
-cursor = pg_cloud.get_cursor()
+password = 'july271914'
+salt = '5YA7z'
+print(decrypt_password(
+    'gAAAAABiJ6udplt-nwvKENVLzaRkrB-SmP-4KaBMBr8t1JoSqeYyqMetxRaAXL_wvFr97bPvfq2s1xidauM_05l93HOspEwDXQ==',
+    'XMdQr'
+))
 
-cursor.execute('SELECT version()')
-
-db_version = cursor.fetchone()
-
-print(f'The DB version is {db_version}')
