@@ -1,5 +1,12 @@
+import psycopg2
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from psycopg2 import OperationalError
+from starlette import status
+from starlette.exceptions import HTTPException
+
+from database.database_operation import DatabaseOperator
+from psycopg2.extras import RealDictCursor
 
 from data_models import (
     Product,
@@ -14,7 +21,6 @@ app = FastAPI()
 # === TRUSTED HOSTS/REQUEST ORIGINS ===
 
 origins = [
-  'http://localhost:8080',
   'http://localhost:3000'
 ]
 
@@ -41,7 +47,30 @@ def root():
 
 @app.get('/product')
 def get_all_product() -> list[Product]:
-    pass
+    try:
+        db = DatabaseOperator()
+        cursor = db.get_cursor(RealDictCursor)
+        cursor.execute("""SELECT 
+                            product_id,
+                            product_name,
+                            product_price,
+                            product_image_link,
+                            product_stock,
+                            product_type,
+                            product_is_active
+                            FROM hainco_product""")
+        all_product = cursor.fetchall()
+        if not all_product:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail='No products exist'
+            )
+        return all_product
+    except OperationalError as e:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail='Failed to connect to database'
+        )
 
 
 @app.get('/product/{id}')
@@ -63,7 +92,30 @@ def update_product(id: int, updated_product: Product) -> Product:
 
 @app.get('/staff')
 def get_all_canteen_staff() -> list[Staff]:
-    pass
+    try:
+        db = DatabaseOperator()
+        cursor = db.get_cursor(RealDictCursor)
+        cursor.execute("""SELECT 
+                            staff_id,
+                            staff_full_name,
+                            staff_contact_number,
+                            staff_username,
+                            staff_address,
+                            staff_position,
+                            staff_is_active
+                            FROM hainco_staff""")
+        all_staff = cursor.fetchall()
+        if not all_staff:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail='No staff records exist'
+            )
+        return all_staff
+    except OperationalError as e:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail='Failed to connect to database'
+        )
 
 
 @app.get('/staff/{id}')
@@ -85,7 +137,31 @@ def update_staff(id: int, updated_staff: Staff) -> Staff:
 
 @app.get('/customer')
 def get_all_customer() -> list[Customer]:
-    pass
+    try:
+        db = DatabaseOperator()
+        cursor = db.get_cursor(RealDictCursor)
+        cursor.execute("""SELECT 
+                            customer_id,
+                            customer_first_name,
+                            customer_middle_name,
+                            customer_last_name,
+                            customer_username,
+                            customer_email,
+                            customer_contact_number,
+                            customer_is_active
+                            FROM hainco_customer""")
+        all_customer = cursor.fetchall()
+        if not all_customer:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail='No customer records exist'
+            )
+        return all_customer
+    except OperationalError as e:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail='Failed to connect to database'
+        )
 
 
 @app.get('/customer/{id}')
@@ -106,22 +182,43 @@ def update_customer(id: int, updated_customer: Customer) -> Customer:
 # === ADMIN ===
 
 @app.get('/admin')
-def get_all_admin() -> list[Admin]:
+def get_all_admin():
+    try:
+        db = DatabaseOperator()
+        cursor = db.get_cursor(RealDictCursor)
+        cursor.execute("""SELECT 
+                        admin_id,
+                        admin_full_name,
+                        admin_username,
+                        admin_position,
+                        admin_is_active
+                        FROM hainco_admin""")
+        all_admin = cursor.fetchall()
+        if not all_admin:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail='No admin records found'
+            )
+        return all_admin
+    except OperationalError:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail='Failed to connect to database'
+        )
+
+
+@app.get('/admin/{username}')
+def get_admin_by_username(username: str):
     pass
 
 
-@app.get('/admin/{id}')
-def get_admin_by_id(id: int) -> Admin:
+@app.post('/admin/new_admin')
+def add_admin(admin: Admin):
     pass
 
 
-@app.post('/admin/{id}')
-def add_admin(id: int, admin: Customer) -> Admin:
-    pass
-
-
-@app.put('/admin/{id}')
-def update_admin(id: int, updated_admin: Customer) -> Admin:
+@app.put('/admin/update_admin')
+def update_admin(username: str, updated_admin: Admin) -> Admin:
     pass
 
 
@@ -129,7 +226,29 @@ def update_admin(id: int, updated_admin: Customer) -> Admin:
 
 @app.get('/transaction')
 def get_all_transaction() -> list[Transaction]:
-    pass
+    try:
+        db = DatabaseOperator()
+        cursor = db.get_cursor(RealDictCursor)
+        cursor.execute("""SELECT 
+                        transaction_id,
+                        transaction_agent,
+                        transaction_description,
+                        transaction_type,
+                        transaction_amount,
+                        transaction_date
+                        FROM hainco_transaction""")
+        all_transaction = cursor.fetchall()
+        if not all_transaction:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail='No transactions found'
+            )
+        return all_transaction
+    except OperationalError:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail='Failed to connect to database'
+        )
 
 
 @app.get('transaction/{id}')
