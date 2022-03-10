@@ -6,11 +6,11 @@ config = dotenv_values('.env')
 
 class DatabaseOperator:
     def __init__(self, **params):
-        self.host = params.get('host', 'ec2-35-153-35-94.compute-1.amazonaws.com')
-        self.database_name = params.get('database', 'd2a8coo0jp3akd')
-        self.user = params.get('user', 'cxbubumlkovyuu')
-        self.password = params.get('password', '7875893fe286b394a64661098d404972f17914786d304ef1fc66705d55840abc')
-        self.port = params.get('port', '5432')
+        self.host = params.get('host', config['DATABASE_HOST'])
+        self.database_name = params.get('database', config['DATABASE_NAME'])
+        self.user = params.get('user', config['DATABASE_USER'])
+        self.password = params.get('password', config['DATABASE_PASSWORD'])
+        self.port = params.get('port', config['DATABASE_PORT'])
         self.conn = pg.connect(
             host=self.host,
             database=self.database_name,
@@ -19,8 +19,8 @@ class DatabaseOperator:
             port=self.port
         )
 
-    def get_cursor(self, factory=None):
-        return self.conn.cursor(cursor_factory=factory)
+    def get_cursor(self):
+        return self.conn.cursor()
 
     def close_cursor(self):
         self.conn.cursor().close()
