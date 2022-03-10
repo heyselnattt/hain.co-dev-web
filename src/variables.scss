@@ -1,5 +1,7 @@
 /* Variables and mixins declared here will be available in all other SCSS files */ /* https://github.com/jgthms/bulma/issues/1293 */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 $body-overflow-y: auto;
 $primary: hsl(56, 100%, 50%);
 $link: hsl(223, 85%, 41%);
 $table-row-hover-background-color: hsla(212, 91%, 71%, 0.445);
+$family-sans-serif: Arial, Inter, Segoe UI, sans-serif;
