@@ -1,4 +1,6 @@
 <script>
+    import BtnAddRecord from "$lib/components/BtnAddRecord.svelte";
+    import BtnBack from "$lib/components/BtnBack.svelte";
     import NavbarWithSearch from "$lib/components/NavbarWithSearch.svelte";
     import TableRow from "$lib/components/TableRow.svelte";
 </script>
@@ -11,27 +13,18 @@
 
 <div class="container">
     <div class="columns has-text-centered pt-5">
-        <div class="column is-4">
-            <a class="btn-txt button is-link is-rounded" href="Database">
-                <img class="img1" src="back.png" alt="back"/>
-                <p class="ml-3">
-                   Back
-                </p>
-            </a>
+        <div class="column is-4 has-text-centered">
+            <a href="Database"><BtnBack /></a>
         </div>
         <div class="column is-4">
             <p class="text has-text-link">
                 Customers
             </p>
         </div>
-        <div class="column is-4">
-            <a class="btn-txt button is-link is-rounded" href="/">
-                <img class="img2" src="add.png" alt="back"/>
-                <p class="ml-2">
-                   Add Record
-                </p>
-            </a>
+        <div>
+            <a href="AddNewCustomer"> <BtnAddRecord /> </a>
         </div>
+        
     </div>
 
     <div class="column is-10 is-offset-1 pl-5 pt-0">
@@ -64,16 +57,7 @@
         font-family: 'Karla', sans-serif;
         font-size: 40px;
     }
-    .btn-txt {
-        font-size: 20px;
-        font-family: 'Karla', sans-serif;
-    }
-    .img1 {
-        width: 20px;
-    }
-    .img2 {
-        width: 30px;
-    }
+
     table {
         font-family: 'Karla', sans-serif;
         font-size: 20px;
