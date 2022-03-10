@@ -1,6 +1,7 @@
 <script>
-import FieldWithValue from "$lib/components/FieldWithValue.svelte";
-import HomeNavbar from "$lib/components/HomeNavbar.svelte";
+    import BtnBack from "$lib/components/BtnBack.svelte";
+    import FieldWithValue from "$lib/components/FieldWithValue.svelte";
+    import HomeNavbar from "$lib/components/HomeNavbar.svelte";
 </script>
 
 <svelte:head>
@@ -11,13 +12,8 @@ import HomeNavbar from "$lib/components/HomeNavbar.svelte";
 
 <div class="container">
     <div class="columns  pt-5 is-multiline">
-        <div class="column is-4 has-text-centered">
-            <a class="btn-txt button is-link is-rounded" href="Customers">
-                <img class="img1" src="back.png" alt="back"/>
-                <p class="ml-3">
-                   Back
-                </p>
-            </a>
+        <div class="column is-4"> 
+            <a href="Customers"> <BtnBack /> </a> 
         </div>
         <div class="column is-4  ml-6">
             <p class="text has-text-link">
@@ -51,8 +47,5 @@ import HomeNavbar from "$lib/components/HomeNavbar.svelte";
     .btn-txt {
         font-size: 20px;
         font-family: 'Karla', sans-serif;
-    }
-    .img1 {
-        width: 20px;
     }
 </style>
