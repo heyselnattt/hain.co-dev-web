@@ -1,5 +1,7 @@
 <script>
     import HomeNavbar from "$lib/components/HomeNavbar.svelte";
+
+    let username
 </script>
 
 <svelte:head>
@@ -20,7 +22,7 @@
         <div class="column is-4 is-offset-2">
             <section class="section pt-0"></section>
             <section class="section is-flex is-justify-content-center pb-3">
-                    <img src="Blue_Circle.png" alt="logo" class="logo"/>
+                    <img src="images/Blue_Circle.png" alt="logo" class="logo"/>
             </section>
             <section class="section is-medium pb-0 has-text-centered is-paddingless">
                 <h1 class="has-text-link">
@@ -45,7 +47,7 @@
                         <p class="text has-text-link ml-6 mb-2 pl-3">
                             ID Number
                         </p>
-                        <input class="input is-rounded mx-6 mb-3" type="email" placeholder="ID Number" />
+                        <input class="input is-rounded mx-6 mb-3" type="text" placeholder="ID Number" />
                         <p class="text has-text-link ml-6 mb-2 pl-3">
                             Password
                         </p>
