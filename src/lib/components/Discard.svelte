@@ -1,5 +1,5 @@
 <button class="btn-txt button is-danger is-rounded mt-3" href="/">
-    <img class="discard" src="delete.png" alt="back"/>
+    <img class="discard" src="images/delete.png" alt="back"/>
     <p class="ml-2">
         Discard
     </p>

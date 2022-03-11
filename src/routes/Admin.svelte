@@ -28,12 +28,12 @@
     </div>
 
     <div class="columns is-centered is-multiline pt-5">
-        <Card name="001" entries="230" sub="customers" image="adminIcon.png"/>
-        <Card name="002" entries="15" sub="staff entries" image="adminIcon.png"/>
-        <Card name="003" entries="15" sub="items" image="adminIcon.png"/>
-        <Card name="004" entries="4" sub="records" image="adminIcon.png"/>
-        <Card name="005" entries="130" sub="entries" image="adminIcon.png"/>
-        <Card name="006" entries="370" sub="entries" image="adminIcon.png"/>
+        <Card name="001" entries="230" sub="customers" image="images/adminIcon.png"/>
+        <Card name="002" entries="15" sub="staff entries" image="images/adminIcon.png"/>
+        <Card name="003" entries="15" sub="items" image="images/adminIcon.png"/>
+        <Card name="004" entries="4" sub="records" image="images/adminIcon.png"/>
+        <Card name="005" entries="130" sub="entries" image="images/adminIcon.png"/>
+        <Card name="006" entries="370" sub="entries" image="images/adminIcon.png"/>
         <!-- {#each Array(100) as a}
         <Card name="{a}" sub="{a}-sub" link="/"/>
         {/each} -->
