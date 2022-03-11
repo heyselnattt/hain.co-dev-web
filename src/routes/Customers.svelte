@@ -2,7 +2,7 @@
     import BtnAddRecord from "$lib/components/BtnAddRecord.svelte";
     import BtnBack from "$lib/components/BtnBack.svelte";
     import NavbarWithSearch from "$lib/components/NavbarWithSearch.svelte";
-    import TableRow from "$lib/components/TableRow.svelte";
+    import CustomersTableRow from "$lib/components/CustomersTableRow.svelte";
 </script>
 
 <svelte:head>
@@ -21,7 +21,7 @@
                 Customers
             </p>
         </div>
-        <div>
+        <div class="ml-6 pl-6">
             <a href="AddNewCustomer"> <BtnAddRecord /> </a>
         </div>
         
@@ -37,17 +37,17 @@
                     <th>Email</th>
                 </tr>
             </thead>
-            <TableRow num="1" name="Taylor Swift" contactNum="09254698852" email="taylorswift@gmail.com"/>
-            <TableRow num="2" name="Cecil Uy" contactNum="09252236478" email="uy.cecil@gmail.com"/>
-            <TableRow num="3" name="Adrian Tan" contactNum="09154223687" email="adriantan123@gmail.com"/>
-            <TableRow num="4" name="Trixie Cruz" contactNum="09356684521" email="cruztrixie@gmail.com"/>
-            <TableRow num="5" name="Mark Johnson" contactNum="09054865523" email="markjohnson1@gmail.com"/>
-            <TableRow num="6" name="Ralph Tirao" contactNum="09683105246" email="tirao_ralph@gmail.com"/>
-            <TableRow num="7" name="Mhea Niere" contactNum="09685233451" email="mheaniere@gmail.com"/>
-            <TableRow num="8" name="Rhea Valdez" contactNum="09352648551" email="rhea.valdez@gmail.com"/>
-            <TableRow num="9" name="Charles Maverick" contactNum="09302922012" email="charlesmaverick@gmail.com"/>
-            <TableRow num="10" name="Angel Lawson" contactNum="09684521404" email="angel_lawson@gmail.com"/>
-            <TableRow num="11" name="Marco De Jesus" contactNum="09156324521" email="marco.dejesus@gmail.com"/>
+            <CustomersTableRow num="1" name="Taylor Swift" contactNum="09254698852" email="taylorswift@gmail.com"/>
+            <CustomersTableRow num="2" name="Cecil Uy" contactNum="09252236478" email="uy.cecil@gmail.com"/>
+            <CustomersTableRow num="3" name="Adrian Tan" contactNum="09154223687" email="adriantan123@gmail.com"/>
+            <CustomersTableRow num="4" name="Trixie Cruz" contactNum="09356684521" email="cruztrixie@gmail.com"/>
+            <CustomersTableRow num="5" name="Mark Johnson" contactNum="09054865523" email="markjohnson1@gmail.com"/>
+            <CustomersTableRow num="6" name="Ralph Tirao" contactNum="09683105246" email="tirao_ralph@gmail.com"/>
+            <CustomersTableRow num="7" name="Mhea Niere" contactNum="09685233451" email="mheaniere@gmail.com"/>
+            <CustomersTableRow num="8" name="Rhea Valdez" contactNum="09352648551" email="rhea.valdez@gmail.com"/>
+            <CustomersTableRow num="9" name="Charles Maverick" contactNum="09302922012" email="charlesmaverick@gmail.com"/>
+            <CustomersTableRow num="10" name="Angel Lawson" contactNum="09684521404" email="angel_lawson@gmail.com"/>
+            <CustomersTableRow num="11" name="Marco De Jesus" contactNum="09156324521" email="marco.dejesus@gmail.com"/>
         </table>
     </div>
 </div>

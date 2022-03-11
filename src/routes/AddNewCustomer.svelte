@@ -13,12 +13,12 @@
         <div class="column is-4"> 
             <a href="Customers"> <BtnBack /> </a> 
         </div>
-        <div class="column is-4  ml-4">
+        <div class="column is-4">
             <p class="text has-text-link">
                 New Customer
             </p>
         </div>
-        <div class="column is-3">
+        <div class="column is-3 ml-6">
             <a href="/"> <Discard /> </a>
         </div>
 
