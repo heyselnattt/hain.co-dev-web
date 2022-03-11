@@ -1,42 +1,44 @@
 <script>
+    import Discard from "$lib/components/Discard.svelte";
     import BtnBack from "$lib/components/BtnBack.svelte";
-    import BtnEdit from "$lib/components/BtnEdit.svelte";
     import FieldWithValue from "$lib/components/FieldWithValue.svelte";
-    import HomeNavbar from "$lib/components/HomeNavbar.svelte";
+    import NavbarSolo from "$lib/components/NavbarSolo.svelte";
+    import BtnAddRecord from "$lib/components/BtnAddRecord.svelte";
 </script>
 
-<svelte:head>
-    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@600&display=swap" rel="stylesheet"/>
-</svelte:head>
-
-<HomeNavbar/>
+<NavbarSolo />
 
 <div class="container">
     <div class="columns  pt-5 is-multiline has-text-centered">
         <div class="column is-4"> 
-            <a href="Customers"> <BtnBack /> </a> 
+            <a href="CanteenStaff"> <BtnBack /> </a> 
         </div>
-        <div class="column is-4">
+        <div class="column is-4  ml-4">
             <p class="text has-text-link">
-                Customer's Information
+                New Canteen Staff
             </p>
         </div>
         <div class="column is-3 ml-6">
-            <a href="/"> <BtnEdit /> </a>
+            <a href="/"> <Discard /> </a>
         </div>
 
         <div class="column is-12"></div>
         <div class="column is-12"></div>
         <div class="column is-12"></div>
-        <FieldWithValue name="Name" value="Swift, Taylor"/>
-        <FieldWithValue name="Contact No." value="09123456789"/>
+        <FieldWithValue name="Name" value=""/>
+        <FieldWithValue name="Position" value=""/>
         <div class="column is-12"></div>
-        <FieldWithValue name="Email" value="taylorswift@gmail.com"/>
-        <FieldWithValue name="Password" value="*****"/>
-        <div class="column is-12"></div>
-        <div class="column is-12"></div>
+        <FieldWithValue name="Contact No." value=""/>
+        <FieldWithValue name="Address" value=""/>
         <div class="column is-12"></div>
         <div class="column is-12"></div>
+        <div class="column is-12"></div>
+        <div class="column is-12"></div>
+    </div>
+
+    <!-- Add record button -->
+    <div class="mb- has-text-centered">
+        <a href="CanteenStaff"> <BtnAddRecord /> </a>
     </div>
 </div>
 

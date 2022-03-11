@@ -2,37 +2,37 @@
     import BtnBack from "$lib/components/BtnBack.svelte";
     import BtnEdit from "$lib/components/BtnEdit.svelte";
     import FieldWithValue from "$lib/components/FieldWithValue.svelte";
-    import HomeNavbar from "$lib/components/HomeNavbar.svelte";
+    import NavbarSolo from "$lib/components/NavbarSolo.svelte";
 </script>
 
 <svelte:head>
     <link href="https://fonts.googleapis.com/css2?family=Karla:wght@600&display=swap" rel="stylesheet"/>
 </svelte:head>
 
-<HomeNavbar/>
+<NavbarSolo/>
 
 <div class="container">
     <div class="columns  pt-5 is-multiline has-text-centered">
         <div class="column is-4"> 
-            <a href="Customers"> <BtnBack /> </a> 
+            <a href="CanteenStaff"> <BtnBack /> </a> 
         </div>
         <div class="column is-4">
             <p class="text has-text-link">
-                Customer's Information
+                Canteen Staff's Information
             </p>
         </div>
         <div class="column is-3 ml-6">
-            <a href="/"> <BtnEdit /> </a>
+            <a href="EditCSInfo"> <BtnEdit /> </a>
         </div>
 
         <div class="column is-12"></div>
         <div class="column is-12"></div>
         <div class="column is-12"></div>
-        <FieldWithValue name="Name" value="Swift, Taylor"/>
-        <FieldWithValue name="Contact No." value="09123456789"/>
+        <FieldWithValue name="Name" value="Salaveria, Rence"/>
+        <FieldWithValue name="Position" value="Cook"/>
         <div class="column is-12"></div>
-        <FieldWithValue name="Email" value="taylorswift@gmail.com"/>
-        <FieldWithValue name="Password" value="*****"/>
+        <FieldWithValue name="Contact No." value="09123456789"/>
+        <FieldWithValue name="Address" value="02 Toronto St. Malinta Valenzuela City"/>
         <div class="column is-12"></div>
         <div class="column is-12"></div>
         <div class="column is-12"></div>
@@ -44,5 +44,9 @@
     .text {
         font-family: 'Karla', sans-serif;
         font-size: 40px;
+    }
+    .btn-txt {
+        font-size: 20px;
+        font-family: 'Karla', sans-serif;
     }
 </style>
