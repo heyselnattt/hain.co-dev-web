@@ -1,7 +1,8 @@
 <script>
     import NavbarSolo from "$lib/components/NavbarSolo.svelte";
     import Discard from "$lib/components/Discard.svelte";
-    import BtnBack from "$lib/components/BtnBack.svelte";
+    import ButtonBack from "$lib/components/ButtonBack.svelte";
+
 </script>
 
 <NavbarSolo />
@@ -9,7 +10,7 @@
 <div class="grouped-columns is-flex is-justify-content-space-between py-6 my-2">
     <div></div>
     <div class="column1">
-        <BtnBack />
+        <ButtonBack />
     </div>
     <div class="column2">
         <p class="text has-text-link">
