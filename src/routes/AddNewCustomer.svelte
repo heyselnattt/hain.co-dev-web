@@ -1,9 +1,9 @@
 <script>
     import Discard from "$lib/components/Discard.svelte";
-    import BtnBack from "$lib/components/BtnBack.svelte";
     import FieldWithValue from "$lib/components/FieldWithValue.svelte";
     import NavbarSolo from "$lib/components/NavbarSolo.svelte";
-    import BtnAddRecord from "$lib/components/BtnAddRecord.svelte";
+    import ButtonBack from "$lib/components/ButtonBack.svelte";
+    import ButtonAddRecord from "$lib/components/ButtonAddRecord.svelte";
 </script>
 
 <NavbarSolo />
@@ -11,7 +11,7 @@
 <div class="container">
     <div class="columns  pt-5 is-multiline has-text-centered">
         <div class="column is-4"> 
-            <a href="Customers"> <BtnBack /> </a> 
+            <a href="Customers"> <ButtonBack /> </a> 
         </div>
         <div class="column is-4">
             <p class="text has-text-link">
@@ -38,7 +38,7 @@
 
     <!-- Add record button -->
     <div class="mb- has-text-centered">
-        <a href="Customers"> <BtnAddRecord /> </a>
+        <a href="Customers"> <ButtonAddRecord /> </a>
     </div>
 </div>
 

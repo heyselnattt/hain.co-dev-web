@@ -1,8 +1,8 @@
 <script>
     import NavbarSolo from "$lib/components/NavbarSolo.svelte";
-    import BtnAddRecord from "$lib/components/BtnAddRecord.svelte";
-    import BtnBack from "$lib/components/BtnBack.svelte";
     import Card from "$lib/components/Card.svelte";
+    import ButtonBack from "$lib/components/ButtonBack.svelte";
+    import ButtonAddRecord from "$lib/components/ButtonAddRecord.svelte";
 </script>
     
     <svelte:head>
@@ -14,7 +14,7 @@
     <div class="container">
         <div class="columns has-text-centered pt-5">
             <div class="column is-4 has-text-centered">
-                <a href="Database"><BtnBack /></a>
+                <a href="Database"><ButtonBack /></a>
             </div>
             <div class="column is-4">
                 <p class="text has-text-link">
@@ -22,7 +22,7 @@
                 </p>
             </div>
             <div>
-                <a href="/"> <BtnAddRecord /> </a>
+                <a href="/"> <ButtonAddRecord /> </a>
             </div>
         </div>
     </div>

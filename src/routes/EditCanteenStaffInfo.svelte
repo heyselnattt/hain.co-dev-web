@@ -1,20 +1,17 @@
 <script>
-    import BtnBack from "$lib/components/BtnBack.svelte";
-    import BtnEdit from "$lib/components/BtnEdit.svelte";
+import ButtonBack from "$lib/components/ButtonBack.svelte";
+import ButtonSave from "$lib/components/ButtonSave.svelte";
+
     import FieldWithValue from "$lib/components/FieldWithValue.svelte";
     import NavbarSolo from "$lib/components/NavbarSolo.svelte";
 </script>
-
-<svelte:head>
-    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@600&display=swap" rel="stylesheet"/>
-</svelte:head>
 
 <NavbarSolo/>
 
 <div class="container">
     <div class="columns  pt-5 is-multiline has-text-centered">
         <div class="column is-4"> 
-            <a href="CanteenStaff"> <BtnBack /> </a> 
+            <a href="CanteenStaffInfo"> <ButtonBack /> </a> 
         </div>
         <div class="column is-4">
             <p class="text has-text-link">
@@ -22,7 +19,7 @@
             </p>
         </div>
         <div class="column is-3 ml-6">
-            <a href="EditCSInfo"> <BtnEdit /> </a>
+            <a href="CanteenStaffInfo"> <ButtonSave /> </a>
         </div>
 
         <div class="column is-12"></div>
@@ -41,12 +38,8 @@
 </div>
 
 <style>
-    .text {
+     .text {
         font-family: 'Karla', sans-serif;
         font-size: 40px;
-    }
-    .btn-txt {
-        font-size: 20px;
-        font-family: 'Karla', sans-serif;
     }
 </style>
