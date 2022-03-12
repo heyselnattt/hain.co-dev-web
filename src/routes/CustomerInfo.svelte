@@ -1,15 +1,16 @@
 <script>
     import BtnBack from "$lib/components/BtnBack.svelte";
     import BtnEdit from "$lib/components/BtnEdit.svelte";
+    import BtnSwitch from "$lib/components/BtnSwitch.svelte";
     import FieldWithValue from "$lib/components/FieldWithValue.svelte";
-    import HomeNavbar from "$lib/components/HomeNavbar.svelte";
+    import NavbarSolo from "$lib/components/NavbarSolo.svelte";
 </script>
 
 <svelte:head>
     <link href="https://fonts.googleapis.com/css2?family=Karla:wght@600&display=swap" rel="stylesheet"/>
 </svelte:head>
 
-<HomeNavbar/>
+<NavbarSolo/>
 
 <div class="container">
     <div class="columns  pt-5 is-multiline has-text-centered">
@@ -40,9 +41,20 @@
     </div>
 </div>
 
+<div class="columns is-centered has-text-link pb-6">
+    <p class="switch-labels mt-3 mr-4">Inactive</p>
+    <BtnSwitch/>
+    <p class="switch-labels mt-3 ml-4">Active</p>
+</div>
+
 <style>
     .text {
         font-family: 'Karla', sans-serif;
         font-size: 40px;
+    }
+
+    .switch-labels {
+        font-family: 'Karla', sans-serif;
+        font-size: 25px;
     }
 </style>
