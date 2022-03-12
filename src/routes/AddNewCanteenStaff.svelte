@@ -1,9 +1,9 @@
 <script>
+    import ButtonAddRecord from "$lib/components/ButtonAddRecord.svelte";
+    import ButtonBack from "$lib/components/ButtonBack.svelte";
     import Discard from "$lib/components/Discard.svelte";
     import FieldWithValue from "$lib/components/FieldWithValue.svelte";
     import NavbarSolo from "$lib/components/NavbarSolo.svelte";
-    import ButtonBack from "$lib/components/ButtonBack.svelte";
-    import ButtonAddRecord from "$lib/components/ButtonAddRecord.svelte";
 </script>
 
 <NavbarSolo />
@@ -11,11 +11,11 @@
 <div class="container">
     <div class="columns  pt-5 is-multiline has-text-centered">
         <div class="column is-4"> 
-            <a href="Customers"> <ButtonBack /> </a> 
+            <a href="CanteenStaff"> <ButtonBack /> </a> 
         </div>
-        <div class="column is-4">
+        <div class="column is-4  ml-4">
             <p class="text has-text-link">
-                New Customer
+                New Canteen Staff
             </p>
         </div>
         <div class="column is-3 ml-6">
@@ -26,10 +26,10 @@
         <div class="column is-12"></div>
         <div class="column is-12"></div>
         <FieldWithValue name="Name" value=""/>
-        <FieldWithValue name="Contact No." value=""/>
+        <FieldWithValue name="Position" value=""/>
         <div class="column is-12"></div>
-        <FieldWithValue name="Email" value=""/>
-        <FieldWithValue name="Password" value=""/>
+        <FieldWithValue name="Contact No." value=""/>
+        <FieldWithValue name="Address" value=""/>
         <div class="column is-12"></div>
         <div class="column is-12"></div>
         <div class="column is-12"></div>
@@ -38,7 +38,7 @@
 
     <!-- Add record button -->
     <div class="mb- has-text-centered">
-        <a href="Customers"> <ButtonAddRecord /> </a>
+        <a href="CanteenStaff"> <ButtonAddRecord /> </a>
     </div>
 </div>
 
