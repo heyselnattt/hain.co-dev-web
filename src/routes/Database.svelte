@@ -16,10 +16,10 @@
 
     <div class="columns is-centered is-multiline pt-5">
             <Card name="Customers" entries="230" sub="customers" image="images/customersIcon.png" link="Customers"/>
-            <Card name="Canteen Staff" entries="15" sub="staff entries" image="images/canteenStaffIcon.png"/>
+            <Card name="Canteen Staff" entries="15" sub="staff entries" image="images/canteenStaffIcon.png" link="CanteenStaff"/>
             <Card name="Food" entries="15" sub="items" image="images/foodIcon.png" link="Food"/>
             <Card name="Administrators" entries="4" sub="records" image="images/adminIcon.png" link="Admin"/>
-            <Card name="Reports" entries="130" sub="entries" image="images/reportIcon.png"/>
+            <Card name="Reports" entries="130" sub="entries" image="images/reportIcon.png" link="Reports"/>
             <Card name="Transactions" entries="370" sub="entries" image="images/transactionIcon.png"/>
             <!-- {#each Array(100) as a}
             <Card name="{a}" sub="{a}-sub" link="/"/>
