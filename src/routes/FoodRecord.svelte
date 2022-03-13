@@ -1,6 +1,6 @@
 <script>
     import NavbarSolo from "$lib/components/NavbarSolo.svelte";
-    import BtnBack from "$lib/components/BtnBack.svelte";
+    import ButtonBack from "$lib/components/ButtonBack.svelte";
     import FieldWithValue from "$lib/components/FieldWithValue.svelte";
 </script>
 
@@ -14,7 +14,7 @@
     <div class="columns pt-5 is-multiline has-text-centered">
         <div class="column is-4">
             <a href="Food">
-                <BtnBack/>
+                <ButtonBack/>
             </a>
         </div>
         <div class="column is-3  ml-6">
