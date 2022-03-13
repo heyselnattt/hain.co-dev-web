@@ -1,5 +1,5 @@
 <script>
-    import BtnBack from "$lib/components/BtnBack.svelte";
+    import ButtonBack from "$lib/components/BtnBack.svelte";
     import NavbarSolo from "$lib/components/NavbarSolo.svelte";
     import FieldWithValue from "$lib/components/FieldWithValue.svelte";
 </script>
