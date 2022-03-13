@@ -1,59 +1,59 @@
 <script>
-    import NavbarSolo from "$lib/components/NavbarSolo.svelte";
-    import Discard from "$lib/components/Discard.svelte";
+    import NavbarWithSearch from "$lib/components/NavbarWithSearch.svelte";
     import BtnBack from "$lib/components/BtnBack.svelte";
+    import BtnAddRecord from "$lib/components/BtnAddRecord.svelte";
+    import FoodTableRow from "$lib/components/FoodTableRow.svelte";
 </script>
 
-<NavbarSolo />
+<NavbarWithSearch />
 
-<div class="grouped-columns is-flex is-justify-content-space-between py-6 my-2">
-    <div></div>
-    <div class="column1">
-        <BtnBack />
-    </div>
-    <div class="column2">
+<div class="container">
+    <div class="columns has-text-centered pt-5">
+      <div class="column is-4 has-text-centered">
+        <a href="Database"><BtnBack /></a>
+      </div>
+      <div class="column is-4 ml-1">
         <p class="text has-text-link">
-            Food
+          Food
         </p>
+      </div>
+
+      <div class="column is-3 ml-2 py-1">
+        <a href="AddNewFood"> <BtnAddRecord /> </a>
+      </div>
     </div>
-    <div class="column3">
-        <Discard />
-    </div>
-    <div></div>
+
+      <div class="column is-10 is-offset-1 pl-5 pt-0">
+        <table class="table is-hoverable is-fullwidth">
+          <thead>
+              <tr>
+                  <th>No.</th>
+                  <th>Product Name</th>
+                  <th>Price</th>
+                  <th>Type</th>
+              </tr>
+          </thead>
+          <FoodTableRow num="1" productName="Hotdog" price="30.00" type="Breakfast"/>
+          <FoodTableRow num="2" productName="Egg" price="25.00" type="Breakfast"/>
+          <FoodTableRow num="3" productName="Adobo" price="30.00" type="Lunch"/>
+          <FoodTableRow num="4" productName="Turon" price="35.00" type="Meryenda"/>
+          <FoodTableRow num="5" productName="Nova" price="40.00" type="Snacks"/>
+          <FoodTableRow num="6" productName="Menudo" price="40.00" type="Lunch"/>
+          <FoodTableRow num="7" productName="RC" price="50.00" type="Drinks"/>
+          <FoodTableRow num="8" productName="C2" price="20.00" type="Drinks"/>
+          <FoodTableRow num="9" productName="Banana Cue" price="20.00" type="Meryenda"/>
+        </table>
+      </div>
 </div>
 
-<div class="grouped-columns-2 is-flex is is-justify-content-space-between py-6">
-    <div></div>
-    <div class="column4">
-        <div class="file is-normal has-name">
-            <label class="file-label">
-              <input class="file-input" type="file" name="resume">
-              <span class="file-cta">
-                <span class="file-icon">
-                  <i class="fas fa-upload"></i>
-                </span>
-                <span class="file-label">
-                  Normal file…
-                </span>
-              </span>
-              <span class="file-name">
-                Screen Shot 2017-07-29 at 15.54.25.png
-              </span>
-            </label>
-          </div>
-    </div>
-    <div class="column5">
-
-    </div>
-    <div class="column6">
-
-    </div>
-    <div></div>
-</div>
 
 <style>
     .text {
         font-family: 'Karla', sans-serif;
         font-size: 40px;
+    }
+    table {
+      font-family: 'Karla', sans-serif;
+      font-size: 20px;
     }
 </style>
