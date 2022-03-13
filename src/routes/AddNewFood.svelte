@@ -1,28 +1,26 @@
 <script>
     import NavbarSolo from "$lib/components/NavbarSolo.svelte";
-    import BtnBack from "$lib/components/BtnBack.svelte";
-    import BtnAddRecord from "$lib/components/BtnAddRecord.svelte";
+    import ButtonBack from "$lib/components/ButtonBack.svelte";
+    import ButtonAddRecord from "$lib/components/ButtonAddRecord.svelte";
     import Discard from "$lib/components/Discard.svelte";
     import FieldWithValue from "$lib/components/FieldWithValue.svelte";
-
-
 </script>
 
 <NavbarSolo/>
 
 <div class="container">
     <div class="columns pt-5 is-multiline has-text-centered">
-        <div class="column is-4 py-5">
+        <div class="column is-4">
             <a href="Food">
-                <BtnBack/>
+                <ButtonBack/>
             </a>
         </div>
-        <div class="column is-4 ml-4">
+        <div class="column is-4">
             <p class="text has-text-link">
                 New Food
             </p>
         </div>
-        <div class="column is-3">
+        <div class="column is-3 ml-6">
             <a href="/">
                 <Discard/>
             </a>
@@ -43,12 +41,11 @@
         <div class="column is-12"></div>
 
         <!-- wala pang dropdown for product type, and file upload para sa image-->
-
     </div>
 
     <div class="mb- has-text-centered">
         <a href="Food">
-            <BtnAddRecord/>
+            <ButtonAddRecord/>
         </a>
     </div>
 </div>
