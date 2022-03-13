@@ -82,6 +82,7 @@
         font-family: 'Karla', sans-serif;
         font-size: 40px;
     }
+
     p {
         font-family: 'Karla', sans-serif;
         font-size: 40px;

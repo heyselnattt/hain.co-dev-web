@@ -1,6 +1,6 @@
 <script>
     import NavbarWithSearch from "$lib/components/NavbarWithSearch.svelte";
-    import BtnBack from "$lib/components/BtnBack.svelte";
+    import ButtonBack from "$lib/components/ButtonBack.svelte";
     import TransactionTableRow from "$lib/components/TransactionTableRow.svelte";
 </script>
 
@@ -13,7 +13,7 @@
 <div class="container">
     <div class="columns has-text-centered pt-5">
         <div class="column is-4 has-text-centered">
-            <a href="Database"><BtnBack /></a>
+            <a href="Database"><ButtonBack /></a>
         </div>
         <div class="column is-4">
             <p class="text has-text-link">
