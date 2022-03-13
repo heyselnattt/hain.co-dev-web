@@ -6,7 +6,6 @@ from starlette import status
 from starlette.exceptions import HTTPException
 
 from database.database_operation import DatabaseOperator
-from psycopg2.extras import RealDictCursor
 
 from data_models import (
     Product,
@@ -49,7 +48,7 @@ def root():
 def get_all_product() -> list[Product]:
     try:
         db = DatabaseOperator()
-        cursor = db.get_cursor(RealDictCursor)
+        cursor = db.get_cursor('RealDictCursor')
         cursor.execute("""SELECT 
                             product_id,
                             product_name,
@@ -94,7 +93,7 @@ def update_product(id: int, updated_product: Product) -> Product:
 def get_all_canteen_staff() -> list[Staff]:
     try:
         db = DatabaseOperator()
-        cursor = db.get_cursor(RealDictCursor)
+        cursor = db.get_cursor('RealDictCursor')
         cursor.execute("""SELECT 
                             staff_id,
                             staff_full_name,
@@ -139,7 +138,7 @@ def update_staff(id: int, updated_staff: Staff) -> Staff:
 def get_all_customer() -> list[Customer]:
     try:
         db = DatabaseOperator()
-        cursor = db.get_cursor(RealDictCursor)
+        cursor = db.get_cursor('RealDictCursor')
         cursor.execute("""SELECT 
                             customer_id,
                             customer_first_name,
@@ -185,7 +184,7 @@ def update_customer(id: int, updated_customer: Customer) -> Customer:
 def get_all_admin():
     try:
         db = DatabaseOperator()
-        cursor = db.get_cursor(RealDictCursor)
+        cursor = db.get_cursor('RealDictCursor')
         cursor.execute("""SELECT 
                         admin_id,
                         admin_full_name,
@@ -228,7 +227,7 @@ def update_admin(username: str, updated_admin: Admin) -> Admin:
 def get_all_transaction() -> list[Transaction]:
     try:
         db = DatabaseOperator()
-        cursor = db.get_cursor(RealDictCursor)
+        cursor = db.get_cursor('RealDictCursor')
         cursor.execute("""SELECT 
                         transaction_id,
                         transaction_agent,
