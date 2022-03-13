@@ -21,7 +21,7 @@
         <Card name="Food" entries="15" sub="items" image="images/foodIcon.png" link="Food"/>
         <Card name="Administrators" entries="4" sub="records" image="images/adminIcon.png" link="Admin"/>
         <Card name="Reports" entries="130" sub="entries" image="images/reportIcon.png" link="Reports"/>
-        <Card name="Transactions" entries="370" sub="entries" image="images/transactionIcon.png"/>
+        <Card name="Transactions" entries="370" sub="entries" image="images/transactionIcon.png" link="Transaction"/>
         <!-- {#each Array(100) as a}
         <Card name="{a}" sub="{a}-sub" link="/"/>
         {/each} -->
