@@ -1,5 +1,5 @@
-<script>
-    
+<script lang="ts">
+    let isOn: boolean = false
 </script>
 
 <div class="field">
