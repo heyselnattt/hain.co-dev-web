@@ -13,7 +13,7 @@
 
 <div class="container">
     <div class="columns has-text-centered pt-5">
-        <div class="column is-4 has-text-centered">
+        <div class="column is-4">
             <a href="Database">
                 <ButtonBack/>
             </a>
@@ -23,7 +23,7 @@
                 Canteen Staffs
             </p>
         </div>
-        <div class="ml-6 pl-6">
+        <div class="column is-3 ml-6">
             <a href="AddNewCanteenStaff">
                 <ButtonAddRecord/>
             </a>

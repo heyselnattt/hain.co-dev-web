@@ -9,18 +9,17 @@
 
 <div class="container">
     <div class="columns has-text-centered pt-5">
-        <div class="column is-4 has-text-centered">
+        <div class="column is-4">
             <a href="Database">
                 <ButtonBack/>
             </a>
         </div>
-        <div class="column is-4 ml-1">
+        <div class="column is-4">
             <p class="text has-text-link">
                 Food
             </p>
         </div>
-
-        <div class="column is-3 ml-2 py-1">
+        <div class="column is-3 ml-6">
             <a href="AddNewFood">
                 <ButtonAddRecord/>
             </a>
