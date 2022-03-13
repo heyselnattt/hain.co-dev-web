@@ -19,8 +19,8 @@ class DatabaseOperator:
             port=self.port
         )
 
-    def get_cursor(self):
-        return self.conn.cursor()
+    def get_cursor(self, cursor_factory=None):
+        return self.conn.cursor(cursor_factory)
 
     def close_cursor(self):
         self.conn.cursor().close()

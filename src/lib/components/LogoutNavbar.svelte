@@ -23,6 +23,7 @@
         font-family: 'Lobster', cursive;
         font-size: 50px;
     }
+
     .text {
         font-family: 'Karla', sans-serif;
     }
