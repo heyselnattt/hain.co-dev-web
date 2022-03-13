@@ -14,7 +14,9 @@
 <div class="container">
     <div class="columns has-text-centered pt-5">
         <div class="column is-4 has-text-centered">
-            <a href="Database"><ButtonBack /></a>
+            <a href="Database">
+                <ButtonBack/>
+            </a>
         </div>
         <div class="column is-4">
             <p class="text has-text-link">
@@ -22,20 +24,22 @@
             </p>
         </div>
         <div class="ml-6 pl-6">
-            <a href="AddNewCustomer"> <ButtonAddRecord /> </a>
+            <a href="AddNewCustomer">
+                <ButtonAddRecord/>
+            </a>
         </div>
-        
+
     </div>
 
     <div class="column is-10 is-offset-1 pl-5 pt-0">
         <table class="table is-hoverable is-fullwidth">
             <thead>
-                <tr>
-                    <th>No.</th>
-                    <th>Name</th>
-                    <th>Contact No.</th>
-                    <th>Email</th>
-                </tr>
+            <tr>
+                <th>No.</th>
+                <th>Name</th>
+                <th>Contact No.</th>
+                <th>Email</th>
+            </tr>
             </thead>
             <CustomersTableRow num="1" name="Taylor Swift" contactNum="09254698852" email="taylorswift@gmail.com"/>
             <CustomersTableRow num="2" name="Cecil Uy" contactNum="09252236478" email="uy.cecil@gmail.com"/>
@@ -45,7 +49,8 @@
             <CustomersTableRow num="6" name="Ralph Tirao" contactNum="09683105246" email="tirao_ralph@gmail.com"/>
             <CustomersTableRow num="7" name="Mhea Niere" contactNum="09685233451" email="mheaniere@gmail.com"/>
             <CustomersTableRow num="8" name="Rhea Valdez" contactNum="09352648551" email="rhea.valdez@gmail.com"/>
-            <CustomersTableRow num="9" name="Charles Maverick" contactNum="09302922012" email="charlesmaverick@gmail.com"/>
+            <CustomersTableRow num="9" name="Charles Maverick" contactNum="09302922012"
+                               email="charlesmaverick@gmail.com"/>
             <CustomersTableRow num="10" name="Angel Lawson" contactNum="09684521404" email="angel_lawson@gmail.com"/>
             <CustomersTableRow num="11" name="Marco De Jesus" contactNum="09156324521" email="marco.dejesus@gmail.com"/>
         </table>

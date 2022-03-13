@@ -7,13 +7,13 @@
 </script>
 
 <tbody>
-    <tr class="text is-clickable" >
-        <th>{num}</th>
-        <td>{name}</td>
-        <td>{position}</td>
-        <td>{contactNum}</td>
-        <td>{address}</td>
-    </tr>
+<tr class="text is-clickable">
+    <th>{num}</th>
+    <td>{name}</td>
+    <td>{position}</td>
+    <td>{contactNum}</td>
+    <td>{address}</td>
+</tr>
 </tbody>
 
 <style>

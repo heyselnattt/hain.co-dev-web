@@ -13,14 +13,14 @@
         <div class="navbar-item">
             <div class="field is-grouped">
                 <p class="control is-expanded">
-                  <input class="input is-rounded" type="text" placeholder="Search">
+                    <input class="input is-rounded" type="text" placeholder="Search">
                 </p>
                 <p class="control">
-                  <a class="text button has-text-link is-rounded" href="/">
-                    Search
-                  </a>
+                    <a class="text button has-text-link is-rounded" href="/">
+                        Search
+                    </a>
                 </p>
-              </div>
+            </div>
         </div>
     </div>
 </nav>
@@ -30,6 +30,7 @@
         font-family: 'Lobster', cursive;
         font-size: 50px;
     }
+
     .text {
         font-family: 'Karla', sans-serif;
     }

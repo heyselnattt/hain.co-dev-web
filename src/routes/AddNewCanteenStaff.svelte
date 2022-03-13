@@ -6,12 +6,14 @@
     import NavbarSolo from "$lib/components/NavbarSolo.svelte";
 </script>
 
-<NavbarSolo />
+<NavbarSolo/>
 
 <div class="container">
     <div class="columns  pt-5 is-multiline has-text-centered">
-        <div class="column is-4"> 
-            <a href="CanteenStaff"> <ButtonBack /> </a> 
+        <div class="column is-4">
+            <a href="CanteenStaff">
+                <ButtonBack/>
+            </a>
         </div>
         <div class="column is-4  ml-4">
             <p class="text has-text-link">
@@ -19,7 +21,9 @@
             </p>
         </div>
         <div class="column is-3 ml-6">
-            <a href="/"> <Discard /> </a>
+            <a href="/">
+                <Discard/>
+            </a>
         </div>
 
         <div class="column is-12"></div>
@@ -38,7 +42,9 @@
 
     <!-- Add record button -->
     <div class="mb- has-text-centered">
-        <a href="CanteenStaff"> <ButtonAddRecord /> </a>
+        <a href="CanteenStaff">
+            <ButtonAddRecord/>
+        </a>
     </div>
 </div>
 

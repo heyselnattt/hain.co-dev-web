@@ -29,14 +29,17 @@
         border: 3px solid hsl(222, 4%, 52%);
         border-radius: 20px;
     }
+
     .text {
         font-family: 'Karla', sans-serif;
         font-size: 20px;
     }
+
     .text1 {
         font-family: 'Karla', sans-serif;
         font-size: 15px;
     }
+
     img {
         max-width: 130px;
     }

@@ -15,7 +15,9 @@
 <div class="container">
     <div class="columns  pt-5 is-multiline has-text-centered">
         <div class="column is-4">
-            <a href="Customers"> <ButtonBack /> </a>
+            <a href="Customers">
+                <ButtonBack/>
+            </a>
         </div>
         <div class="column is-4">
             <p class="text has-text-link">
@@ -23,7 +25,9 @@
             </p>
         </div>
         <div class="column is-3 ml-6">
-            <a href="/"> <ButtonEdit /> </a>
+            <a href="/">
+                <ButtonEdit/>
+            </a>
         </div>
 
         <div class="column is-12"></div>
