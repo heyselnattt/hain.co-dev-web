@@ -1,5 +1,5 @@
 <script>
-    import BtnBack from "$lib/components/BtnBack.svelte";
+    import ButtonBack from "$lib/components/ButtonBack.svelte";
     import NavbarSolo from "$lib/components/NavbarSolo.svelte";
     import Discard from "$lib/components/Discard.svelte";
 </script>
@@ -13,7 +13,7 @@
 <div class="container">
     <div class="columns  pt-5 is-multiline has-text-centered">
         <div class="column is-4"> 
-            <a href="Customers"> <BtnBack /> </a> 
+            <a href="Customers"> <ButtonBack /> </a>
         </div>
         <div class="column is-4  ml-4">
             <p class="text has-text-link">
