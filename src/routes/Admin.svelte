@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import NavbarSolo from "$lib/components/NavbarSolo.svelte";
     import Card from "$lib/components/Card.svelte";
     import ButtonBack from "$lib/components/ButtonBack.svelte";

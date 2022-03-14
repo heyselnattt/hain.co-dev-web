@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import NavbarWithSearch from "$lib/components/NavbarWithSearch.svelte";
     import ButtonBack from "$lib/components/ButtonBack.svelte";
     import ButtonAddRecord from "$lib/components/ButtonAddRecord.svelte";

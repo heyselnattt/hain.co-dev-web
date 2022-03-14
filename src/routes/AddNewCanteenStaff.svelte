@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import ButtonAddRecord from "$lib/components/ButtonAddRecord.svelte";
     import ButtonBack from "$lib/components/ButtonBack.svelte";
     import Discard from "$lib/components/Discard.svelte";

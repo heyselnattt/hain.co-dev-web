@@ -1,7 +1,8 @@
-<script>
+<script lang="ts">
     import HomeNavbar from "$lib/components/HomeNavbar.svelte";
 
-    let username
+    let username: string
+    let password: string
 </script>
 
 <svelte:head>

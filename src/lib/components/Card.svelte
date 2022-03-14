@@ -1,6 +1,6 @@
-<script>
-    export let name;
-    export let sub;
+<script lang="ts">
+    export let name: string;
+    export let sub: string;
     export let link = " ";
     export let image;
     export let entries;

@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import NavbarSolo from "$lib/components/NavbarSolo.svelte";
     import ButtonBack from "$lib/components/ButtonBack.svelte";
     import ButtonAddRecord from "$lib/components/ButtonAddRecord.svelte";
