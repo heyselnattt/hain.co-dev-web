@@ -1,6 +1,5 @@
 <script lang="ts">
     import Homepage from "./Homepage.svelte";
-    import LoadingScreen from "$lib/components/LoadingScreen.svelte";
     import {onMount} from 'svelte';
 
     let isLoaded: boolean = false
@@ -18,5 +17,5 @@
         }
     </style>
 {:else}
-    <LoadingScreen/>
+    load screen component here
 {/if}
