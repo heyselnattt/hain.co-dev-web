@@ -2,7 +2,7 @@
     export let name: string;
     export let sub: string;
     export let link = " ";
-    export let image;
+    export let imagePath;
     export let entries;
 </script>
 
@@ -14,7 +14,7 @@
     <a href={link}>
         <div class="card">
             <div class="card-image is-flex is-justify-content-center pt-4">
-                <img src={image} alt="logo"/>
+                <img src={imagePath} alt="logo"/>
             </div>
             <div class="card-content pt-3 pb-4">
                 <p class="text is-4 has-text-centered has-text-link">{name}</p>
