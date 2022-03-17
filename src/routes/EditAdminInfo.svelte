@@ -1,55 +1,48 @@
-<script lang="ts">
-    import NavbarSolo from "$lib/components/NavbarSolo.svelte";
+<script>
     import ButtonBack from "$lib/components/ButtonBack.svelte";
-    import ButtonAddRecord from "$lib/components/ButtonAddRecord.svelte";
-    import Discard from "$lib/components/Discard.svelte";
+    import ButtonSave from "$lib/components/ButtonSave.svelte";
     import FieldWithValue from "$lib/components/FieldWithValue.svelte";
+    import NavbarSolo from "$lib/components/NavbarSolo.svelte";
 </script>
+
+<svelte:head>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@600&display=swap" rel="stylesheet"/>
+</svelte:head>
 
 <NavbarSolo/>
 
 <div class="container">
-    <div class="columns pt-5 is-multiline has-text-centered">
+    <div class="columns  pt-5 is-multiline has-text-centered">
         <div class="column is-4">
-            <a href="Food">
+            <a href="Admin">
                 <ButtonBack/>
             </a>
         </div>
         <div class="column is-4">
             <p class="text has-text-link">
-                New Food
+                Admin's Information
             </p>
         </div>
         <div class="column is-3 ml-6">
-            <a href="/">
-                <Discard/>
+            <a href="AdminInfo">
+                <ButtonSave/>
             </a>
         </div>
-    </div>
 
-    <div class="columns pt-5 is-multiline">
         <div class="column is-12"></div>
         <div class="column is-12"></div>
         <div class="column is-12"></div>
-        <FieldWithValue name="Product Name" value=""/>
-        <FieldWithValue name="Price" value=""/>
+        <FieldWithValue name="Name" value="Del Valle, Deib Lohr H."/>
+        <FieldWithValue name="Contact No." value="Cook"/>
         <div class="column is-12"></div>
-        <FieldWithValue name="Product Stock" value=""/>
+        <FieldWithValue name="ID No." value="09123456789"/>
+        <FieldWithValue name="Password" value="*****"/>
         <div class="column is-12"></div>
         <div class="column is-12"></div>
         <div class="column is-12"></div>
         <div class="column is-12"></div>
-
-        <!-- wala pang dropdown for product type, and file upload para sa image-->
-    </div>
-
-    <div class="mb- has-text-centered">
-        <a href="Food">
-            <ButtonAddRecord/>
-        </a>
     </div>
 </div>
-
 
 <style>
     .text {

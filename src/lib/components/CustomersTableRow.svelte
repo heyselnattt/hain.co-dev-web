@@ -1,4 +1,5 @@
 <script lang="ts">
+    import ButtonEditTable from "./ButtonEditTable.svelte";
     export let num;
     export let name: string;
     export let contactNum: string;
@@ -11,6 +12,7 @@
     <td>{name}</td>
     <td>{contactNum}</td>
     <td>{email}</td>
+    <td><ButtonEditTable link="EditCustomerInfo"/></td>
 </tr>
 </tbody>
 

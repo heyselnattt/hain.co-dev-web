@@ -1,5 +1,5 @@
-<button class="btn-txt button is-link is-rounded mt-3" href="/">
-    <img class="img2" src="images/add.png" alt="back"/>
+<button class="btn-txt button is-link is-rounded">
+    <img class="img2" src="images/add.png" alt="Add record"/>
     <p class="ml-2">
         Add Record
     </p>

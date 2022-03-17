@@ -1,13 +1,13 @@
-<button class="btn-txt button is-danger is-rounded mt-3" href="/">
+<button class="btn-txt button is-danger is-rounded">
     <img class="discard" src="images/delete.png" alt="back"/>
-    <p class="ml-2">
+    <p class="ml-3">
         Discard
     </p>
 </button>
 
 <style>
     .discard {
-        width: 30px;
+        width: 20px;
     }
 
     .btn-txt {
