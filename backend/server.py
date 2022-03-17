@@ -54,6 +54,7 @@ def root():
 
 @app.get('/product')
 def get_all_product() -> list[Product]:
+    # TODO add product_description to query
     try:
         db = DatabaseOperator(cursor_factory=RealDictCursor)
         cursor = db.get_cursor()
