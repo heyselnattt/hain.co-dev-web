@@ -5,15 +5,11 @@
     import ButtonAddRecord from "$lib/components/ButtonAddRecord.svelte";
 </script>
 
-<svelte:head>
-    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@600&display=swap" rel="stylesheet"/>
-</svelte:head>
-
 <NavbarWithSearch/>
 
 <div class="container">
     <div class="columns has-text-centered pt-5">
-        <div class="column is-4 has-text-centered">
+        <div class="column is-4">
             <a href="Database">
                 <ButtonBack/>
             </a>
@@ -23,12 +19,11 @@
                 Customers
             </p>
         </div>
-        <div class="ml-6 pl-6">
+        <div class="column is-3 ml-6">
             <a href="AddNewCustomer">
                 <ButtonAddRecord/>
             </a>
         </div>
-
     </div>
 
     <div class="column is-10 is-offset-1 pl-5 pt-0">
@@ -49,8 +44,7 @@
             <CustomersTableRow num="6" name="Ralph Tirao" contactNum="09683105246" email="tirao_ralph@gmail.com"/>
             <CustomersTableRow num="7" name="Mhea Niere" contactNum="09685233451" email="mheaniere@gmail.com"/>
             <CustomersTableRow num="8" name="Rhea Valdez" contactNum="09352648551" email="rhea.valdez@gmail.com"/>
-            <CustomersTableRow num="9" name="Charles Maverick" contactNum="09302922012"
-                               email="charlesmaverick@gmail.com"/>
+            <CustomersTableRow num="9" name="Charles Maverick" contactNum="09302922012" email="charlesmaverick@gmail.com"/>
             <CustomersTableRow num="10" name="Angel Lawson" contactNum="09684521404" email="angel_lawson@gmail.com"/>
             <CustomersTableRow num="11" name="Marco De Jesus" contactNum="09156324521" email="marco.dejesus@gmail.com"/>
         </table>

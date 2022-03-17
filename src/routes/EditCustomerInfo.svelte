@@ -1,6 +1,6 @@
 <script>
     import ButtonBack from "$lib/components/ButtonBack.svelte";
-    import ButtonEdit from "$lib/components/ButtonEdit.svelte";
+    import ButtonSave from "$lib/components/ButtonSave.svelte";
     import ButtonSwitch from "$lib/components/ButtonSwitch.svelte";
     import FieldWithValue from "$lib/components/FieldWithValue.svelte";
     import NavbarSolo from "$lib/components/NavbarSolo.svelte";
@@ -25,8 +25,8 @@
             </p>
         </div>
         <div class="column is-3 ml-6">
-            <a href="EditCustomerInfo">
-                <ButtonEdit/>
+            <a href="CustomerInfo">
+                <ButtonSave/>
             </a>
         </div>
 

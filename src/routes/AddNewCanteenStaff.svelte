@@ -9,13 +9,13 @@
 <NavbarSolo/>
 
 <div class="container">
-    <div class="columns  pt-5 is-multiline has-text-centered">
+    <div class="columns pt-5 is-multiline has-text-centered">
         <div class="column is-4">
             <a href="CanteenStaff">
                 <ButtonBack/>
             </a>
         </div>
-        <div class="column is-4  ml-4">
+        <div class="column is-4">
             <p class="text has-text-link">
                 New Canteen Staff
             </p>
