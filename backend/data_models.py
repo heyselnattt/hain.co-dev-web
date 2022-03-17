@@ -43,6 +43,7 @@ class Product(BaseModel):
     product_price: float
     product_image_link: str
     product_stock: int
+    product_description: str
     product_type: ProductType
     product_is_active: bool
 
