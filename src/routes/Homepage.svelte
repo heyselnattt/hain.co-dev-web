@@ -1,7 +1,8 @@
-<script>
+<script lang="ts">
     import HomeNavbar from "$lib/components/HomeNavbar.svelte";
 
-    let username
+    let username: string
+    let password: string
 </script>
 
 <svelte:head>
@@ -45,17 +46,24 @@
                 <section class="section is-paddingless">
                     <div class="container px-5 is-flex is-flex-wrap-wrap">
                         <p class="text has-text-link ml-6 mb-2 pl-3">
-                            ID Number
+                            Username
                         </p>
-                        <input class="input is-rounded mx-6 mb-3" type="text" placeholder="ID Number"/>
+                        <input class="input is-rounded mx-6 mb-3"
+                               type="text"
+                               placeholder="ID Number"
+                               bind:value={username}/>
                         <p class="text has-text-link ml-6 mb-2 pl-3">
                             Password
                         </p>
-                        <input class="input is-rounded mx-6" type="password" placeholder="Password"/>
+                        <input class="input is-rounded mx-6"
+                               type="password"
+                               placeholder="Password"
+                               bind:value={password}/>
                     </div>
                 </section>
+                <!-- TODO add the session for logging in -->
                 <a href="Database">
-                    <button class="button is-link is-rounded mt-5"> Login</button>
+                    <button class="button is-link is-rounded mt-5">Login</button>
                 </a>
             </div>
         </div>

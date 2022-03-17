@@ -1,3 +1,5 @@
+<!-- TODO add logout logic -->
+
 <svelte:head>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"/>
     <link href="https://fonts.googleapis.com/css2?family=Karla:wght@600&display=swap" rel="stylesheet"/>

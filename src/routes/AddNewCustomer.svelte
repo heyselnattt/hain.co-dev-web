@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import Discard from "$lib/components/Discard.svelte";
     import FieldWithValue from "$lib/components/FieldWithValue.svelte";
     import NavbarSolo from "$lib/components/NavbarSolo.svelte";

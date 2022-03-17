@@ -1,9 +1,9 @@
-<script>
+<script lang="ts">
     import ButtonEditTable from "./ButtonEditTable.svelte";
     export let num;
-    export let name;
-    export let contactNum;
-    export let email;
+    export let name: string;
+    export let contactNum: string;
+    export let email: string;
 </script>
 
 <tbody>

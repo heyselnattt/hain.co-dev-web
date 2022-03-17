@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     export let num;
     export let name;
     export let desc;

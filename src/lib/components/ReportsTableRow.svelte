@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     export let recordID;
     export let dateRange;
     export let recordType;

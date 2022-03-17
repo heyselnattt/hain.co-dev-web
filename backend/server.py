@@ -2,6 +2,7 @@ import psycopg2
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from psycopg2 import OperationalError
+from psycopg2.extras import RealDictCursor, NamedTupleCursor
 from starlette import status
 from starlette.exceptions import HTTPException
 
@@ -14,7 +15,14 @@ from data_models import (
     Admin, Transaction, Record
 )
 
-app = FastAPI()
+app = FastAPI(
+    title='Hain.co Web API',
+    version='0.0.1',
+    contact={
+        'name': 'Clarence Rhey Salaveria',
+        'email': 'clarencerhey.edu@gmail.com'
+    }
+)
 
 
 # === TRUSTED HOSTS/REQUEST ORIGINS ===
@@ -46,9 +54,10 @@ def root():
 
 @app.get('/product')
 def get_all_product() -> list[Product]:
+    # TODO add product_description to query
     try:
-        db = DatabaseOperator()
-        cursor = db.get_cursor('RealDictCursor')
+        db = DatabaseOperator(cursor_factory=RealDictCursor)
+        cursor = db.get_cursor()
         cursor.execute("""SELECT 
                             product_id,
                             product_name,
@@ -92,8 +101,8 @@ def update_product(id: int, updated_product: Product) -> Product:
 @app.get('/staff')
 def get_all_canteen_staff() -> list[Staff]:
     try:
-        db = DatabaseOperator()
-        cursor = db.get_cursor('RealDictCursor')
+        db = DatabaseOperator(cursor_factory=RealDictCursor)
+        cursor = db.get_cursor()
         cursor.execute("""SELECT 
                             staff_id,
                             staff_full_name,
@@ -137,8 +146,8 @@ def update_staff(id: int, updated_staff: Staff) -> Staff:
 @app.get('/customer')
 def get_all_customer() -> list[Customer]:
     try:
-        db = DatabaseOperator()
-        cursor = db.get_cursor('RealDictCursor')
+        db = DatabaseOperator(cursor_factory=RealDictCursor)
+        cursor = db.get_cursor()
         cursor.execute("""SELECT 
                             customer_id,
                             customer_first_name,
@@ -183,8 +192,8 @@ def update_customer(id: int, updated_customer: Customer) -> Customer:
 @app.get('/admin')
 def get_all_admin():
     try:
-        db = DatabaseOperator()
-        cursor = db.get_cursor('RealDictCursor')
+        db = DatabaseOperator(cursor_factory=RealDictCursor)
+        cursor = db.get_cursor()
         cursor.execute("""SELECT 
                         admin_id,
                         admin_full_name,
@@ -226,8 +235,8 @@ def update_admin(username: str, updated_admin: Admin) -> Admin:
 @app.get('/transaction')
 def get_all_transaction() -> list[Transaction]:
     try:
-        db = DatabaseOperator()
-        cursor = db.get_cursor('RealDictCursor')
+        db = DatabaseOperator(cursor_factory=RealDictCursor)
+        cursor = db.get_cursor()
         cursor.execute("""SELECT 
                         transaction_id,
                         transaction_agent,

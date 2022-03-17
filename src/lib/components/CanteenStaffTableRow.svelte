@@ -1,9 +1,10 @@
-<script>
-    export let num;
-    export let name;
+<script lang="ts">
+    export let num: string;
+    export let name: string;
+    // TODO add position enum
     export let position;
-    export let contactNum;
-    export let address;
+    export let contactNum: string;
+    export let address: string;
 </script>
 
 <tbody>
