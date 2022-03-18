@@ -29,13 +29,29 @@
 
     <div class="columns pt-5 is-multiline">
         <div class="column is-12"></div>
-        <div class="column is-12"></div>
-        <div class="column is-12"></div>
         <FieldWithValue name="Product Name" value=""/>
+        <div class="column is-3"></div>
+        <div class="column is-3 control py-3">
+            <p class="has-text-link"></p>
+            <textarea class="textarea has-fixed-size" placeholder="Description" ></textarea>
+        </div>
         <FieldWithValue name="Price" value=""/>
+        <div class="column is-3"></div>
+        <div class="file">
+            <label class="file-label">
+              <input class="file-input" type="file" name="resume">
+              <span class="file-cta">
+                <span class="file-icon">
+                  <i class="fas fa-upload"></i>
+                </span>
+                <span class="file-label">
+                  Choose a file…
+                </span>
+              </span>
+            </label>
+          </div>
         <div class="column is-12"></div>
-        <FieldWithValue name="Product Stock" value=""/>
-        <div class="column is-12"></div>
+        
         <div class="column is-12"></div>
         <div class="column is-12"></div>
         <div class="column is-12"></div>
@@ -53,6 +69,10 @@
 
 <style>
     .text {
+        font-family: 'Karla', sans-serif;
+        font-size: 40px;
+    }
+    p {
         font-family: 'Karla', sans-serif;
         font-size: 40px;
     }

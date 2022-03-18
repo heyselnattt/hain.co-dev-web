@@ -2,6 +2,7 @@
     import NavbarSolo from "$lib/components/NavbarSolo.svelte";
     import ButtonBack from "$lib/components/ButtonBack.svelte";
     import FieldWithValue from "$lib/components/FieldWithValue.svelte";
+    import ButtonSave from "$lib/components/ButtonSave.svelte";
 </script>
 
 <svelte:head>
@@ -22,11 +23,9 @@
                 Food's Information
             </p>
         </div>
-        <div class="column is-4">
-            <a class="btn-txt button is-link is-rounded" href="/">
-                <p class="ml-5 mr-5">
-                    Save <!--save button-->
-                </p>
+        <div class="column is-3 ml-6">
+            <a href="/">
+                <ButtonSave/>
             </a>
         </div>
     </div>
@@ -49,11 +48,6 @@
     .text {
         font-family: 'Karla', sans-serif;
         font-size: 40px;
-    }
-
-    .btn-txt {
-        font-size: 20px;
-        font-family: 'Karla', sans-serif;
     }
 </style>
 
