@@ -3,6 +3,8 @@
     import Card from "$lib/components/Card.svelte";
     import ButtonBack from "$lib/components/ButtonBack.svelte";
     import ButtonAddRecord from "$lib/components/ButtonAddRecord.svelte";
+
+    import {admins} from '$lib/stores/adminStore';
 </script>
 
 <NavbarSolo/>
@@ -27,15 +29,21 @@
     </div>
 
     <div class="columns is-centered is-multiline pt-5">
-        <Card name="001" entries="" sub="" image="images/adminIcon.png" link="AdminInfo"/>
-        <Card name="002" entries="" sub="" image="images/adminIcon.png" link="AdminInfo"/>
-        <Card name="003" entries="" sub="" image="images/adminIcon.png" link="AdminInfo"/>
-        <Card name="004" entries="" sub="" image="images/adminIcon.png" link="AdminInfo"/>
-        <Card name="005" entries="" sub="" image="images/adminIcon.png" link="AdminInfo"/>
-        <Card name="006" entries="" sub="" image="images/adminIcon.png" link="AdminInfo"/>
-        <!-- {#each Array(100) as a}
-        <Card name="{a}" sub="{a}-sub" link="/"/>
-        {/each} -->
+        {#await $admins}
+            <!-- waiting for data component -->
+            <p>Waiting for data</p>
+        {:then admin}
+            {#each admin.data as info}
+                <Card
+                    name={info.admin_username}
+                    sub={info.admin_full_name}
+                    image="images/adminIcon.png"
+                    link="Admin/{info.admin_id}"/>
+            {/each}
+        {:catch err}
+            <p>{err.message}</p>
+            <!-- error message component -->
+        {/await}
     </div>
 </div>
 
