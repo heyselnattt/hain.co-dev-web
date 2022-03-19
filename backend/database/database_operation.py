@@ -8,11 +8,11 @@ config = dotenv_values('.env')
 class DatabaseOperator:
     def __init__(self, **params):
         load_dotenv()
-        self.host = params.get('host', os.getenv('DATABASE_HOST'))
-        self.database_name = params.get('database', os.getenv('DATABASE_NAME'))
-        self.user = params.get('user', os.getenv('DATABASE_USER'))
-        self.password = params.get('password', os.getenv('DATABASE_PASSWORD'))
-        self.port = params.get('port', os.getenv('DATABASE_PORT'))
+        self.host = params.get('host', 'ec2-35-153-35-94.compute-1.amazonaws.com')
+        self.database_name = params.get('database', 'd2a8coo0jp3akd')
+        self.user = params.get('user', 'cxbubumlkovyuu')
+        self.password = params.get('password', '7875893fe286b394a64661098d404972f17914786d304ef1fc66705d55840abc')
+        self.port = params.get('port', '5432')
         self.cursor_factory = params.get('cursor_factory', None)
         self.conn = pg.connect(
             host=self.host,
