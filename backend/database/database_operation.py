@@ -1,11 +1,13 @@
-from dotenv import dotenv_values
+from dotenv import dotenv_values, load_dotenv
 import psycopg2 as pg
+import os
 
 config = dotenv_values('.env')
 
 
 class DatabaseOperator:
     def __init__(self, **params):
+        load_dotenv()
         self.host = params.get('host', 'ec2-35-153-35-94.compute-1.amazonaws.com')
         self.database_name = params.get('database', 'd2a8coo0jp3akd')
         self.user = params.get('user', 'cxbubumlkovyuu')
