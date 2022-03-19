@@ -1,8 +1,8 @@
 <script lang="ts">
-    import NavbarSolo from "$lib/components/NavbarSolo.svelte";
-    import Card from "$lib/components/Card.svelte";
-    import ButtonBack from "$lib/components/ButtonBack.svelte";
-    import ButtonAddRecord from "$lib/components/ButtonAddRecord.svelte";
+    import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
+    import Card from "$lib/components/otherComponents/Card.svelte";
+    import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
+    import ButtonAddRecord from "$lib/components/buttons/ButtonAddRecord.svelte";
 
     import {admins} from '$lib/stores/adminStore';
 </script>
