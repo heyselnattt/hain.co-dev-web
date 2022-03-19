@@ -1,7 +1,7 @@
 <script>
-    import ButtonBack from "$lib/components/ButtonBack.svelte";
-    import NavbarSolo from "$lib/components/NavbarSolo.svelte";
-    import Discard from "$lib/components/Discard.svelte";
+    import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
+    import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
+    import Discard from "$lib/components/buttons/Discard.svelte";
 </script>
 
 <svelte:head>

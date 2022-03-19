@@ -1,6 +1,6 @@
 <script>
-    import Card from "$lib/components/Card.svelte";
-    import LogoutNavbar from "$lib/components/LogoutNavbar.svelte";
+    import Card from "$lib/components/otherComponents/Card.svelte";
+    import LogoutNavbar from "$lib/components/navbars/LogoutNavbar.svelte";
 </script>
 
 <svelte:head>
