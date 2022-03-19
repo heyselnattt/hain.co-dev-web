@@ -1,9 +1,9 @@
 <script lang="ts">
     export let name: string;
-    export let sub: string;
+    export let sub: string = " ";
     export let link = " ";
     export let imagePath;
-    export let entries;
+    export let entries = " ";
 </script>
 
 <svelte:head>
