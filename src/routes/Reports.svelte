@@ -1,7 +1,7 @@
 <script>
-    import ButtonBack from "$lib/components/ButtonBack.svelte";
-    import NavbarWithSearch from "$lib/components/NavbarWithSearch.svelte";
-    import ReportsTableRow from "$lib/components/ReportsTableRow.svelte";
+    import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
+    import NavbarWithSearch from "$lib/components/navbars/NavbarWithSearch.svelte";
+    import ReportsTableRow from "$lib/components/tableRows/ReportsTableRow.svelte";
 </script>
 
 <svelte:head>

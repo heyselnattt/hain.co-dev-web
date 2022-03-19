@@ -1,8 +1,8 @@
 <script lang="ts">
-    import NavbarWithSearch from "$lib/components/NavbarWithSearch.svelte";
-    import ButtonBack from "$lib/components/ButtonBack.svelte";
-    import ButtonAddRecord from "$lib/components/ButtonAddRecord.svelte";
-    import CanteenStaffTableRow from "$lib/components/CanteenStaffTableRow.svelte";
+    import NavbarWithSearch from "$lib/components/navbars/NavbarWithSearch.svelte";
+    import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
+    import ButtonAddRecord from "$lib/components/buttons/ButtonAddRecord.svelte";
+    import CanteenStaffTableRow from "$lib/components/tableRows/CanteenStaffTableRow.svelte";
 </script>
 
 <svelte:head>

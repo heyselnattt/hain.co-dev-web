@@ -1,8 +1,8 @@
 <script>
-    import NavbarWithSearch from "$lib/components/NavbarWithSearch.svelte";
-    import ButtonBack from "$lib/components/ButtonBack.svelte";
-    import ButtonAddRecord from "$lib/components/ButtonAddRecord.svelte";
-    import FoodTableRow from "$lib/components/FoodTableRow.svelte";
+    import NavbarWithSearch from "$lib/components/navbars/NavbarWithSearch.svelte";
+    import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
+    import ButtonAddRecord from "$lib/components/buttons/ButtonAddRecord.svelte";
+    import FoodTableRow from "$lib/components/tableRows/FoodTableRow.svelte";
 </script>
 
 <NavbarWithSearch/>

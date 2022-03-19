@@ -1,9 +1,9 @@
 <script>
-    import Discard from "$lib/components/Discard.svelte";
-    import FieldWithValue from "$lib/components/FieldWithValue.svelte";
-    import NavbarSolo from "$lib/components/NavbarSolo.svelte";
-    import ButtonBack from "$lib/components/ButtonBack.svelte";
-    import ButtonAddRecord from "$lib/components/ButtonAddRecord.svelte";
+    import Discard from "$lib/components/buttons/Discard.svelte";
+    import FieldWithValue from "$lib/components/otherComponents/FieldWithValue.svelte";
+    import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
+    import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
+    import ButtonAddRecord from "$lib/components/buttons/ButtonAddRecord.svelte";
 </script>
 
 <NavbarSolo/>
