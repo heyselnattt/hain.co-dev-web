@@ -1,8 +1,8 @@
 <script>
-    import ButtonBack from "$lib/components/ButtonBack.svelte";
-    import ButtonEdit from "$lib/components/ButtonEdit.svelte";
-    import FieldWithValue from "$lib/components/FieldWithValue.svelte";
-    import NavbarSolo from "$lib/components/NavbarSolo.svelte";
+    import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
+    import ButtonEdit from "$lib/components/buttons/ButtonEdit.svelte";
+    import FieldWithValue from "$lib/components/otherComponents/FieldWithValue.svelte";
+    import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
 </script>
 
 <svelte:head>

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import ButtonEditTable from "./ButtonEditTable.svelte";
+    import ButtonEditTable from "../buttons/ButtonEditTable.svelte";
     export let num;
     export let name: string;
     export let contactNum: string;

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import HomeNavbar from "$lib/components/HomeNavbar.svelte";
+    import HomeNavbar from "$lib/components/navbars/HomeNavbar.svelte";
 
     let username: string
     let password: string

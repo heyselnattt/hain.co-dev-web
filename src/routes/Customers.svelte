@@ -1,8 +1,8 @@
 <script>
-    import NavbarWithSearch from "$lib/components/NavbarWithSearch.svelte";
-    import CustomersTableRow from "$lib/components/CustomersTableRow.svelte";
-    import ButtonBack from "$lib/components/ButtonBack.svelte";
-    import ButtonAddRecord from "$lib/components/ButtonAddRecord.svelte";
+    import NavbarWithSearch from "$lib/components/navbars/NavbarWithSearch.svelte";
+    import CustomersTableRow from "$lib/components/tableRows/CustomersTableRow.svelte";
+    import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
+    import ButtonAddRecord from "$lib/components/buttons/ButtonAddRecord.svelte";
 </script>
 
 <NavbarWithSearch/>
