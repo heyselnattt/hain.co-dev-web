@@ -1,12 +1,9 @@
-import psycopg2
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from psycopg2 import OperationalError
-from psycopg2.extras import RealDictCursor, NamedTupleCursor
+from psycopg2.extras import RealDictCursor
 from starlette import status
 from starlette.exceptions import HTTPException
-
-from database.database_operation import DatabaseOperator
 
 from data_models import (
     Product,
@@ -14,6 +11,9 @@ from data_models import (
     Customer,
     Admin, Transaction, Record
 )
+
+from database.database_operation import DatabaseOperator
+import database.database_operation as DB_STATIC
 
 app = FastAPI(
     title='Hain.co Web API',
@@ -24,13 +24,11 @@ app = FastAPI(
     }
 )
 
-
 # === TRUSTED HOSTS/REQUEST ORIGINS ===
 
 origins = [
-  'http://localhost:3000'
+    'http://localhost:3000'
 ]
-
 
 # === ADD MIDDLEWARE TO APPLICATION ===
 
@@ -54,7 +52,6 @@ def root():
 
 @app.get('/product')
 def get_all_product() -> list[Product]:
-    # TODO add product_description to query
     try:
         db = DatabaseOperator(cursor_factory=RealDictCursor)
         cursor = db.get_cursor()
@@ -64,6 +61,7 @@ def get_all_product() -> list[Product]:
                             product_price,
                             product_image_link,
                             product_stock,
+                            product_description,
                             product_type,
                             product_is_active
                             FROM hainco_product""")
@@ -259,12 +257,12 @@ def get_all_transaction() -> list[Transaction]:
         )
 
 
-@app.get('transaction/{id}')
+@app.get('/transaction/{id}')
 def get_transaction_by_id(id: int) -> Transaction:
     pass
 
 
-@app.post('transaction/{id}')
+@app.post('/transaction/{id}')
 def add_transaction(id: int, transaction: Transaction) -> Transaction:
     pass
 
@@ -276,11 +274,24 @@ def get_all_record() -> list[Record]:
     pass
 
 
-@app.get('record/{id}')
+@app.get('/record/{id}')
 def get_record_by_id(id: int) -> Record:
     pass
 
 
-@app.post('record/{id}')
+@app.post('/record/{id}')
 def add_record(id: int, updated_record: Record) -> Record:
     pass
+
+
+# === META ===
+
+@app.get('/meta/row_count')
+def get_row_count():
+    try:
+        return DB_STATIC.count_rows()
+    except OperationalError:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail='Failed to connect to database'
+        )
