@@ -35,6 +35,10 @@ class DatabaseOperator:
     def commit(self):
         self.conn.commit()
 
+    def row_count(self, table_name: str = 'admin'):
+        table = f'hainco_{table_name}'
+        sql = f'SELECT COUNT(*) FROM {table}'
+
     # def get_next_id(self, table: str):
     #     sql = f'SELECT {table}_id FROM hainco_{table} ORDER BY id DESC LIMIT 1'
     #     print(sql)
