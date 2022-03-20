@@ -30,10 +30,10 @@
         <div class="column is-12"></div>
         <div class="column is-12"></div>
         <div class="column is-12"></div>
-        <FieldWithValue name="Product Name" value="Hotdog"/>
-        <FieldWithValue name="Price" value="30.00"/>
+        <FieldWithValue name="Product Name" value="Hotdog" isReadOnly={true}/>
+        <FieldWithValue name="Price" value="30.00" isReadOnly={true}/>
         <div class="column is-12"></div>
-        <FieldWithValue name="Product Stock" value="10"/>
+        <FieldWithValue name="Product Stock" value="10" isReadOnly={true}/>
 
         <!-- wala pang file upload for image and also yung dropdown para sa product type-->
 

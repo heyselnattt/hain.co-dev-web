@@ -28,11 +28,11 @@
         <div class="column is-12"></div>
         <div class="column is-12"></div>
         <div class="column is-12"></div>
-        <FieldWithValue name="Name" value="Del Valle, Deib Lohr H."/>
-        <FieldWithValue name="Contact No." value="Cook"/>
+        <FieldWithValue name="Name" value="Del Valle, Deib Lohr H." isReadOnly={true}/>
+        <FieldWithValue name="Contact No." value="Cook" isReadOnly={true}/>
         <div class="column is-12"></div>
-        <FieldWithValue name="ID No." value="09123456789"/>
-        <FieldWithValue name="Password" value="*****"/>
+        <FieldWithValue name="ID No." value="09123456789" isReadOnly={true}/>
+        <FieldWithValue name="Password" value="*****" isReadOnly={true}/>
         <div class="column is-12"></div>
         <div class="column is-12"></div>
         <div class="column is-12"></div>
