@@ -1,5 +1,8 @@
+from pprint import pprint
+
 from dotenv import dotenv_values, load_dotenv
 import psycopg2 as pg
+from psycopg2.extras import RealDictCursor
 
 config = dotenv_values('.env')
 
@@ -43,12 +46,28 @@ class DatabaseOperator:
     #     # return int(max_id) + 1
 
 
-def count_rows(table_name: str = 'admin') -> int:
-    db = DatabaseOperator()
+def count_rows():
+    db = DatabaseOperator(cursor_factory=RealDictCursor)
     cursor = db.get_cursor()
-    table = f'hainco_{table_name}'
-    sql = f'SELECT COUNT(*) FROM {table}'
+    sql = """
+    SELECT 
+        table_name, 
+        cnt_rows(table_schema, table_name) AS rows
+    FROM information_schema.tables
+    WHERE 
+        table_schema NOT IN ('pg_catalog', 'information_schema') AND
+        table_name NOT LIKE ('%position') AND
+        table_name NOT LIKE ('%interval') AND
+        table_name NOT LIKE ('%type')
+        and table_type='BASE TABLE'
+    ORDER BY
+        table_name;
+    """
 
     cursor.execute(sql)
-    row_count = cursor.fetchone()[0]
-    return int(row_count)
+    row_counts = cursor.fetchall()
+    return row_counts
+
+
+if __name__ == '__main__':
+    count_rows()
