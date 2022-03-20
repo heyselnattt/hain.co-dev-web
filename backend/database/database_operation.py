@@ -1,6 +1,5 @@
 from dotenv import dotenv_values, load_dotenv
 import psycopg2 as pg
-import os
 
 config = dotenv_values('.env')
 
@@ -35,10 +34,6 @@ class DatabaseOperator:
     def commit(self):
         self.conn.commit()
 
-    def row_count(self, table_name: str = 'admin'):
-        table = f'hainco_{table_name}'
-        sql = f'SELECT COUNT(*) FROM {table}'
-
     # def get_next_id(self, table: str):
     #     sql = f'SELECT {table}_id FROM hainco_{table} ORDER BY id DESC LIMIT 1'
     #     print(sql)
@@ -46,3 +41,14 @@ class DatabaseOperator:
     #     # cursor.execute(sql)
     #     # max_id = cursor.fetchone()
     #     # return int(max_id) + 1
+
+
+def count_rows(table_name: str = 'admin') -> int:
+    db = DatabaseOperator()
+    cursor = db.get_cursor()
+    table = f'hainco_{table_name}'
+    sql = f'SELECT COUNT(*) FROM {table}'
+
+    cursor.execute(sql)
+    row_count = cursor.fetchone()[0]
+    return int(row_count)
