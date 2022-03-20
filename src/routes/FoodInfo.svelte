@@ -1,5 +1,6 @@
 <script>
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
+    import ButtonEdit from "$lib/components/buttons/ButtonEdit.svelte";
     import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
     import FieldWithValue from "$lib/components/otherComponents/FieldWithValue.svelte";
 </script>
@@ -13,9 +14,7 @@
 <div class="container">
     <div class="columns  pt-5 is-multiline has-text-centered">
         <div class="column is-4">
-            <a href="Customers">
-                <ButtonBack/>
-            </a>
+            <ButtonBack link="Customers"/>
         </div>
         <div class="column is-3  ml-6">
             <p class="text has-text-link">
@@ -23,11 +22,7 @@
             </p>
         </div>
         <div class="column is-4">
-            <a class="btn-txt button is-link is-rounded" href="/">
-                <p class="ml-5 mr-5">
-                    Edit
-                </p>
-            </a>
+            <ButtonEdit link="FoodInfo"/>
         </div>
     </div>
 
@@ -49,11 +44,6 @@
     .text {
         font-family: 'Karla', sans-serif;
         font-size: 40px;
-    }
-
-    .btn-txt {
-        font-size: 20px;
-        font-family: 'Karla', sans-serif;
     }
 </style>
 
