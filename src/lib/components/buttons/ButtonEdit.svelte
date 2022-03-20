@@ -1,8 +1,14 @@
-<button class="button is-rounded is-link btn-txt">
-    <p class="ml-4 mr-4">
-        Edit
-    </p>
-</button>
+<script lang="ts">
+    export let link: string = " ";
+</script>
+
+<a href="{link}">
+    <button class="button is-rounded is-link btn-txt">
+        <p class="ml-4 mr-4">
+            Edit
+        </p>
+    </button>
+</a>
 
 <style>
     .btn-txt {

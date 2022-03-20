@@ -14,9 +14,7 @@
 <div class="container">
     <div class="columns has-text-centered pt-5">
         <div class="column is-4">
-            <a href="Database">
-                <ButtonBack/>
-            </a>
+            <ButtonBack link="Database"/>
         </div>
         <div class="column is-4">
             <p class="text has-text-link">
@@ -24,9 +22,7 @@
             </p>
         </div>
         <div class="column is-3 ml-6">
-            <a href="AddNewCanteenStaff">
-                <ButtonAddRecord/>
-            </a>
+            <ButtonAddRecord link="AddNewCanteenStaff"/>
         </div>
     </div>
 

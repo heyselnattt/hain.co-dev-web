@@ -1,9 +1,15 @@
-<button class="btn-txt button is-link is-rounded">
-    <img class="img2" src="images/add.png" alt="Add record"/>
-    <p class="ml-2">
-        Add Record
-    </p>
-</button>
+<script lang="ts">
+    export let link: string = " ";
+</script>
+
+<a href="{link}">
+    <button class="btn-txt button is-link is-rounded">
+        <img class="img2" src="images/add.png" alt="Add record"/>
+        <p class="ml-2">
+            Add Record
+        </p>
+    </button>
+</a>
 
 <style>
     .img2 {
