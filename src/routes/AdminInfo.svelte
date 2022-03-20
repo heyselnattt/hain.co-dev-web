@@ -24,7 +24,9 @@
         <div class="column is-3 ml-6">
             <ButtonEdit link="EditAdminInfo"/>
         </div>
+    </div>
 
+    <div class="columns pt-5 is-multiline">
         <div class="column is-12"></div>
         <div class="column is-12"></div>
         <div class="column is-12"></div>

@@ -24,8 +24,9 @@
         <div class="column is-3 ml-6">
             <ButtonEdit link="EditCanteenStaffInfo"/>
         </div>
+    </div>
 
-        <div class="column is-12"></div>
+    <div class="columns pt-5 is-multiline">
         <div class="column is-12"></div>
         <div class="column is-12"></div>
         <FieldWithValue name="Name" value="Salaveria, Rence" isReadOnly={true}/>
