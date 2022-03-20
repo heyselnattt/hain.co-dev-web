@@ -28,11 +28,11 @@
         <div class="column is-12"></div>
         <div class="column is-12"></div>
         <div class="column is-12"></div>
-        <FieldWithValue name="Name" value="Salaveria, Rence"/>
-        <FieldWithValue name="Position" value="Cook"/>
+        <FieldWithValue name="Name" value="Salaveria, Rence" isReadOnly={true}/>
+        <FieldWithValue name="Position" value="Cook" isReadOnly={true}/>
         <div class="column is-12"></div>
-        <FieldWithValue name="Contact No." value="09123456789"/>
-        <FieldWithValue name="Address" value="02 Toronto St. Malinta Valenzuela City"/>
+        <FieldWithValue name="Contact No." value="09123456789" isReadOnly={true}/>
+        <FieldWithValue name="Address" value="02 Toronto St. Malinta Valenzuela City" isReadOnly={true}/>
         <div class="column is-12"></div>
         <div class="column is-12"></div>
         <div class="column is-12"></div>
