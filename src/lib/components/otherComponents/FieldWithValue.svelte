@@ -1,6 +1,7 @@
 <script lang="ts">
     export let value;
     export let name;
+    export let isReadOnly = false;
 </script>
 
 <svelte:head>
@@ -11,7 +12,7 @@
     <p class="pText has-text-link ml-4 mb-1">
         {name}
     </p>
-    <input class="pText input is-rounded" type="text" value={value}/>
+    <input class="pText input is-rounded" type="text" value={value} readonly={isReadOnly}/>
 </div>
 
 <style>
