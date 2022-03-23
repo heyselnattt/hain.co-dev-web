@@ -23,7 +23,7 @@
             </p>
         </div>
         <div class="column is-3 ml-4">
-            <ButtonAddRecord link="AddNewAdmin"/>
+            <ButtonAddRecord link="Admin/AddNewAdmin"/>
         </div>
     </div>
 
@@ -36,7 +36,7 @@
                 <Card
                     name={info.admin_username}
                     sub={info.admin_full_name}
-                    imagePath="images/adminIcon.png"
+                    imagePath="../static/images/adminIcon.png"
                     link="Admin/{info.admin_id}"/>
             {/each}
         {:catch err}

@@ -22,7 +22,7 @@
             </p>
         </div>
         <div class="column is-3 ml-6">
-            <ButtonAddRecord link="AddNewCanteenStaff"/>
+            <ButtonAddRecord link="CanteenStaff/AddNewCanteenStaff"/>
         </div>
     </div>
 
