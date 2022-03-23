@@ -4,7 +4,7 @@
 
 <a href="{link}">
     <button class="btn-txt button is-link is-rounded">
-        <img class="img2" src="images/add.png" alt="Add record"/>
+        <img class="img2" src="../static/images/add.png" alt="Add record"/>
         <p class="ml-2">
             Add Record
         </p>
