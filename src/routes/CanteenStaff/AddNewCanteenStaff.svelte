@@ -1,25 +1,25 @@
 <script lang="ts">
+    import ButtonAddRecord from "$lib/components/buttons/ButtonAddRecord.svelte";
+    import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
     import Discard from "$lib/components/buttons/Discard.svelte";
     import FieldWithValue from "$lib/components/otherComponents/FieldWithValue.svelte";
     import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
-    import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
-    import ButtonAddRecord from "$lib/components/buttons/ButtonAddRecord.svelte";
 </script>
 
 <NavbarSolo/>
 
 <div class="container">
-    <div class="columns  pt-5 is-multiline has-text-centered">
+    <div class="columns pt-5 is-multiline has-text-centered">
         <div class="column is-4">
-            <ButtonBack link="Customers"/>
+            <ButtonBack link="../CanteenStaff"/>
         </div>
         <div class="column is-4">
             <p class="text has-text-link">
-                New Customer
+                New Canteen Staff
             </p>
         </div>
         <div class="column is-3 ml-6">
-            <Discard link="Customers"/>
+            <Discard link="../CanteenStaff"/>
         </div>
     </div>
 
@@ -28,10 +28,10 @@
         <div class="column is-12"></div>
         <div class="column is-12"></div>
         <FieldWithValue name="Name" value=""/>
-        <FieldWithValue name="Contact No." value=""/>
+        <FieldWithValue name="Position" value=""/>
         <div class="column is-12"></div>
-        <FieldWithValue name="Email" value=""/>
-        <FieldWithValue name="Password" value=""/>
+        <FieldWithValue name="Contact No." value=""/>
+        <FieldWithValue name="Address" value=""/>
         <div class="column is-12"></div>
         <div class="column is-12"></div>
         <div class="column is-12"></div>
@@ -40,7 +40,7 @@
 
     <!-- Add record button -->
     <div class="mb- has-text-centered">
-        <ButtonAddRecord link="Customers"/>
+        <ButtonAddRecord link="../CanteenStaff"/>
     </div>
 </div>
 

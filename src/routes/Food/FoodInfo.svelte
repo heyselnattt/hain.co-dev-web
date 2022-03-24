@@ -1,8 +1,8 @@
 <script>
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
-    import ButtonSave from "$lib/components/buttons/ButtonSave.svelte";
-    import FieldWithValue from "$lib/components/otherComponents/FieldWithValue.svelte";
+    import ButtonEdit from "$lib/components/buttons/ButtonEdit.svelte";
     import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
+    import FieldWithValue from "$lib/components/otherComponents/FieldWithValue.svelte";
 </script>
 
 <svelte:head>
@@ -14,15 +14,15 @@
 <div class="container">
     <div class="columns  pt-5 is-multiline has-text-centered">
         <div class="column is-4">
-            <ButtonBack link="Admin"/>
+            <ButtonBack link="../Food"/>
         </div>
-        <div class="column is-4">
+        <div class="column is-3  ml-6">
             <p class="text has-text-link">
-                Admin's Information
+                Food's Information
             </p>
         </div>
-        <div class="column is-3 ml-6">
-            <ButtonSave link="AdminInfo"/>
+        <div class="column is-4">
+            <ButtonEdit link="FoodRecord"/>
         </div>
     </div>
 
@@ -30,15 +30,13 @@
         <div class="column is-12"></div>
         <div class="column is-12"></div>
         <div class="column is-12"></div>
-        <FieldWithValue name="Name" value="Del Valle, Deib Lohr H."/>
-        <FieldWithValue name="Contact No." value="Cook"/>
+        <FieldWithValue name="Product Name" value="Hotdog" isReadOnly={true}/>
+        <FieldWithValue name="Price" value="30.00" isReadOnly={true}/>
         <div class="column is-12"></div>
-        <FieldWithValue name="ID No." value="09123456789"/>
-        <FieldWithValue name="Password" value="*****"/>
-        <div class="column is-12"></div>
-        <div class="column is-12"></div>
-        <div class="column is-12"></div>
-        <div class="column is-12"></div>
+        <FieldWithValue name="Product Stock" value="10" isReadOnly={true}/>
+
+        <!-- wala pang file upload for image and also yung dropdown para sa product type-->
+
     </div>
 </div>
 
@@ -48,3 +46,4 @@
         font-size: 40px;
     }
 </style>
+

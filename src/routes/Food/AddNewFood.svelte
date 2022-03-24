@@ -11,7 +11,7 @@
 <div class="container">
     <div class="columns pt-5 is-multiline has-text-centered">
         <div class="column is-4">
-            <ButtonBack link="Food"/>
+            <ButtonBack link="../Food"/>
         </div>
         <div class="column is-4">
             <p class="text has-text-link">
@@ -19,7 +19,7 @@
             </p>
         </div>
         <div class="column is-3 ml-6">
-            <Discard link="Food"/>
+            <Discard link="../Food"/>
         </div>
     </div>
 

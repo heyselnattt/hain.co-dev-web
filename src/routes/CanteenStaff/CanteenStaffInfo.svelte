@@ -1,46 +1,43 @@
-<script lang="ts">
-    import ButtonAddRecord from "$lib/components/buttons/ButtonAddRecord.svelte";
+<script>
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
-    import Discard from "$lib/components/buttons/Discard.svelte";
+    import ButtonEdit from "$lib/components/buttons/ButtonEdit.svelte";
     import FieldWithValue from "$lib/components/otherComponents/FieldWithValue.svelte";
     import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
 </script>
 
+<svelte:head>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@600&display=swap" rel="stylesheet"/>
+</svelte:head>
+
 <NavbarSolo/>
 
 <div class="container">
-    <div class="columns pt-5 is-multiline has-text-centered">
+    <div class="columns  pt-5 is-multiline has-text-centered">
         <div class="column is-4">
-            <ButtonBack link="CanteenStaff"/>
+            <ButtonBack link="../CanteenStaff"/>
         </div>
         <div class="column is-4">
             <p class="text has-text-link">
-                New Canteen Staff
+                Canteen Staff's Information
             </p>
         </div>
         <div class="column is-3 ml-6">
-            <Discard link="CanteenStaff"/>
+            <ButtonEdit link="EditCanteenStaffInfo"/>
         </div>
     </div>
 
     <div class="columns pt-5 is-multiline">
         <div class="column is-12"></div>
         <div class="column is-12"></div>
+        <FieldWithValue name="Name" value="Salaveria, Rence" isReadOnly={true}/>
+        <FieldWithValue name="Position" value="Cook" isReadOnly={true}/>
         <div class="column is-12"></div>
-        <FieldWithValue name="Name" value=""/>
-        <FieldWithValue name="Position" value=""/>
-        <div class="column is-12"></div>
-        <FieldWithValue name="Contact No." value=""/>
-        <FieldWithValue name="Address" value=""/>
-        <div class="column is-12"></div>
+        <FieldWithValue name="Contact No." value="09123456789" isReadOnly={true}/>
+        <FieldWithValue name="Address" value="02 Toronto St. Malinta Valenzuela City" isReadOnly={true}/>
         <div class="column is-12"></div>
         <div class="column is-12"></div>
         <div class="column is-12"></div>
-    </div>
-
-    <!-- Add record button -->
-    <div class="mb- has-text-centered">
-        <ButtonAddRecord link="CanteenStaff"/>
+        <div class="column is-12"></div>
     </div>
 </div>
 
