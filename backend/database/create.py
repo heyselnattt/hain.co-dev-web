@@ -1,6 +1,12 @@
 import psycopg2
 
-from data_models import Admin
+from data_models import (
+    Admin,
+    Customer,
+    Product,
+    Staff,
+    Transaction
+)
 from database.security import create_salt, encrypt_password
 from database_operation import DatabaseOperator
 
@@ -32,3 +38,115 @@ def add_admin_to_database(admin: Admin) -> Admin:
         print(e)
     finally:
         return admin
+
+
+def add_customer_to_database(customer: Customer) -> Customer:
+    salt = create_salt()
+    encrypted_password = encrypt_password(customer.customer_password, salt)
+    try:
+        sql = """INSERT INTO hainco_customer(
+                    customer_first_name, 
+                    customer_middle_name,
+                    customer_last_name,
+                    customer_username, 
+                    customer_email, 
+                    customer_is_active,
+                    customer_password_salt,
+                    customer_password_hash,
+                    customer_contact_number
+                    ) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+        cursor.execute(sql, (customer.customer_first_name,
+                             customer.customer_middle_name,
+                             customer.customer_last_name,
+                             customer.customer_username,
+                             customer.customer_email,
+                             customer.customer_is_active,
+                             salt,
+                             encrypted_password,
+                             customer.customer_contact_number
+                             ))
+        pg_heroku.commit()
+        cursor.close()
+    except (Exception, psycopg2.DatabaseError) as e:
+        print(e)
+    finally:
+        return customer
+
+
+def add_product_to_database(product: Product) -> Product:
+    try:
+        sql = """INSERT INTO hainco_product(
+                    product_name, 
+                    product_price,
+                    product_image_link,
+                    product_stock, 
+                    product_type, 
+                    product_is_active,
+                    product_description
+                    ) VALUES(%s, %s, %s, %s, %s, %s, %s)"""
+        cursor.execute(sql, (product.product_name,
+                             product.product_price,
+                             product.product_image_link,
+                             product.product_stock,
+                             product.product_type,
+                             product.product_is_active,
+                             product.product_description
+                             ))
+        pg_heroku.commit()
+        cursor.close()
+    except (Exception, psycopg2.DatabaseError) as e:
+        print(e)
+    finally:
+        return product
+
+
+def add_staff_to_database(staff: Staff) -> Staff:
+    salt = create_salt()
+    encrypted_password = encrypt_password(staff.staff_password, salt)
+    try:
+        sql = """INSERT INTO hainco_staff(
+                        staff_full_name, 
+                        staff_contact_number, 
+                        staff_username, 
+                        staff_password_salt,
+                        staff_password_hash,
+                        staff_address,
+                        staff_position
+                        ) VALUES(%s, %s, %s, %s, %s, %s, %s)"""
+        cursor.execute(sql, (staff.staff_full_name,
+                             staff.staff_contact_number,
+                             staff.staff_username,
+                             salt,
+                             encrypted_password,
+                             staff.staff_address,
+                             staff.staff_position
+                             ))
+        pg_heroku.commit()
+        cursor.close()
+    except (Exception, psycopg2.DatabaseError) as e:
+        print(e)
+    finally:
+        return staff
+
+
+def add_transaction_to_database(transaction: Transaction) -> Transaction:
+    try:
+        sql = """INSERT INTO hainco_transaction(
+                    transaction_agent, 
+                    transaction_description, 
+                    transaction_type, 
+                    transaction_amount,
+                    transaction_date
+                    ) VALUES(%s, %s, %s, %s, %s)"""
+        cursor.execute(sql, (transaction.transaction_agent,
+                             transaction.transaction_description,
+                             transaction.transaction_type,
+                             transaction.transaction_amount,
+                             transaction.transaction_date
+                             ))
+        pg_heroku.commit()
+        cursor.close()
+    except (Exception, psycopg2.DatabaseError) as e:
+        print(e)
+    finally:
+        return transaction
