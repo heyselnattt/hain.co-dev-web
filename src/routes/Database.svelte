@@ -1,10 +1,8 @@
 <script context="module">
     import {row_count} from "$lib/stores/metaStore";
-</script>
-
-<script>
     import Card from "$lib/components/otherComponents/Card.svelte";
     import LogoutNavbar from "$lib/components/navbars/LogoutNavbar.svelte";
+    import DatabaseLoadingScreen from "$lib/components/otherComponents/DatabaseLoadingScreen.svelte";
 </script>
 
 <svelte:head>
@@ -12,6 +10,7 @@
 </svelte:head>
 
 <LogoutNavbar/>
+<DatabaseLoadingScreen/>
 
 <div class="container">
     <p class="text has-text-centered has-text-link has-text-weight- mt-5">
