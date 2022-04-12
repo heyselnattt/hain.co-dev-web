@@ -1,11 +1,8 @@
 <script context="module">
     import {row_count} from "$lib/stores/metaStore";
-</script>
-
-<script>
     import Card from "$lib/components/otherComponents/Card.svelte";
     import LogoutNavbar from "$lib/components/navbars/LogoutNavbar.svelte";
-    import LoadingScreen from "$lib/components/otherComponents/LoadingScreen.svelte"
+    import FixedLoadingScreen from "$lib/components/otherComponents/FixedLoadingScreen.svelte";
 </script>
 
 <svelte:head>
@@ -21,7 +18,7 @@
 
     <div class="columns is-centered is-multiline pt-5">
         {#await $row_count}
-            <LoadingScreen/>
+            <FixedLoadingScreen/>
         {:then row_count}
             <Card name="Customers"
                   entries={row_count['data'][1]['rows']}
