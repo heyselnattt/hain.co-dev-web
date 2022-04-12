@@ -2,7 +2,7 @@
     import {row_count} from "$lib/stores/metaStore";
     import Card from "$lib/components/otherComponents/Card.svelte";
     import LogoutNavbar from "$lib/components/navbars/LogoutNavbar.svelte";
-    import DatabaseLoadingScreen from "$lib/components/otherComponents/DatabaseLoadingScreen.svelte";
+    import FixedLoadingScreen from "$lib/components/otherComponents/FixedLoadingScreen.svelte";
 </script>
 
 <svelte:head>
@@ -10,7 +10,6 @@
 </svelte:head>
 
 <LogoutNavbar/>
-<DatabaseLoadingScreen/>
 
 <div class="container">
     <p class="text has-text-centered has-text-link has-text-weight- mt-5">
@@ -19,7 +18,7 @@
 
     <div class="columns is-centered is-multiline pt-5">
         {#await $row_count}
-            <p>Waiting for data</p>
+            <FixedLoadingScreen/>
         {:then row_count}
             <Card name="Customers"
                   entries={row_count['data'][1]['rows']}

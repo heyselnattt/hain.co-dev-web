@@ -10,7 +10,7 @@
     })
 </script>
 
-<LoadingScreen/>
+
 
 {#if isLoaded}
     <Homepage/>
@@ -20,5 +20,5 @@
         }
     </style>
 {:else}
-    load screen component here
+    <LoadingScreen/>
 {/if}

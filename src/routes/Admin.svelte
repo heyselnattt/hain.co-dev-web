@@ -3,6 +3,7 @@
     import Card from "$lib/components/otherComponents/Card.svelte";
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
     import ButtonAddRecord from "$lib/components/buttons/ButtonAddRecord.svelte";
+    import FixedLoadingScreen from "$lib/components/otherComponents/FixedLoadingScreen.svelte";
     import {admins} from '$lib/stores/adminStore';
 </script>
 
@@ -29,8 +30,7 @@
 
     <div class="columns is-centered is-multiline pt-5">
         {#await $admins}
-            <!-- waiting for data component -->
-            <p>Waiting for data</p>
+            <FixedLoadingScreen/>
         {:then admin}
             {#each admin.data as info}
                 <Card
