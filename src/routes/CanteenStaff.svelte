@@ -3,6 +3,27 @@
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
     import ButtonAddRecord from "$lib/components/buttons/ButtonAddRecord.svelte";
     import CanteenStaffTableRow from "$lib/components/tableRows/CanteenStaffTableRow.svelte";
+
+    import FixedLoadingScreen from "$lib/components/otherComponents/FixedLoadingScreen.svelte";
+    import {staffs} from "$lib/stores/staffStore";
+
+    let staffNumber = 1;
+    const counter = (): number => {
+        return staffNumber++;
+    }
+
+    const identifyType = (code: number): string => {
+        switch(code) {
+            case 1:
+                return "Chef"
+
+            case 2:
+                return "Cashier"
+
+            case 3:
+                return "Server"
+        }
+    }
 </script>
 
 <svelte:head>
@@ -37,22 +58,23 @@
                 <th>Address</th>
             </tr>
             </thead>
-            <CanteenStaffTableRow num="1" name="Salaveria, Rence" position="Cook" contactNum="09123456789"
-                                  address="02 Toronto St. Malinta, Valenzuela City"/>
-            <CanteenStaffTableRow num="2" name="Delica, Lean O." position="Cook" contactNum="09523648951"
-                                  address="211 Maple St. Pateros, Metro Manila"/>
-            <CanteenStaffTableRow num="3" name="Briguel, Jen" position="Cleaner" contactNum="09152463894"
-                                  address="123 Canada Compd., Quezon City"/>
-            <CanteenStaffTableRow num="4" name="Monton, Che" position="Cleaner" contactNum="09681125433"
-                                  address="45 Mexico St. Po.."/>
-            <CanteenStaffTableRow num="5" name="Baguio, Janine" position="Dishwasher" contactNum="09352264871"
-                                  address="#1 Thesis St. Punturin, Valenzuela City"/>
-            <CanteenStaffTableRow num="6" name="Fernando, Angela" position="Cashier" contactNum="09256855497"
-                                  address="Blk. 2 Phase 2 Amabelle Homes, Caloocan City"/>
-            <CanteenStaffTableRow num="7" name="Roche, Razelle" position="Server" contactNum="09055964325"
-                                  address="78 Maysan Rd. Maysan, Valenzuela City"/>
-            <CanteenStaffTableRow num="8" name="Lee, Mark" position="Server" contactNum="09994563221"
-                                  address="024 Buenavista St. Malinta, Valenzuela City"/>
+            {#await $staffs}
+                <FixedLoadingScreen/>
+            {:then staff}
+                {#each staff.data as info}
+                    <!--TODO add property for the link for the individual staff
+                        TODO add property to access the object
+                    -->
+                    <CanteenStaffTableRow
+                        num={counter()}
+                        name={info.staff_full_name}
+                        position={identifyType(info.staff_position)}
+                        contactNum={info.staff_contact_num}
+                        address={info.staff_address}/>
+                {/each}
+            {:catch err}
+                <p>{err.message}</p>
+            {/await}
         </table>
     </div>
 </div>
