@@ -69,7 +69,7 @@
                         num={counter()}
                         name={info.staff_full_name}
                         position={identifyType(info.staff_position)}
-                        contactNum={info.staff_contact_num}
+                        contactNum={info.staff_contact_number}
                         address={info.staff_address}/>
                 {/each}
             {:catch err}
