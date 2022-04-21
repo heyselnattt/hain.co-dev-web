@@ -2,12 +2,18 @@
     import NavbarWithSearch from "$lib/components/navbars/NavbarWithSearch.svelte";
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
     import TransactionTableRow from "$lib/components/tableRows/TransactionTableRow.svelte";
+    import Inaccessible from "$lib/components/otherComponents/Inaccessible.svelte";
+
+    let loggedIn = false;
 </script>
 
 <svelte:head>
     <link href="https://fonts.googleapis.com/css2?family=Karla:wght@600&display=swap" rel="stylesheet"/>
 </svelte:head>
 
+{#if !loggedIn}
+    <Inaccessible/>
+    {:else}
 <NavbarWithSearch />
 
 <div class="container">
@@ -45,6 +51,7 @@
         </table>
     </div>
 </div>
+{/if}
 
 <style>
     .text {

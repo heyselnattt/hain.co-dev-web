@@ -3,12 +3,18 @@
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
     import FieldWithValue from "$lib/components/otherComponents/FieldWithValue.svelte";
     import ButtonSave from "$lib/components/buttons/ButtonSave.svelte";
+    import Inaccessible from "$lib/components/otherComponents/Inaccessible.svelte";
+
+    let loggedIn = false;
 </script>
 
 <svelte:head>
     <link href="https://fonts.googleapis.com/css2?family=Karla:wght@600&display=swap" rel="stylesheet"/>
 </svelte:head>
 
+{#if !loggedIn}
+    <Inaccessible/>
+    {:else}
 <NavbarSolo/>
 
 <div class="container">
@@ -39,6 +45,7 @@
 
     </div>
 </div>
+{/if}
 
 <style>
     .text {

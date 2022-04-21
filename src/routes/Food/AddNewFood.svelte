@@ -4,7 +4,9 @@
     import ButtonAddRecord from "$lib/components/buttons/ButtonAddRecord.svelte";
     import Discard from "$lib/components/buttons/Discard.svelte";
     import FieldWithValue from "$lib/components/otherComponents/FieldWithValue.svelte";
+    import Inaccessible from "$lib/components/otherComponents/Inaccessible.svelte";
 
+    let loggedIn = false;
     let avatar, fileinput;
 
     const onFileSelected = (e) => {
@@ -17,6 +19,9 @@
     }
 </script>
 
+{#if !loggedIn}
+    <Inaccessible/>
+    {:else}
 <NavbarSolo/>
 
 <div class="container">
@@ -75,6 +80,7 @@
         <ButtonAddRecord link="../Food" />
     </div>
 </div>
+{/if}
 
 
 <style>

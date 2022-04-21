@@ -4,8 +4,14 @@
     import Discard from "$lib/components/buttons/Discard.svelte";
     import FieldWithValue from "$lib/components/otherComponents/FieldWithValue.svelte";
     import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
+    import Inaccessible from "$lib/components/otherComponents/Inaccessible.svelte";
+
+    let loggedIn = false;
 </script>
 
+{#if !loggedIn}
+    <Inaccessible/>
+    {:else}
 <NavbarSolo/>
 
 <div class="container">
@@ -43,6 +49,7 @@
         <ButtonAddRecord link="../CanteenStaff"/>
     </div>
 </div>
+{/if}
 
 <style>
     .text {

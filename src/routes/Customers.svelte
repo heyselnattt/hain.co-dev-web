@@ -3,8 +3,14 @@
     import CustomersTableRow from "$lib/components/tableRows/CustomersTableRow.svelte";
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
     import ButtonAddRecord from "$lib/components/buttons/ButtonAddRecord.svelte";
+    import Inaccessible from "$lib/components/otherComponents/Inaccessible.svelte";
+    
+    let loggedIn = false;
 </script>
 
+{#if !loggedIn}
+    <Inaccessible/>
+    {:else}
 <NavbarWithSearch/>
 
 <div class="container">
@@ -46,6 +52,7 @@
         </table>
     </div>
 </div>
+{/if}
 
 <style>
     .text {

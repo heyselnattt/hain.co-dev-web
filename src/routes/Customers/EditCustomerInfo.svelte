@@ -4,12 +4,18 @@
     import ButtonSwitch from "$lib/components/buttons/ButtonSwitch.svelte";
     import FieldWithValue from "$lib/components/otherComponents/FieldWithValue.svelte";
     import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
+    import Inaccessible from "$lib/components/otherComponents/Inaccessible.svelte";
+
+    let loggedIn = false;
 </script>
 
 <svelte:head>
     <link href="https://fonts.googleapis.com/css2?family=Karla:wght@600&display=swap" rel="stylesheet"/>
 </svelte:head>
 
+{#if !loggedIn}
+    <Inaccessible/>
+    {:else}
 <NavbarSolo/>
 
 <div class="container">
@@ -46,6 +52,7 @@
     <ButtonSwitch/>
     <p class="switch-labels mt-3 ml-4">Active</p>
 </div>
+{/if}
 
 <style>
     .text {

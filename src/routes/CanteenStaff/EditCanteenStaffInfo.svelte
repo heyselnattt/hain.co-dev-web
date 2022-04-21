@@ -3,8 +3,14 @@
     import ButtonSave from "$lib/components/buttons/ButtonSave.svelte";
     import FieldWithValue from "$lib/components/otherComponents/FieldWithValue.svelte";
     import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
+    import Inaccessible from "$lib/components/otherComponents/Inaccessible.svelte";
+
+    let loggedIn = false;
 </script>
 
+{#if !loggedIn}
+    <Inaccessible/>
+    {:else}
 <NavbarSolo/>
 
 <div class="container">
@@ -36,6 +42,7 @@
         <div class="column is-12"></div>
     </div>
 </div>
+{/if}
 
 <style>
     .text {

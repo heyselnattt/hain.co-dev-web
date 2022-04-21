@@ -1,8 +1,11 @@
 <script lang="ts">
     import HomeNavbar from "$lib/components/navbars/HomeNavbar.svelte";
+    import ErrorMessage from "$lib/components/otherComponents/ErrorMessage.svelte";
+    import ErrorMessageContainer from "$lib/components/otherComponents/ErrorMessageContainer.svelte";
 
     let username: string
     let password: string
+    let loggedIn = false;
 </script>
 
 <svelte:head>
@@ -62,13 +65,20 @@
                     </div>
                 </section>
                 <!-- TODO add the session for logging in -->
-                <a href="Database">
                     <button class="button is-link is-rounded mt-5">Login</button>
-                </a>
             </div>
         </div>
     </div>
 </div>
+
+<!-- draft error message -->
+<!-- <ErrorMessageContainer>
+    {#if er}
+        {#each Array(1) as a}    
+            <ErrorMessage message="tanga mo mali!"/>
+        {/each}
+    {/if}
+</ErrorMessageContainer> -->
 
 <style>
     h1 {
