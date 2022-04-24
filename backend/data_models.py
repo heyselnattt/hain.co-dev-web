@@ -46,6 +46,7 @@ class Product(BaseModel):
     product_description: str
     product_type: ProductType
     product_is_active: bool
+    product_code: str
 
 
 class Transaction(BaseModel):
