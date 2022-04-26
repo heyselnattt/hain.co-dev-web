@@ -1,14 +1,14 @@
 import psycopg2
 
-from data_models import (
+from backend.data_models import (
     Admin,
     Customer,
     Product,
     Staff,
     Transaction
 )
-from database.security import create_salt, encrypt_password
-from database.database_operation import DatabaseOperator
+from backend.database.security import create_salt, encrypt_password
+from backend.database.database_operation import DatabaseOperator
 
 pg_heroku = DatabaseOperator()
 
