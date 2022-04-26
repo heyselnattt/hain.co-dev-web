@@ -401,7 +401,7 @@ def get_admin_by_username(username: str):
             db_admin = dict(record)
             if username != db_admin['admin_username']:
                 raise HTTPException(
-                    status_code=status.HTTP_403_FORBIDDEN,
+                    status_code=status.HTTP_404_NOT_FOUND,
                     detail='Username does not exist.'
                 )
         db = DatabaseOperator(cursor_factory=RealDictCursor)
