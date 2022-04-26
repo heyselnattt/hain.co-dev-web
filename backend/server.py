@@ -15,6 +15,7 @@ from backend.data_models import (
 from backend.database.database_operation import DatabaseOperator
 import backend.database.database_operation as DB_STATIC
 import backend.database.create as db_controller
+import backend.database.security as sec
 
 app = FastAPI(
     title='Hain.co Web API',
@@ -217,7 +218,20 @@ def get_staff_by_username(username: str):
                             WHERE staff_username = '{username}'
                             """)
         staff_record = cursor.fetchone()
-        return staff_record
+        # convert the result to a dictionary to modify its values
+        staff_dict = dict(staff_record)
+        # decrypt the password
+        decrypted_password = sec.decrypt_password(
+            staff_dict.get('staff_password_hash'),
+            staff_dict.get('staff_password_salt')
+        )
+        # remove the hash and salt of the password
+        staff_dict.pop('staff_password_hash')
+        staff_dict.pop('staff_password_salt')
+        # update with the actual password
+        staff_dict.update({'staff_password': decrypted_password})
+        # return the modified dictionary
+        return staff_dict
     except OperationalError:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
@@ -322,7 +336,20 @@ def get_customer_by_email(email: str):
                             WHERE customer_email = '{email}'
                             """)
         customer_record = cursor.fetchone()
-        return customer_record
+        # convert the result to a dictionary to modify its values
+        customer_dict = dict(customer_record)
+        # decrypt the password
+        decrypted_password = sec.decrypt_password(
+            customer_dict.get('customer_password_hash'),
+            customer_dict.get('customer_password_salt')
+        )
+        # remove the hash and salt of the password
+        customer_dict.pop('customer_password_hash')
+        customer_dict.pop('customer_password_salt')
+        # update with the actual password
+        customer_dict.update({'customer_password': decrypted_password})
+        # return the modified dictionary
+        return customer_dict
     except OperationalError:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
@@ -423,7 +450,20 @@ def get_admin_by_username(username: str):
                         WHERE admin_username = '{username}'
                         """)
         admin_record = cursor.fetchone()
-        return admin_record
+        # convert the result to a dictionary to modify its values
+        admin_dict = dict(admin_record)
+        # decrypt the password
+        decrypted_password = sec.decrypt_password(
+            admin_dict.get('admin_password_hash'),
+            admin_dict.get('admin_password_salt')
+        )
+        # remove the hash and salt of the password
+        admin_dict.pop('admin_password_hash')
+        admin_dict.pop('admin_password_salt')
+        # update with the actual password
+        admin_dict.update({'admin_password': decrypted_password})
+        # return the modified dictionary
+        return admin_dict
     except OperationalError:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
@@ -539,4 +579,4 @@ def get_row_count():
 
 
 if __name__ == '__main__':
-    print(dict(get_admin_by_username('eluxify')))
+    print(get_admin_by_username('eluxify'))
