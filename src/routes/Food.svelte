@@ -27,13 +27,13 @@
     }
 </script>
 
-<NavbarWithSearch/>
+<NavbarWithSearch />
 
 
 <div class="container">
     <div class="columns has-text-centered pt-5">
         <div class="column is-4">
-            <ButtonBack link="Database"/>
+            <ButtonBack link="Database" />
         </div>
         <div class="column is-4">
             <p class="text has-text-link">
@@ -48,14 +48,18 @@
     <div class="column is-10 is-offset-1 pl-5 pt-0">
         <table class="table is-hoverable is-fullwidth">
             <thead>
-            <tr>
-                <th>No.</th>
-                <th>Product Name</th>
-                <th>Price</th>
-                <th>Type</th>
-            </tr>
+                <tr>
+                    <th>No.</th>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Type</th>
+                    <th></th>
+                </tr>
             </thead>
-
+            <!-- Temporary placeholders:
+                    Product name - name
+                    Price - phone
+                    Type - username -->
             {#await $products}
                 <FixedLoadingScreen/>
             {:then food}
@@ -66,7 +70,8 @@
                         num={counter()}
                         productName={product.product_name}
                         price={product.product_price}
-                        type={identifyType(product.product_type)}/>
+                        type={identifyType(product.product_type)}
+                        link={`/Food/${product.product_id}`}/>
                 {/each}
             {:catch err}
                 <p>{err.message}</p>

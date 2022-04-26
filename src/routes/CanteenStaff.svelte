@@ -1,9 +1,28 @@
+<script context="module">
+    export async function load({ fetch }) {
+        const res = await fetch('https://jsonplaceholder.typicode.com/users')
+        const canteenStaffs = await res.json()
+
+        if (res.ok) {
+            return {
+                props: {
+                    canteenStaffs
+                }
+            }
+        }
+
+        return {
+            status: res.status,
+            error: new Error('Could not fetch the cateen staffs.')
+        }
+    }
+</script>
+
 <script lang="ts">
     import NavbarWithSearch from "$lib/components/navbars/NavbarWithSearch.svelte";
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
     import ButtonAddRecord from "$lib/components/buttons/ButtonAddRecord.svelte";
     import CanteenStaffTableRow from "$lib/components/tableRows/CanteenStaffTableRow.svelte";
-
     import FixedLoadingScreen from "$lib/components/otherComponents/FixedLoadingScreen.svelte";
     import {staffs} from "$lib/stores/staffStore";
 
@@ -26,11 +45,10 @@
     }
 </script>
 
-<svelte:head>
-    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@600&display=swap" rel="stylesheet"/>
-</svelte:head>
+    export let canteenStaffs;
+</script>
 
-<NavbarWithSearch/>
+<NavbarWithSearch />
 
 <div class="container">
     <div class="columns has-text-centered pt-5">
@@ -43,21 +61,26 @@
             </p>
         </div>
         <div class="column is-3 ml-6">
-            <ButtonAddRecord link="CanteenStaff/AddNewCanteenStaff"/>
+            <ButtonAddRecord link="CanteenStaff/AddNewCanteenStaff" />
         </div>
     </div>
 
     <div class="column is-10 is-offset-1 pl-5 pt-0">
         <table class="table is-hoverable is-fullwidth">
             <thead>
-            <tr>
-                <th>No.</th>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Contact No.</th>
-                <th>Address</th>
-            </tr>
+                <tr>
+                    <th>No.</th>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Contact No.</th>
+                    <th>Address</th>
+                    <th></th>
+                </tr>
             </thead>
+          
+            <!-- Temporary placeholders:
+                    Position - username
+                    Address - email -->
             {#await $staffs}
                 <FixedLoadingScreen/>
             {:then staff}
@@ -70,7 +93,8 @@
                         name={info.staff_full_name}
                         position={identifyType(info.staff_position)}
                         contactNum={info.staff_contact_number}
-                        address={info.staff_address}/>
+                        address={info.staff_address}
+                        link={`/CanteenStaff/${info.staff_id}`}/>
                 {/each}
             {:catch err}
                 <p>{err.message}</p>

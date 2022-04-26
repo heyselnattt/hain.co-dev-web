@@ -1,4 +1,5 @@
 <script lang="ts">
+
     import NavbarWithSearch from "$lib/components/navbars/NavbarWithSearch.svelte";
     import CustomersTableRow from "$lib/components/tableRows/CustomersTableRow.svelte";
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
@@ -12,12 +13,12 @@
     }
 </script>
 
-<NavbarWithSearch/>
+<NavbarWithSearch />
 
 <div class="container">
     <div class="columns has-text-centered pt-5">
         <div class="column is-4">
-            <ButtonBack link="Database"/>
+            <ButtonBack link="Database" />
         </div>
         <div class="column is-4">
             <p class="text has-text-link">
@@ -25,21 +26,21 @@
             </p>
         </div>
         <div class="column is-3 ml-6">
-            <ButtonAddRecord link="Customers/AddNewCustomer"/>
+            <ButtonAddRecord link="Customers/AddNewCustomer" />
         </div>
     </div>
 
     <div class="column is-10 is-offset-1 pl-5 pt-0">
         <table class="table is-hoverable is-fullwidth">
             <thead>
-            <tr>
-                <th>No.</th>
-                <th>Name</th>
-                <th>Contact No.</th>
-                <th>Email</th>
-            </tr>
+                <tr>
+                    <th>No.</th>
+                    <th>Name</th>
+                    <th>Contact No.</th>
+                    <th>Email</th>
+                    <th></th>
+                </tr>
             </thead>
-
             {#await $customers}
                 <FixedLoadingScreen/>
             {:then customer}
@@ -50,7 +51,8 @@
                         num={counter()}
                         name={`${info.customer_first_name} ${info.customer_middle_name} ${info.customer_last_name}`}
                         contactNum={info.customer_contact_number}
-                        email={info.customer_email}/>
+                        email={info.customer_email}
+                        link={`/Customers/${info.customer_id}`}/>
                 {/each}
             {:catch err}
                 <p>{err.message}</p>
