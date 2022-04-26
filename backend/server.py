@@ -269,7 +269,6 @@ def get_all_customer() -> list[Customer]:
                             customer_first_name,
                             customer_middle_name,
                             customer_last_name,
-                            customer_username,
                             customer_email,
                             customer_contact_number,
                             customer_is_active
@@ -290,7 +289,7 @@ def get_all_customer() -> list[Customer]:
 
 @app.get('/customer/{username}',
          status_code=status.HTTP_200_OK)
-def get_customer_by_username(username: str):
+def get_customer_by_email(email: str):
     try:
         existing = False
         # check username if existing
@@ -298,12 +297,12 @@ def get_customer_by_username(username: str):
         for record in all_customers:
             # convert to a dictionary
             db_customer = dict(record)
-            if username == db_customer['customer_username']:
+            if email == db_customer['customer_email']:
                 existing = True
         if not existing:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
-                detail='Username does not exist.'
+                detail='Account does not exist.'
             )
         db = DatabaseOperator(cursor_factory=RealDictCursor)
         cursor = db.get_cursor()
@@ -312,12 +311,11 @@ def get_customer_by_username(username: str):
                             customer_first_name,
                             customer_middle_name,
                             customer_last_name,
-                            customer_username,
                             customer_email,
                             customer_contact_number,
                             customer_is_active
                             FROM hainco_customer
-                            WHERE customer_username = '{username}'
+                            WHERE customer_email = '{email}'
                             """)
         customer_record = cursor.fetchone()
         return customer_record
@@ -333,15 +331,16 @@ def get_customer_by_username(username: str):
 def add_customer(customer: Customer):
     try:
         username = customer.customer_username
+        email = customer.customer_email
         # check username if taken
         all_customers = get_all_customer()
         for record in all_customers:
             # convert to a dictionary
             db_customer = dict(record)
-            if username == db_customer['customer_username']:
+            if email == db_customer['customer_email']:
                 raise HTTPException(
                     status_code=status.HTTP_403_FORBIDDEN,
-                    detail='Username is already taken'
+                    detail='Email is already taken'
                 )
 
         return {

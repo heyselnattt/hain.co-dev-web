@@ -48,17 +48,15 @@ def add_customer_to_database(customer: Customer) -> Customer:
                     customer_first_name, 
                     customer_middle_name,
                     customer_last_name,
-                    customer_username, 
                     customer_email, 
                     customer_is_active,
                     customer_password_salt,
                     customer_password_hash,
                     customer_contact_number
-                    ) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+                    ) VALUES(%s, %s, %s, %s, %s, %s, %s, %s)"""
         cursor.execute(sql, (customer.customer_first_name,
                              customer.customer_middle_name,
                              customer.customer_last_name,
-                             customer.customer_username,
                              customer.customer_email,
                              customer.customer_is_active,
                              salt,
