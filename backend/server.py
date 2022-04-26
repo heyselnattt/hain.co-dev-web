@@ -287,7 +287,7 @@ def get_all_customer() -> list[Customer]:
         )
 
 
-@app.get('/customer/{username}',
+@app.get('/customer/{email}',
          status_code=status.HTTP_200_OK)
 def get_customer_by_email(email: str):
     try:
@@ -330,7 +330,6 @@ def get_customer_by_email(email: str):
           status_code=status.HTTP_201_CREATED)
 def add_customer(customer: Customer):
     try:
-        username = customer.customer_username
         email = customer.customer_email
         # check username if taken
         all_customers = get_all_customer()
