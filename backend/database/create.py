@@ -8,13 +8,12 @@ from data_models import (
     Transaction
 )
 from database.security import create_salt, encrypt_password
-from database_operation import DatabaseOperator
+from database.database_operation import DatabaseOperator
 
 pg_heroku = DatabaseOperator()
-cursor = pg_heroku.get_cursor()
-
 
 def add_admin_to_database(admin: Admin) -> Admin:
+    cursor = pg_heroku.get_cursor()
     salt = create_salt()
     encrypted_password = encrypt_password(admin.admin_password, salt)
     try:
@@ -41,6 +40,7 @@ def add_admin_to_database(admin: Admin) -> Admin:
 
 
 def add_customer_to_database(customer: Customer) -> Customer:
+    cursor = pg_heroku.get_cursor()
     salt = create_salt()
     encrypted_password = encrypt_password(customer.customer_password, salt)
     try:
@@ -48,17 +48,15 @@ def add_customer_to_database(customer: Customer) -> Customer:
                     customer_first_name, 
                     customer_middle_name,
                     customer_last_name,
-                    customer_username, 
                     customer_email, 
                     customer_is_active,
                     customer_password_salt,
                     customer_password_hash,
                     customer_contact_number
-                    ) VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+                    ) VALUES(%s, %s, %s, %s, %s, %s, %s, %s)"""
         cursor.execute(sql, (customer.customer_first_name,
                              customer.customer_middle_name,
                              customer.customer_last_name,
-                             customer.customer_username,
                              customer.customer_email,
                              customer.customer_is_active,
                              salt,
@@ -74,6 +72,7 @@ def add_customer_to_database(customer: Customer) -> Customer:
 
 
 def add_product_to_database(product: Product) -> Product:
+    cursor = pg_heroku.get_cursor()
     try:
         sql = """INSERT INTO hainco_product(
                     product_name, 
@@ -82,15 +81,17 @@ def add_product_to_database(product: Product) -> Product:
                     product_stock, 
                     product_type, 
                     product_is_active,
-                    product_description
-                    ) VALUES(%s, %s, %s, %s, %s, %s, %s)"""
+                    product_description,
+                    product_code
+                    ) VALUES(%s, %s, %s, %s, %s, %s, %s, %s)"""
         cursor.execute(sql, (product.product_name,
                              product.product_price,
                              product.product_image_link,
                              product.product_stock,
                              product.product_type,
                              product.product_is_active,
-                             product.product_description
+                             product.product_description,
+                             product.product_code
                              ))
         pg_heroku.commit()
         cursor.close()
@@ -101,6 +102,7 @@ def add_product_to_database(product: Product) -> Product:
 
 
 def add_staff_to_database(staff: Staff) -> Staff:
+    cursor = pg_heroku.get_cursor()
     salt = create_salt()
     encrypted_password = encrypt_password(staff.staff_password, salt)
     try:
@@ -130,6 +132,7 @@ def add_staff_to_database(staff: Staff) -> Staff:
 
 
 def add_transaction_to_database(transaction: Transaction) -> Transaction:
+    cursor = pg_heroku.get_cursor()
     try:
         sql = """INSERT INTO hainco_transaction(
                     transaction_agent, 

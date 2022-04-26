@@ -5,9 +5,7 @@ from dotenv import dotenv_values
 
 config = dotenv_values('.env')
 
-key = config['FERNET_KEY']
-
-fernet = Fernet(key)
+fernet = Fernet('KnUnWaSL29SLlqz_F3m3QbRbb6Q8w8CuFFmLgDyClZE=')
 
 
 def create_salt(length: int = 5) -> str:
@@ -17,7 +15,7 @@ def create_salt(length: int = 5) -> str:
     :param int length: Length of the generated salt string, defaults to 5
     :return: A randomly generated salt string (5 characters)
     """
-    salt = randomstr = ''.join(random.choices(
+    salt = ''.join(random.choices(
         string.ascii_letters+string.digits,
         k=length
     ))

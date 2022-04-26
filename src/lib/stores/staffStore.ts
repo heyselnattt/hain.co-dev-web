@@ -1,18 +1,18 @@
 import {readable} from 'svelte/store';
 import axios from '$lib/api/index';
 
-export const admins = readable(null, function start(set) {
-    const adminList = getAdmin();
-    set(adminList);
+export const staffs = readable(null, function start(set) {
+    const staffList = getStaffs();
+    set(staffList);
 
     return function stop() {
         console.log('Ended');
     }
 });
 
-async function getAdmin() {
+async function getStaffs() {
     try {
-        return await axios.get('/admin');
+        return await axios.get('/staff');
     } catch (e) {
         console.log(e);
     }

@@ -13,7 +13,6 @@ class Customer(BaseModel):
     customer_first_name: str
     customer_middle_name: Optional[str]
     customer_last_name: str
-    customer_username: str
     customer_password: str
     customer_email: str
     customer_contact_number: str
@@ -46,6 +45,7 @@ class Product(BaseModel):
     product_description: str
     product_type: ProductType
     product_is_active: bool
+    product_code: str
 
 
 class Transaction(BaseModel):

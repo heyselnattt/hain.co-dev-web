@@ -1,8 +1,15 @@
-<script>
+<script lang="ts">
     import NavbarWithSearch from "$lib/components/navbars/NavbarWithSearch.svelte";
     import CustomersTableRow from "$lib/components/tableRows/CustomersTableRow.svelte";
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
     import ButtonAddRecord from "$lib/components/buttons/ButtonAddRecord.svelte";
+    import FixedLoadingScreen from "$lib/components/otherComponents/FixedLoadingScreen.svelte";
+    import {customers} from "$lib/stores/customerStores";
+
+    let itemNumber = 1;
+    const counter = (): number => {
+        return itemNumber++;
+    }
 </script>
 
 <NavbarWithSearch/>
@@ -32,17 +39,22 @@
                 <th>Email</th>
             </tr>
             </thead>
-            <CustomersTableRow num="1" name="Taylor Swift" contactNum="09254698852" email="taylorswift@gmail.com"/>
-            <CustomersTableRow num="2" name="Cecil Uy" contactNum="09252236478" email="uy.cecil@gmail.com"/>
-            <CustomersTableRow num="3" name="Adrian Tan" contactNum="09154223687" email="adriantan123@gmail.com"/>
-            <CustomersTableRow num="4" name="Trixie Cruz" contactNum="09356684521" email="cruztrixie@gmail.com"/>
-            <CustomersTableRow num="5" name="Mark Johnson" contactNum="09054865523" email="markjohnson1@gmail.com"/>
-            <CustomersTableRow num="6" name="Ralph Tirao" contactNum="09683105246" email="tirao_ralph@gmail.com"/>
-            <CustomersTableRow num="7" name="Mhea Niere" contactNum="09685233451" email="mheaniere@gmail.com"/>
-            <CustomersTableRow num="8" name="Rhea Valdez" contactNum="09352648551" email="rhea.valdez@gmail.com"/>
-            <CustomersTableRow num="9" name="Charles Maverick" contactNum="09302922012" email="charlesmaverick@gmail.com"/>
-            <CustomersTableRow num="10" name="Angel Lawson" contactNum="09684521404" email="angel_lawson@gmail.com"/>
-            <CustomersTableRow num="11" name="Marco De Jesus" contactNum="09156324521" email="marco.dejesus@gmail.com"/>
+
+            {#await $customers}
+                <FixedLoadingScreen/>
+            {:then customer}
+
+                {#each customer.data as info}
+                    <!--TODO add property for the link for the individual product-->
+                    <CustomersTableRow
+                        num={counter()}
+                        name={`${info.customer_first_name} ${info.customer_middle_name} ${info.customer_last_name}`}
+                        contactNum={info.customer_contact_number}
+                        email={info.customer_email}/>
+                {/each}
+            {:catch err}
+                <p>{err.message}</p>
+            {/await}
         </table>
     </div>
 </div>
