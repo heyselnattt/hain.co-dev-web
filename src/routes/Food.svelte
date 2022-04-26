@@ -11,7 +11,7 @@
         return itemNumber++;
     }
     const identifyType = (code: number): string => {
-        switch(code) {
+        switch (code) {
             case 1:
                 return "Breakfast"
 
@@ -41,7 +41,7 @@
             </p>
         </div>
         <div class="column is-3 ml-6">
-                <ButtonAddRecord link="Food/AddNewFood"/>
+            <ButtonAddRecord link="Food/AddNewFood"/>
         </div>
     </div>
 
@@ -55,9 +55,11 @@
                 <th>Type</th>
             </tr>
             </thead>
+
             {#await $products}
                 <FixedLoadingScreen/>
             {:then food}
+
                 {#each food.data as product}
                     <!--TODO add property for the link for the individual product-->
                     <FoodTableRow
