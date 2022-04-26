@@ -1,21 +1,19 @@
 <script context="module">
+    import axios from "$lib/api/index"
     export async function load({ fetch, params }) {
-
-        const id = params.id;
-        const res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
-        const customer = await res.json()
-
-        if (res.ok) {
+        try {
+            const email = params.email;
+            const customer = await axios.get(`/customer/${email}`);
+            console.log(customer)
             return {
                 props: {
                     customer
                 }
             }
-        }
-
-        return {
-            status: res.status,
-            error: new Error('Could not fetch the customer.')
+        } catch (e) {
+            return {
+                error: new Error('Can\'t fetch the customer information')
+            }
         }
     }
 </script>
@@ -27,7 +25,7 @@
     import FieldWithValue from "$lib/components/otherComponents/FieldWithValue.svelte";
     import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
 
-    export let customer
+    export let customer;
 </script>
 
 <NavbarSolo/>
@@ -49,20 +47,38 @@
 
     <div class="columns pt-5 is-multiline">
         <div class="column is-12"></div>
-        <FieldWithValue name="Name" value={customer.name} />
-        <FieldWithValue name="Contact No." value={customer.phone} />
-        <div class="column is-12"></div>
-        <FieldWithValue name="Email" value={customer.email} />
-        <FieldWithValue name="Password" value="*****" />
-        <div class="column is-12"></div>
-        <div class="column is-12"></div>
-        <div class="column is-12"></div>
+        {#await customer}
+            Waiting data
+        {:then customer}
+            <!-- TODO switch to bound inputs -->
+            <FieldWithValue
+                name="First Name"
+                value={customer.data.customer_first_name}/>
+            <FieldWithValue
+                name="Middle Name"
+                value={customer.data.customer_middle_name} />
+            <FieldWithValue
+                name="Last Name"
+                value={customer.data.customer_last_name} />
+            <FieldWithValue
+                name="Email"
+                value={customer.data.customer_email} />
+            <FieldWithValue
+                name="Contact Number"
+                value={customer.data.customer_contact_number} />
+            <FieldWithValue
+                name="Password"
+                value={customer.data.customer_password_hash} />
+        {:catch e}
+            {e}
+        {/await}
         <div class="column is-12"></div>
     </div>
 </div>
 
 <div class="columns is-centered has-text-link pb-6">
     <p class="switch-labels mt-3 mr-4">Inactive</p>
+<!--    TODO FIX TO RENDER THE IS ACTIVE -->
     <ButtonSwitch/>
     <p class="switch-labels mt-3 ml-4">Active</p>
 </div>
