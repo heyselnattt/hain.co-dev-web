@@ -209,6 +209,7 @@ def get_staff_by_username(username: str):
                             staff_contact_number,
                             staff_username,
                             staff_address,
+                            staff_password_salt,
                             staff_password_hash,
                             staff_position,
                             staff_is_active
@@ -313,6 +314,7 @@ def get_customer_by_email(email: str):
                             customer_middle_name,
                             customer_last_name,
                             customer_email,
+                            customer_password_salt,
                             customer_password_hash,
                             customer_contact_number,
                             customer_is_active
@@ -394,22 +396,26 @@ def get_all_admin():
          status_code=status.HTTP_200_OK)
 def get_admin_by_username(username: str):
     try:
-        # check username if existing
-        all_admin = get_all_admin()
-        for record in all_admin:
+        existing = False
+        # check product if existing
+        all_admins = get_all_admin()
+        for record in all_admins:
             # convert to a dictionary
             db_admin = dict(record)
-            if username != db_admin['admin_username']:
-                raise HTTPException(
-                    status_code=status.HTTP_404_NOT_FOUND,
-                    detail='Username does not exist.'
-                )
+            if username == db_admin['admin_username']:
+                existing = True
+        if not existing:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail='Product does not exist.'
+            )
         db = DatabaseOperator(cursor_factory=RealDictCursor)
         cursor = db.get_cursor()
         cursor.execute(f"""SELECT 
                         admin_id,
                         admin_full_name,
                         admin_username,
+                        admin_password_salt,
                         admin_password_hash,
                         admin_position,
                         admin_is_active
@@ -530,3 +536,7 @@ def get_row_count():
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail='Failed to connect to database'
         )
+
+
+if __name__ == '__main__':
+    print(dict(get_admin_by_username('eluxify')))
