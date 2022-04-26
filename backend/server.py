@@ -529,7 +529,3 @@ def get_row_count():
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
             detail='Failed to connect to database'
         )
-
-
-if __name__ == '__main__':
-    print(get_admin_by_username('eluxify'))
