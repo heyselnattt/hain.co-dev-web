@@ -3,10 +3,10 @@ from typing import Optional
 import datetime as dt
 
 # enum types
-from enums.product_type import ProductType
-from enums.record_interval import RecordInterval
-from enums.transaction_type import TransactionType
-from enums.work_position import CanteenPosition, AdminPosition
+from backend.enums.product_type import ProductType
+from backend.enums.record_interval import RecordInterval
+from backend.enums.transaction_type import TransactionType
+from backend.enums.work_position import CanteenPosition, AdminPosition
 
 
 class Customer(BaseModel):

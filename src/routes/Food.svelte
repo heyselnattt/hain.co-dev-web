@@ -53,6 +53,7 @@
                     <th>Product Name</th>
                     <th>Price</th>
                     <th>Type</th>
+                    <th>Product Code</th>
                     <th></th>
                 </tr>
             </thead>
@@ -71,7 +72,8 @@
                         productName={product.product_name}
                         price={product.product_price}
                         type={identifyType(product.product_type)}
-                        link={`/Food/${product.product_id}`}/>
+                        code={product.product_code}
+                        link={`/Food/${product.product_code}`}/>
                 {/each}
             {:catch err}
                 <p>{err.message}</p>

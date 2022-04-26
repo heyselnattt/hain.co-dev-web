@@ -5,16 +5,16 @@ from psycopg2.extras import RealDictCursor
 from starlette import status
 from starlette.exceptions import HTTPException
 
-from data_models import (
+from backend.data_models import (
     Product,
     Staff,
     Customer,
     Admin, Transaction, Record
 )
 
-from database.database_operation import DatabaseOperator
-import database.database_operation as DB_STATIC
-import database.create as db_controller
+from backend.database.database_operation import DatabaseOperator
+import backend.database.database_operation as DB_STATIC
+import backend.database.create as db_controller
 
 app = FastAPI(
     title='Hain.co Web API',
@@ -209,6 +209,7 @@ def get_staff_by_username(username: str):
                             staff_contact_number,
                             staff_username,
                             staff_address,
+                            staff_password_hash,
                             staff_position,
                             staff_is_active
                             FROM hainco_staff
@@ -312,6 +313,7 @@ def get_customer_by_email(email: str):
                             customer_middle_name,
                             customer_last_name,
                             customer_email,
+                            customer_password_hash,
                             customer_contact_number,
                             customer_is_active
                             FROM hainco_customer
@@ -408,6 +410,7 @@ def get_admin_by_username(username: str):
                         admin_id,
                         admin_full_name,
                         admin_username,
+                        admin_password_hash,
                         admin_position,
                         admin_is_active
                         FROM hainco_admin

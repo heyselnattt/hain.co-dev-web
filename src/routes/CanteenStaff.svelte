@@ -1,23 +1,3 @@
-<script context="module">
-    export async function load({ fetch }) {
-        const res = await fetch('https://jsonplaceholder.typicode.com/users')
-        const canteenStaffs = await res.json()
-
-        if (res.ok) {
-            return {
-                props: {
-                    canteenStaffs
-                }
-            }
-        }
-
-        return {
-            status: res.status,
-            error: new Error('Could not fetch the cateen staffs.')
-        }
-    }
-</script>
-
 <script lang="ts">
     import NavbarWithSearch from "$lib/components/navbars/NavbarWithSearch.svelte";
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
@@ -43,9 +23,6 @@
                 return "Server"
         }
     }
-</script>
-
-    export let canteenStaffs;
 </script>
 
 <NavbarWithSearch />
@@ -94,7 +71,7 @@
                         position={identifyType(info.staff_position)}
                         contactNum={info.staff_contact_number}
                         address={info.staff_address}
-                        link={`/CanteenStaff/${info.staff_id}`}/>
+                        link={`/CanteenStaff/${info.staff_username}`}/>
                 {/each}
             {:catch err}
                 <p>{err.message}</p>

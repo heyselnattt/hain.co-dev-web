@@ -52,7 +52,7 @@
                         name={`${info.customer_first_name} ${info.customer_middle_name} ${info.customer_last_name}`}
                         contactNum={info.customer_contact_number}
                         email={info.customer_email}
-                        link={`/Customers/${info.customer_id}`}/>
+                        link={`/Customers/${info.customer_email}`}/>
                 {/each}
             {:catch err}
                 <p>{err.message}</p>
