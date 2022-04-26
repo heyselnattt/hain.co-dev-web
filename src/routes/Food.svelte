@@ -1,33 +1,34 @@
-<script context="module">
-    export async function load({ fetch }) {
-        const res = await fetch('https://jsonplaceholder.typicode.com/users')
-        const foods = await res.json()
-
-        if (res.ok) {
-            return {
-                props: {
-                    foods
-                }
-            }
-        }
-
-        return {
-            status: res.status,
-            error: new Error('Could not fetch the foods.')
-        }
-    }
-</script>
-
-<script>
+<script lang="ts">
     import NavbarWithSearch from "$lib/components/navbars/NavbarWithSearch.svelte";
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
     import ButtonAddRecord from "$lib/components/buttons/ButtonAddRecord.svelte";
     import FoodTableRow from "$lib/components/tableRows/FoodTableRow.svelte";
+    import FixedLoadingScreen from "$lib/components/otherComponents/FixedLoadingScreen.svelte";
+    import {products} from "$lib/stores/productStore";
 
-    export let foods;
+    let itemNumber = 1;
+    const counter = (): number => {
+        return itemNumber++;
+    }
+    const identifyType = (code: number): string => {
+        switch (code) {
+            case 1:
+                return "Breakfast"
+
+            case 2:
+                return "Lunch"
+
+            case 3:
+                return "Dessert"
+
+            case 4:
+                return "Extra"
+        }
+    }
 </script>
 
 <NavbarWithSearch />
+
 
 <div class="container">
     <div class="columns has-text-centered pt-5">
@@ -40,7 +41,7 @@
             </p>
         </div>
         <div class="column is-3 ml-6">
-                <ButtonAddRecord link="Food/AddNewFood" />
+            <ButtonAddRecord link="Food/AddNewFood"/>
         </div>
     </div>
 
@@ -55,30 +56,26 @@
                     <th></th>
                 </tr>
             </thead>
-            <!-- <FoodTableRow num="1" productName="Hotdog" price="30.00" type="Breakfast"/>
-            <FoodTableRow num="2" productName="Egg" price="25.00" type="Breakfast"/>
-            <FoodTableRow num="3" productName="Adobo" price="30.00" type="Lunch"/>
-            <FoodTableRow num="4" productName="Turon" price="35.00" type="Meryenda"/>
-            <FoodTableRow num="5" productName="Nova" price="40.00" type="Snacks"/>
-            <FoodTableRow num="6" productName="Menudo" price="40.00" type="Lunch"/>
-            <FoodTableRow num="7" productName="RC" price="50.00" type="Drinks"/>
-            <FoodTableRow num="8" productName="C2" price="20.00" type="Drinks"/>
-            <FoodTableRow num="9" productName="Banana Cue" price="20.00" type="Meryenda"/> -->
-
-            {#each foods as food}
-                <FoodTableRow
-                    num={food.id}
-                    productName={food.name}
-                    price={food.phone}
-                    type={food.username}
-                    link={`/Food/${food.id}`}
-                />
-            {/each}
-
             <!-- Temporary placeholders:
                     Product name - name
                     Price - phone
                     Type - username -->
+            {#await $products}
+                <FixedLoadingScreen/>
+            {:then food}
+
+                {#each food.data as product}
+                    <!--TODO add property for the link for the individual product-->
+                    <FoodTableRow
+                        num={counter()}
+                        productName={product.product_name}
+                        price={product.product_price}
+                        type={identifyType(product.product_type)}
+                        link={`/Food/${product.product_id}`}/>
+                {/each}
+            {:catch err}
+                <p>{err.message}</p>
+            {/await}
         </table>
     </div>
 </div>

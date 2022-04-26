@@ -4,6 +4,24 @@
     import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
     import ButtonAddRecord from "$lib/components/buttons/ButtonAddRecord.svelte";
+    import axios from "$lib/api/index";
+
+    let admin = {
+        admin_full_name: null,
+        admin_username: null,
+        admin_password: null,
+        admin_position: 1,
+        admin_is_active: true,
+    }
+
+    const addAdminToDatabase = async () => {
+        try {
+            let response = await axios.post('/admin/new_admin', admin)
+            console.log(response)
+        } catch (e) {
+            console.log(e)
+        }
+    }
 </script>
 
 <NavbarSolo/>
@@ -24,23 +42,33 @@
     </div>
 
     <div class="columns pt-5 is-multiline">
-        <div class="column is-12"></div>
-        <div class="column is-12"></div>
-        <div class="column is-12"></div>
-        <FieldWithValue name="Name" value=""/>
-        <FieldWithValue name="Contact No." value=""/>
-        <div class="column is-12"></div>
-        <FieldWithValue name="Email" value=""/>
-        <FieldWithValue name="Password" value=""/>
-        <div class="column is-12"></div>
-        <div class="column is-12"></div>
-        <div class="column is-12"></div>
-        <div class="column is-12"></div>
+            <!-- TODO add confirm password logic-->
+<!--        <div class="column is-12"></div>-->
+<!--        <div class="column is-12"></div>-->
+<!--        <div class="column is-12"></div>-->
+<!--        <FieldWithValue name="Name" value="" bind:value={admin.admin_full_name}/>-->
+<!--        <FieldWithValue name="Password" value="" bind:value={admin.admin_password}/>-->
+<!--        <div class="column is-12"></div>-->
+<!--        <FieldWithValue name="Username" value="" bind:value={admin.admin_username}/>-->
+<!--        <FieldWithValue name="Confirm Password" value=""/>-->
+<!--        <div class="column is-12"></div>-->
+<!--        <div class="column is-12"></div>-->
+<!--        <div class="column is-12"></div>-->
+<!--        <div class="column is-12"></div>-->
+        <!-- TODO Style text fields and buttons -->
+        Name
+        <input type="text" bind:value={admin.admin_full_name}/>
+        Username
+        <input type="text" bind:value={admin.admin_username}/>
+        Password
+        <input type="password" bind:value={admin.admin_password}/>
     </div>
 
     <!-- Add record button -->
     <div class="mb- has-text-centered">
-        <ButtonAddRecord link="../Admin"/>
+<!--        <ButtonAddRecord link="../Admin"/>-->
+        <!-- TODO redirect pabalik sa parent page -->
+        <button on:click={addAdminToDatabase}>Add Admin</button>
     </div>
 </div>
 
