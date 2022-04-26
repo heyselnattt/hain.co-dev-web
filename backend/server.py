@@ -223,7 +223,7 @@ def get_staff_by_username(username: str):
         )
 
 
-@app.post('/staff/{id}',
+@app.post('/staff/new_staff',
           status_code=status.HTTP_201_CREATED)
 def add_staff(staff: Staff):
     try:
