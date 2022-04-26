@@ -12,6 +12,7 @@ from backend.database.database_operation import DatabaseOperator
 
 pg_heroku = DatabaseOperator()
 
+
 def add_admin_to_database(admin: Admin) -> Admin:
     cursor = pg_heroku.get_cursor()
     salt = create_salt()

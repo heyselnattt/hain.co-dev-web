@@ -5,6 +5,7 @@
     export let productName;
     export let price;
     export let type;
+    export let code;
     export let link: string;
 </script>
 
@@ -14,6 +15,7 @@
         <td>{productName}</td>
         <td>{price}</td>
         <td>{type}</td>
+        <td>{code}</td>
         <td><ButtonEditTable link={link}/></td>
     </tr>
 </tbody>

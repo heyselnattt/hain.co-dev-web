@@ -1,21 +1,20 @@
 <script context="module">
-    export async function load({ fetch, params }) {
+    import axios from "$lib/api/index"
 
-        const id = params.id;
-        const res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
-        const food = await res.json()
-
-        if (res.ok) {
+    export async function load({fetch, params}) {
+        try {
+            const productCode = params.code;
+            const product = await axios.get(`/product/${productCode}`);
+            console.log(product)
             return {
                 props: {
-                    food
+                    product
                 }
             }
-        }
-
-        return {
-            status: res.status,
-            error: new Error('Could not fetch the food.')
+        } catch (e) {
+            return {
+                error: new Error('Can\'t fetch the food information')
+            }
         }
     }
 </script>
@@ -25,11 +24,12 @@
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
     import FieldWithValue from "$lib/components/otherComponents/FieldWithValue.svelte";
     import ButtonSave from "$lib/components/buttons/ButtonSave.svelte";
+    import ButtonSwitch from "$lib/components/buttons/ButtonSwitch.svelte";
 
-    export let food;
+    export let product;
 </script>
 
-<NavbarSolo />
+<NavbarSolo/>
 
 <div class="container">
     <div class="columns pt-5 is-multiline has-text-centered">
@@ -48,22 +48,55 @@
 
     <div class="columns pt-5 is-multiline">
         <div class="column is-12"></div>
-        <div class="column is-12"></div>
-        <div class="column is-12"></div>
-        <FieldWithValue name="Product Name" value={food.name}/>
-        <FieldWithValue name="Price" value={food.phone}/>
-        <div class="column is-12"></div>
-        <FieldWithValue name="Product Stock" value={food.phone}/>
+        {#await product}
+            Waiting data
+        {:then food}
+            <!-- TODO switch to bound inputs -->
+            <FieldWithValue
+                name="Product Name"
+                value={food.data.product_name}/>
+            <FieldWithValue
+                name="Price"
+                value={food.data.product_price}/>
+            <FieldWithValue
+                name="Stock"
+                value={food.data.product_stock}/>
+<!--            TODO PRODUCT TYPE DROPDOWN-->
+<!--            <FieldWithValue-->
+<!--                name="Product Type"-->
+<!--                value={food.data.customer_email}/>-->
+            <FieldWithValue
+                name="Product Description"
+                value={food.data.product_description}/>
+            <FieldWithValue
+                name="Product Code"
+                value={food.data.product_code}/>
+            <img src="{food.data.product_image_link}" alt=""/>
+        {:catch e}
+            {e}
+        {/await}
 
         <!-- wala pang file upload for image and also yung dropdown para sa product type
              + yung stock wala sa actual table-->
     </div>
 </div>
 
+<div class="columns is-centered has-text-link pb-6">
+    <p class="switch-labels mt-3 mr-4">Inactive</p>
+<!--    TODO FIX TO RENDER THE IS ACTIVE -->
+    <ButtonSwitch/>
+    <p class="switch-labels mt-3 ml-4">Active</p>
+</div>
+
 <style>
     .text {
         font-family: 'Karla', sans-serif;
         font-size: 40px;
+    }
+
+    .pText {
+        font-family: 'Karla', sans-serif;
+        font-size: 20px;
     }
 </style>
 
