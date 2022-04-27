@@ -1,10 +1,12 @@
 <script>
     import Discard from "$lib/components/buttons/Discard.svelte";
-    import FieldWithValue from "$lib/components/otherComponents/FieldWithValue.svelte";
     import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
-    import ButtonAddRecord from "$lib/components/buttons/ButtonAddRecord.svelte";
     import axios from "$lib/api/index";
+
+    export let value;
+    export let name;
+    export let defaultValue = "";
 
     let admin = {
         admin_full_name: null,
@@ -24,6 +26,10 @@
     }
 </script>
 
+<svelte:head>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@600&display=swap" rel="stylesheet"/>
+</svelte:head>
+
 <NavbarSolo/>
 
 <div class="container">
@@ -32,7 +38,7 @@
             <ButtonBack link="../Admin"/>
         </div>
         <div class="column is-4">
-            <p class="text has-text-link">
+            <p class="text1 has-text-link">
                 New Administrator
             </p>
         </div>
@@ -42,39 +48,59 @@
     </div>
 
     <div class="columns pt-5 is-multiline">
-            <!-- TODO add confirm password logic-->
-<!--        <div class="column is-12"></div>-->
-<!--        <div class="column is-12"></div>-->
-<!--        <div class="column is-12"></div>-->
-<!--        <FieldWithValue name="Name" value="" bind:value={admin.admin_full_name}/>-->
-<!--        <FieldWithValue name="Password" value="" bind:value={admin.admin_password}/>-->
-<!--        <div class="column is-12"></div>-->
-<!--        <FieldWithValue name="Username" value="" bind:value={admin.admin_username}/>-->
-<!--        <FieldWithValue name="Confirm Password" value=""/>-->
-<!--        <div class="column is-12"></div>-->
-<!--        <div class="column is-12"></div>-->
-<!--        <div class="column is-12"></div>-->
-<!--        <div class="column is-12"></div>-->
-        <!-- TODO Style text fields and buttons -->
-        Name
-        <input type="text" bind:value={admin.admin_full_name}/>
-        Username
-        <input type="text" bind:value={admin.admin_username}/>
-        Password
-        <input type="password" bind:value={admin.admin_password}/>
+        <div class="column is-12"></div>
+        <div class="column is-12"></div>
+        <div class="column is-12"></div>
+        <div class="column is-3 is-offset-2">
+            <p class="pText has-text-link ml-4 mb-1">
+                Name
+            </p>
+            <input class="pText input is-rounded" type="text" bind:value={value}/>
+        </div>
+        <div class="column is-3 is-offset-2">
+            <p class="pText has-text-link ml-4 mb-1">
+                Contact No.
+            </p>
+            <input class="pText input is-rounded" type="text" bind:value={value}/>
+        </div>
+        <div class="column is-12"></div>
+        <div class="column is-3 is-offset-2">
+            <p class="pText has-text-link ml-4 mb-1">
+                ID No.
+            </p>
+            <input class="pText input is-rounded" type="text" bind:value={value}/>
+        </div>
+        <div class="column is-3 is-offset-2">
+            <p class="pText has-text-link ml-4 mb-1">
+                Password
+            </p>
+            <input class="pText input is-rounded" type="text" bind:value={value}/>
+        </div>
+        <div class="column is-12"></div>
+        <div class="column is-12"></div>
+        <div class="column is-12"></div>
+        <div class="column is-12"></div>
     </div>
 
     <!-- Add record button -->
     <div class="mb- has-text-centered">
-<!--        <ButtonAddRecord link="../Admin"/>-->
+        <!-- <ButtonAddRecord link="../Admin"/> -->
         <!-- TODO redirect pabalik sa parent page -->
-        <button on:click={addAdminToDatabase}>Add Admin</button>
+        <button class="btn-txt button is-link is-rounded" on:click={addAdminToDatabase}>Add Admin</button>
     </div>
 </div>
 
 <style>
-    .text {
+    .text1 {
         font-family: 'Karla', sans-serif;
         font-size: 40px;
+    }
+    .pText {
+        font-family: 'Karla', sans-serif;
+        font-size: 20px;
+    }
+    .btn-txt {
+        font-size: 20px;
+        font-family: 'Karla', sans-serif;
     }
 </style>
