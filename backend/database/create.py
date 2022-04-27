@@ -5,7 +5,8 @@ from backend.data_models import (
     Customer,
     Product,
     Staff,
-    Transaction
+    Transaction,
+    Record
 )
 from backend.database.security import create_salt, encrypt_password
 from backend.database.database_operation import DatabaseOperator
@@ -114,15 +115,17 @@ def add_staff_to_database(staff: Staff) -> Staff:
                         staff_password_salt,
                         staff_password_hash,
                         staff_address,
-                        staff_position
-                        ) VALUES(%s, %s, %s, %s, %s, %s, %s)"""
+                        staff_position,
+                        staff_is_active
+                        ) VALUES(%s, %s, %s, %s, %s, %s, %s, %s)"""
         cursor.execute(sql, (staff.staff_full_name,
                              staff.staff_contact_number,
                              staff.staff_username,
                              salt,
                              encrypted_password,
                              staff.staff_address,
-                             staff.staff_position
+                             staff.staff_position,
+                             staff.staff_is_active
                              ))
         pg_heroku.commit()
         cursor.close()
