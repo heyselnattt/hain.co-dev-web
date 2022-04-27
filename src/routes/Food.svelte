@@ -3,8 +3,8 @@
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
     import ButtonAddRecord from "$lib/components/buttons/ButtonAddRecord.svelte";
     import FoodTableRow from "$lib/components/tableRows/FoodTableRow.svelte";
-    import FixedLoadingScreen from "$lib/components/otherComponents/FixedLoadingScreen.svelte";
     import {products} from "$lib/stores/productStore";
+    import TableLoadingScreen from "$lib/components/otherComponents/TableLoadingScreen.svelte";
 
     let itemNumber = 1;
     const counter = (): number => {
@@ -62,7 +62,7 @@
                     Price - phone
                     Type - username -->
             {#await $products}
-                <FixedLoadingScreen/>
+                <TableLoadingScreen/>
             {:then food}
 
                 {#each food.data as product}

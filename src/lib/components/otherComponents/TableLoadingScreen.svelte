@@ -27,8 +27,8 @@
 <style>
     .container {
         position: absolute;
-        top: 32%;
-        left: 50%;
+        top: 30%;
+        left: 35%;
         transform: translate(-50%, -50%);
     }
 
@@ -36,8 +36,8 @@
         position: absolute;
         font-family: 'Lobster', cursive;
         font-size: 30px;
-        top: 37%;
-        left: 50%;
+        top: 35%;
+        left: 35%;
         transform: translate(-50%, -50%);
     }
     .hero {
