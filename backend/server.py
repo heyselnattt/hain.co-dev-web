@@ -14,7 +14,9 @@ from backend.data_models import (
 
 from backend.database.database_operation import DatabaseOperator
 import backend.database.database_operation as DB_STATIC
-import backend.database.create as db_controller
+import backend.database.create as db_create
+import backend.database.update as db_update
+import backend.database.security as sec
 
 app = FastAPI(
     title='Hain.co Web API',
@@ -138,7 +140,7 @@ def add_product(product: Product):
                 )
 
         return {
-            "data": db_controller.add_product_to_database(product),
+            "data": db_create.add_product_to_database(product),
             "detail": "Product added to database"
         }
     except OperationalError:
@@ -148,9 +150,32 @@ def add_product(product: Product):
         )
 
 
-@app.put('/product/{id}')
-def update_product(id: int, updated_product: Product) -> Product:
-    pass
+@app.put('/product/update_product/{current_product_code}')
+def update_product(current_product_code: str, updated_product: Product):
+    try:
+        existing = False
+        # check product if existing
+        all_products = get_all_product()
+        for record in all_products:
+            # convert to a dictionary
+            db_product = dict(record)
+            if current_product_code == db_product['product_code']:
+                existing = True
+        if not existing:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail='Product does not exist.'
+            )
+
+        return {
+            "data": db_update.update_product(current_product_code, updated_product),
+            "detail": "Product updated to database"
+        }
+    except OperationalError:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail='Invalid data format received'
+        )
 
 
 # === CANTEEN STAFF ===
@@ -217,7 +242,20 @@ def get_staff_by_username(username: str):
                             WHERE staff_username = '{username}'
                             """)
         staff_record = cursor.fetchone()
-        return staff_record
+        # convert the result to a dictionary to modify its values
+        staff_dict = dict(staff_record)
+        # decrypt the password
+        decrypted_password = sec.decrypt_password(
+            staff_dict.get('staff_password_hash'),
+            staff_dict.get('staff_password_salt')
+        )
+        # remove the hash and salt of the password
+        staff_dict.pop('staff_password_hash')
+        staff_dict.pop('staff_password_salt')
+        # update with the actual password
+        staff_dict.update({'staff_password': decrypted_password})
+        # return the modified dictionary
+        return staff_dict
     except OperationalError:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
@@ -242,7 +280,7 @@ def add_staff(staff: Staff):
                 )
 
         return {
-            "data": db_controller.add_staff_to_database(staff),
+            "data": db_create.add_staff_to_database(staff),
             "detail": "Staff added to database"
         }
     except OperationalError:
@@ -252,10 +290,33 @@ def add_staff(staff: Staff):
         )
 
 
-@app.put('/staff/{id}',
+@app.put('/staff/update_staff/{current_username}',
          status_code=status.HTTP_200_OK)
-def update_staff(id: int, updated_staff: Staff) -> Staff:
-    pass
+def update_staff(current_username: str, updated_staff: Staff):
+    try:
+        existing = False
+        # check product if existing
+        all_staff = get_all_canteen_staff()
+        for record in all_staff:
+            # convert to a dictionary
+            db_staff = dict(record)
+            if current_username == db_staff['staff_username']:
+                existing = True
+        if not existing:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail='Staff does not exist.'
+            )
+
+        return {
+            "data": db_update.update_staff(current_username, updated_staff),
+            "detail": "Staff updated to database"
+        }
+    except OperationalError:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail='Invalid data format received'
+        )
 
 
 # === CUSTOMER ===
@@ -322,7 +383,20 @@ def get_customer_by_email(email: str):
                             WHERE customer_email = '{email}'
                             """)
         customer_record = cursor.fetchone()
-        return customer_record
+        # convert the result to a dictionary to modify its values
+        customer_dict = dict(customer_record)
+        # decrypt the password
+        decrypted_password = sec.decrypt_password(
+            customer_dict.get('customer_password_hash'),
+            customer_dict.get('customer_password_salt')
+        )
+        # remove the hash and salt of the password
+        customer_dict.pop('customer_password_hash')
+        customer_dict.pop('customer_password_salt')
+        # update with the actual password
+        customer_dict.update({'customer_password': decrypted_password})
+        # return the modified dictionary
+        return customer_dict
     except OperationalError:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
@@ -347,7 +421,7 @@ def add_customer(customer: Customer):
                 )
 
         return {
-            "data": db_controller.add_customer_to_database(customer),
+            "data": db_create.add_customer_to_database(customer),
             "detail": "Customer added to database"
         }
     except OperationalError:
@@ -357,10 +431,33 @@ def add_customer(customer: Customer):
         )
 
 
-@app.put('/customer/{id}',
+@app.put('/customer/update_customer/{current_email}',
          status_code=status.HTTP_200_OK)
-def update_customer(id: int, updated_customer: Customer) -> Customer:
-    pass
+def update_customer(current_email: str, updated_customer: Customer):
+    try:
+        existing = False
+        # check product if existing
+        all_customers = get_all_customer()
+        for record in all_customers:
+            # convert to a dictionary
+            db_customer = dict(record)
+            if current_email == db_customer['customer_email']:
+                existing = True
+        if not existing:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail='Customer does not exist.'
+            )
+
+        return {
+            "data": db_update.update_customer(current_email, updated_customer),
+            "detail": "Customer updated to database"
+        }
+    except OperationalError:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail='Invalid data format received'
+        )
 
 
 # === ADMIN ===
@@ -423,7 +520,20 @@ def get_admin_by_username(username: str):
                         WHERE admin_username = '{username}'
                         """)
         admin_record = cursor.fetchone()
-        return admin_record
+        # convert the result to a dictionary to modify its values
+        admin_dict = dict(admin_record)
+        # decrypt the password
+        decrypted_password = sec.decrypt_password(
+            admin_dict.get('admin_password_hash'),
+            admin_dict.get('admin_password_salt')
+        )
+        # remove the hash and salt of the password
+        admin_dict.pop('admin_password_hash')
+        admin_dict.pop('admin_password_salt')
+        # update with the actual password
+        admin_dict.update({'admin_password': decrypted_password})
+        # return the modified dictionary
+        return admin_dict
     except OperationalError:
         raise HTTPException(
             status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
@@ -448,7 +558,7 @@ def add_admin(admin: Admin):
                 )
 
         return {
-            "data": db_controller.add_admin_to_database(admin),
+            "data": db_create.add_admin_to_database(admin),
             "detail": "Admin added to database"
         }
     except OperationalError:
@@ -458,10 +568,33 @@ def add_admin(admin: Admin):
         )
 
 
-@app.put('/admin/update_admin',
+@app.put('/admin/update_admin/{current_username}',
          status_code=status.HTTP_200_OK)
-def update_admin(username: str, updated_admin: Admin):
-    pass
+def update_admin(current_username: str, updated_admin: Admin):
+    try:
+        existing = False
+        # check product if existing
+        all_admins = get_all_admin()
+        for record in all_admins:
+            # convert to a dictionary
+            db_admin = dict(record)
+            if current_username == db_admin['admin_username']:
+                existing = True
+        if not existing:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail='Admin does not exist.'
+            )
+
+        return {
+            "data": db_update.update_admin(current_username, updated_admin),
+            "detail": "Admin updated to database"
+        }
+    except OperationalError:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail='Failed to connect to database'
+        )
 
 
 # === TRANSACTION ===
@@ -539,4 +672,4 @@ def get_row_count():
 
 
 if __name__ == '__main__':
-    print(dict(get_admin_by_username('eluxify')))
+    print(get_admin_by_username('eluxify'))
