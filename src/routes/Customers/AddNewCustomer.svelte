@@ -1,10 +1,17 @@
 <script lang="ts">
     import Discard from "$lib/components/buttons/Discard.svelte";
-    import FieldWithValue from "$lib/components/otherComponents/FieldWithValue.svelte";
     import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
     import ButtonAddRecord from "$lib/components/buttons/ButtonAddRecord.svelte";
+
+    export let value;
+    export let name;
+    export let defaultValue = "";
 </script>
+
+<svelte:head>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@600&display=swap" rel="stylesheet"/>
+</svelte:head>
 
 <NavbarSolo/>
 
@@ -14,7 +21,7 @@
             <ButtonBack link="../Customers"/>
         </div>
         <div class="column is-4">
-            <p class="text has-text-link">
+            <p class="text1 has-text-link">
                 New Customer
             </p>
         </div>
@@ -27,11 +34,31 @@
         <div class="column is-12"></div>
         <div class="column is-12"></div>
         <div class="column is-12"></div>
-        <FieldWithValue name="Name" value=""/>
-        <FieldWithValue name="Contact No." value=""/>
+        <div class="column is-3 is-offset-2">
+            <p class="pText has-text-link ml-4 mb-1">
+                Name
+            </p>
+            <input class="pText input is-rounded" type="text" bind:value={value}/>
+        </div>
+        <div class="column is-3 is-offset-2">
+            <p class="pText has-text-link ml-4 mb-1">
+                Contact No.
+            </p>
+            <input class="pText input is-rounded" type="text" bind:value={value}/>
+        </div>
         <div class="column is-12"></div>
-        <FieldWithValue name="Email" value=""/>
-        <FieldWithValue name="Password" value=""/>
+        <div class="column is-3 is-offset-2">
+            <p class="pText has-text-link ml-4 mb-1">
+                Email
+            </p>
+            <input class="pText input is-rounded" type="text" bind:value={value}/>
+        </div>
+        <div class="column is-3 is-offset-2">
+            <p class="pText has-text-link ml-4 mb-1">
+                Address
+            </p>
+            <input class="pText input is-rounded" type="text" bind:value={value}/>
+        </div>
         <div class="column is-12"></div>
         <div class="column is-12"></div>
         <div class="column is-12"></div>
@@ -45,8 +72,12 @@
 </div>
 
 <style>
-    .text {
+    .text1 {
         font-family: 'Karla', sans-serif;
         font-size: 40px;
+    }
+    .pText {
+        font-family: 'Karla', sans-serif;
+        font-size: 20px;
     }
 </style>
