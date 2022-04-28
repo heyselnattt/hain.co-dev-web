@@ -4,7 +4,12 @@
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
     import ButtonAddRecord from "$lib/components/buttons/ButtonAddRecord.svelte";
     import FixedLoadingScreen from "$lib/components/otherComponents/FixedLoadingScreen.svelte";
-    import {admins} from '$lib/stores/adminStore';
+    import {admins} from "$lib/stores/adminStore";
+
+    let adminNumber = 1;
+    const counter = (): number => {
+        return adminNumber++;
+    }
 </script>
 
 <svelte:head>
@@ -37,7 +42,7 @@
                     name={info.admin_username}
                     sub={info.admin_full_name}
                     imagePath="../static/images/adminIcon.png"
-                    link="Admin/{info.admin_id}"/>
+                    link="Admin/{info.admin_username}"/>
             {/each}
         {:catch err}
             <p>{err.message}</p>
