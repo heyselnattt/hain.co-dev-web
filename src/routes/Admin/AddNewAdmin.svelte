@@ -1,10 +1,11 @@
 <script>
     import Discard from "$lib/components/buttons/Discard.svelte";
-    import FieldWithValue from "$lib/components/otherComponents/FieldWithValue.svelte";
+    import FieldWithoutValue from "$lib/components/otherComponents/FieldWithoutValue.svelte";
     import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
     import ButtonAddRecord from "$lib/components/buttons/ButtonAddRecord.svelte";
     import axios from "$lib/api/index";
+import ButtonSwitch from "$lib/components/buttons/ButtonSwitch.svelte";
 
     let admin = {
         admin_full_name: null,
@@ -42,6 +43,8 @@
     </div>
 
     <div class="columns pt-5 is-multiline">
+        <div class="column is-12"></div>
+        <div class="column is-12"></div>
             <!-- TODO add confirm password logic-->
 <!--        <div class="column is-12"></div>-->
 <!--        <div class="column is-12"></div>-->
@@ -56,19 +59,46 @@
 <!--        <div class="column is-12"></div>-->
 <!--        <div class="column is-12"></div>-->
         <!-- TODO Style text fields and buttons -->
-        Name
+        <!-- Name
         <input type="text" bind:value={admin.admin_full_name}/>
         Username
         <input type="text" bind:value={admin.admin_username}/>
         Password
-        <input type="password" bind:value={admin.admin_password}/>
+        <input type="password" bind:value={admin.admin_password}/> -->
+        <FieldWithoutValue 
+            name="Name"
+            type='text'
+            bind:value={admin.admin_full_name} />
+        <FieldWithoutValue 
+            name="Username"
+            type='text'
+            bind:value={admin.admin_username} />
+        <FieldWithoutValue 
+            name="Password"
+            type='password'
+            bind:value={admin.admin_password} />
+    </div>
+
+    <div class="has-text-centered">
+        <ButtonSwitch 
+            isOn={admin.admin_is_active}/>
     </div>
 
     <!-- Add record button -->
-    <div class="mb- has-text-centered">
-<!--        <ButtonAddRecord link="../Admin"/>-->
-        <!-- TODO redirect pabalik sa parent page -->
+    <!-- <div class="mb- has-text-centered">
+        <ButtonAddRecord link="../Admin"/>
+        TODO redirect pabalik sa parent page
         <button on:click={addAdminToDatabase}>Add Admin</button>
+    </div> -->
+
+    <div class="column is-12"></div>
+    <div class="column is-12"></div>
+    <div class="column is-12"></div>
+
+    <div class="has-text-centered">
+        <ButtonAddRecord
+            click={addAdminToDatabase}
+            link="../Admin" />
     </div>
 </div>
 
