@@ -82,10 +82,15 @@
 </div>
 
 <div class="columns is-centered has-text-link pb-6">
-    <p class="switch-labels mt-3 mr-4">Inactive</p>
-<!--    TODO FIX TO RENDER THE IS ACTIVE -->
-    <ButtonSwitch/>
-    <p class="switch-labels mt-3 ml-4">Active</p>
+    {#await product}
+        Waiting data
+    {:then food}
+        <ButtonSwitch 
+            isOn={food.data.product_is_active}
+        />
+    {:catch e}
+        {e}
+    {/await}
 </div>
 
 <style>
