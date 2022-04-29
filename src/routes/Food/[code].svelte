@@ -25,6 +25,23 @@
     import FieldWithValue from "$lib/components/otherComponents/FieldWithValue.svelte";
     import ButtonSave from "$lib/components/buttons/ButtonSave.svelte";
     import ButtonSwitch from "$lib/components/buttons/ButtonSwitch.svelte";
+    import Dropdown from "$lib/components/otherComponents/Dropdown.svelte";
+import Food from "../Food.svelte";
+    const identifyType = (code) => {
+            switch(code) {
+                case 1:
+                    return "Breakfast"
+
+                case 2:
+                    return "Lunch"
+
+                case 3:
+                    return "Drinks"
+
+                case 4:
+                    return "Desserts"
+            }
+        }
 
     export let product;
 </script>
@@ -54,43 +71,46 @@
             <!-- TODO switch to bound inputs -->
             <FieldWithValue
                 name="Product Name"
-                value={food.data.product_name}/>
+                value={food.data.product_name} />
             <FieldWithValue
                 name="Price"
-                value={food.data.product_price}/>
+                value={food.data.product_price} />
             <FieldWithValue
                 name="Stock"
-                value={food.data.product_stock}/>
-<!--            TODO PRODUCT TYPE DROPDOWN-->
-<!--            <FieldWithValue-->
-<!--                name="Product Type"-->
-<!--                value={food.data.customer_email}/>-->
+                value={food.data.product_stock} />
+            <Dropdown 
+                name="Product Type"
+                type={food.data.product_type} />
             <FieldWithValue
                 name="Product Description"
-                value={food.data.product_description}/>
+                value={food.data.product_description} />
             <FieldWithValue
                 name="Product Code"
                 value={food.data.product_code}/>
-            <img src="{food.data.product_image_link}" alt=""/>
+            <FieldWithValue
+                name="Food image Link"
+                value={food.data.product_image_link} />
+            <div class="column is-3 is-offset-2 pt-5 pl-4 has-text-link">
+                <ButtonSwitch 
+                    isOn={food.data.product_is_active} />
+            </div>
+            <div class="column is-3 is-offset-2">
+                <div class="pText has-text-link ml-4 mb-1">
+                    <p>Image Preview</p>
+                    <figure class="avatar mt-2">
+                        <img src="{food.data.product_image_link}" alt=""/>
+                    </figure>
+                </div>
+            </div>
+
+            <div class="column is-12"></div>
+            <div class="column is-12"></div>
         {:catch e}
             {e}
         {/await}
 
-        <!-- wala pang file upload for image and also yung dropdown para sa product type
-             + yung stock wala sa actual table-->
+        <!-- wala pang file upload for image and also yung dropdown para sa product type -->
     </div>
-</div>
-
-<div class="columns is-centered has-text-link pb-6">
-    {#await product}
-        Waiting data
-    {:then food}
-        <ButtonSwitch 
-            isOn={food.data.product_is_active}
-        />
-    {:catch e}
-        {e}
-    {/await}
 </div>
 
 <style>
@@ -98,10 +118,17 @@
         font-family: 'Karla', sans-serif;
         font-size: 40px;
     }
-
+    
     .pText {
         font-family: 'Karla', sans-serif;
         font-size: 20px;
+    }
+
+    .avatar {
+        display: flex;
+        height: 150px;
+        width: 150px;
+        margin-bottom: 1.5rem;
     }
 </style>
 
