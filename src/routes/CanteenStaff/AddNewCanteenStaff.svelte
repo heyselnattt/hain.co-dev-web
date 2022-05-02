@@ -26,6 +26,7 @@
     const addStaffToDatabase = async () => {
         try {
             let response = await axios.post('/staff/new_staff', staff)
+            console.log(response)
             await goto("../CanteenStaff")
         } catch (e) {
             console.log(e)
@@ -100,6 +101,21 @@
         </div>
         <div class="column is-12"></div>
         <div class="column is-12"></div>
+    </div>
+
+    <div class="has-text-centered">
+        <div class="field">
+            <input id="switchLarge switchColorDefault switchRoundedDefault"
+                   type="checkbox"
+                   name="switchLarge switchColorDefault switchRoundedDefault"
+                   class="switch is-large is-link is-rounded"
+                   bind:checked={staff.staff_is_active}>
+            {#if staff.staff_is_active}
+                <label for="switchLarge switchColorDefault switchRoundedDefault">Active</label>
+            {:else}
+                <label for="switchLarge switchColorDefault switchRoundedDefault">Inactive</label>
+            {/if}
+        </div>
     </div>
 
     <!-- Add record button -->

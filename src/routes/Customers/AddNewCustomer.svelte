@@ -2,11 +2,28 @@
     import Discard from "$lib/components/buttons/Discard.svelte";
     import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
-    import ButtonAddRecord from "$lib/components/buttons/ButtonAddRecord.svelte";
+    import axios from "$lib/api";
+    import {goto} from "$app/navigation";
 
-    export let value;
-    export let name;
-    export let defaultValue = "";
+    let customer = {
+        customer_first_name: null,
+        customer_middle_name: null,
+        customer_last_name: null,
+        customer_password: null,
+        customer_email: null,
+        customer_contact_number: null,
+        customer_is_active: true
+    };
+
+    const addCustomerToDatabase = async () => {
+        try {
+            let response = await axios.post('/customer/new_customer', customer);
+            console.log(response);
+            await goto("../Customers");
+        } catch (e) {
+            console.log(e);
+        }
+    }
 </script>
 
 <svelte:head>
@@ -32,42 +49,64 @@
 
     <div class="columns pt-5 is-multiline">
         <div class="column is-12"></div>
-        <div class="column is-12"></div>
-        <div class="column is-12"></div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
-                Name
+                First Name
             </p>
-            <input class="pText input is-rounded" type="text" bind:value={value}/>
+            <input class="pText input is-rounded" type="text" bind:value={customer.customer_first_name} required/>
         </div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
-                Contact No.
+                Middle Name
             </p>
-            <input class="pText input is-rounded" type="text" bind:value={value}/>
+            <input class="pText input is-rounded" type="text" bind:value={customer.customer_middle_name}/>
         </div>
         <div class="column is-12"></div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
-                Email
+                Last Name
             </p>
-            <input class="pText input is-rounded" type="text" bind:value={value}/>
+            <input class="pText input is-rounded" type="text" bind:value={customer.customer_last_name} required/>
         </div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
-                Address
+                Email Address
             </p>
-            <input class="pText input is-rounded" type="text" bind:value={value}/>
+            <input class="pText input is-rounded" type="email" bind:value={customer.customer_email} required/>
+        </div>
+        <div class="column is-3 is-offset-2">
+            <p class="pText has-text-link ml-4 mb-1">
+                Contact Number
+            </p>
+            <input class="pText input is-rounded" type="text" bind:value={customer.customer_contact_number} required/>
+        </div>
+        <div class="column is-3 is-offset-2">
+            <p class="pText has-text-link ml-4 mb-1">
+                Password
+            </p>
+            <input class="pText input is-rounded" type="password" bind:value={customer.customer_password} required/>
         </div>
         <div class="column is-12"></div>
-        <div class="column is-12"></div>
-        <div class="column is-12"></div>
-        <div class="column is-12"></div>
+    </div>
+
+    <div class="has-text-centered">
+        <div class="field">
+            <input id="switchLarge switchColorDefault switchRoundedDefault"
+                   type="checkbox"
+                   name="switchLarge switchColorDefault switchRoundedDefault"
+                   class="switch is-large is-link is-rounded"
+                   bind:checked={customer.customer_is_active}>
+            {#if customer.customer_is_active}
+                <label for="switchLarge switchColorDefault switchRoundedDefault">Active</label>
+            {:else}
+                <label for="switchLarge switchColorDefault switchRoundedDefault">Inactive</label>
+            {/if}
+        </div>
     </div>
 
     <!-- Add record button -->
     <div class="mb- has-text-centered">
-        <ButtonAddRecord link="../Customers"/>
+        <button class="btn-txt button is-link is-rounded" on:click={addCustomerToDatabase}>Add Customer</button>
     </div>
 </div>
 
@@ -79,5 +118,9 @@
     .pText {
         font-family: 'Karla', sans-serif;
         font-size: 20px;
+    }
+    .btn-txt {
+        font-size: 20px;
+        font-family: 'Karla', sans-serif;
     }
 </style>

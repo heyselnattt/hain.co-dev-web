@@ -5,7 +5,7 @@
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
     import ButtonAddRecord from "$lib/components/buttons/ButtonAddRecord.svelte";
     import axios from "$lib/api/index";
-    import ButtonSwitch from "$lib/components/buttons/ButtonSwitch.svelte";
+    import {goto} from "$app/navigation";
 
     let product = {
         product_name: null,
@@ -18,10 +18,18 @@
         product_code: null
     }
 
+    let foodTypes = [
+        {value: 1, type: "BREAKFAST"},
+        {value: 2, type: "LUNCH"},
+        {value: 3, type: "DESSERT"},
+        {value: 4, type: "EXTRA"}
+    ]
+
     const addProductToDatabase = async () => {
         try {
             let response = await axios.post('/product/new_product', product)
             console.log(response)
+            await goto("../Food")
         } catch (e) {
             console.log(e)
         }
@@ -52,6 +60,10 @@
     }
 </script>
 
+<svelte:head>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@600&display=swap" rel="stylesheet"/>
+</svelte:head>
+
 <NavbarSolo/>
 
 <div class="container">
@@ -70,40 +82,45 @@
     </div>
 
     <div class="columns pt-5 is-multiline">
-        <div class="column is-12"></div>
-        <div class="column is-12"></div>
-        <FieldWithoutValue 
+        <FieldWithoutValue
             name="Name"
             type='text'
-            bind:value={product.product_name} />
-        <FieldWithoutValue 
+            bind:value={product.product_name}/>
+        <FieldWithoutValue
             name="Price"
             type='number'
-            bind:value={product.product_price} />
-        <FieldWithoutValue 
+            bind:value={product.product_price}/>
+        <FieldWithoutValue
             name="Stock"
             type='number'
-            bind:value={product.product_stock} />
-        <FieldWithoutValue 
-            name="Product Type"
-            type='number'
-            bind:value={product.product_type} />
-        <FieldWithoutValue 
+            bind:value={product.product_stock}/>
+        <div class="column is-3 is-offset-2">
+            <p class="pText has-text-link ml-4 mb-1">
+                Product Type
+            </p>
+            <select bind:value={product.product_type} class="pText input is-rounded">
+                {#each foodTypes as food}
+                    <option value={food.value}>
+                        {food.type}
+                    </option>
+                {/each}
+            </select>
+        </div>
+        <FieldWithoutValue
             name="Product Description"
-            type='number'
-            bind:value={product.product_description} />
-        <FieldWithoutValue 
+            type='textarea'
+            bind:value={product.product_description}/>
+        <FieldWithoutValue
             name="Product Code"
             type='text'
-            bind:value={product.product_code} />
-        <FieldWithoutValue
-            name="Food Image Link"
-            type='text'
-            bind:value={product.product_image_link} />
-        <div class="column is-3 is-offset-2 pt-5 pl-4 has-text-link">
-            <ButtonSwitch 
-                isOn={product.product_is_active}/>
+            bind:value={product.product_code}/>
+        <div class="column is-3 is-offset-2">
+            <p class="pText has-text-link ml-4 mb-1">
+                Food Image Link
+            </p>
+            <input class="pText input is-rounded" type="text" bind:value={product.product_image_link} required/>
         </div>
+
         <div class="column is-3 is-offset-2">
             <div class="pText has-text-link ml-4 mb-1">
                 <p>Image Preview</p>
@@ -113,18 +130,26 @@
             </div>
         </div>
     </div>
-
-    <div class="column is-12"></div>
-    <div class="column is-12"></div>
-
     <div class="has-text-centered">
-        <ButtonAddRecord
-            click={addProductToDatabase}
-            link="../Food" />
+        <div class="field">
+            <input id="switchLarge switchColorDefault switchRoundedDefault"
+                   type="checkbox"
+                   name="switchLarge switchColorDefault switchRoundedDefault"
+                   class="switch is-large is-link is-rounded"
+                   bind:checked={product.product_is_active}>
+            {#if product.product_is_active}
+                <label for="switchLarge switchColorDefault switchRoundedDefault">Active</label>
+            {:else}
+                <label for="switchLarge switchColorDefault switchRoundedDefault">Inactive</label>
+            {/if}
+        </div>
+    </div>
+    <div class="has-text-centered">
+        <div class="mb- has-text-centered">
+            <button class="btn-txt button is-link is-rounded" on:click={addProductToDatabase}>Add Product</button>
+        </div>
     </div>
 
-    <div class="column is-12"></div>
-    <div class="column is-12"></div>
     <div class="column is-12"></div>
 </div>
 
