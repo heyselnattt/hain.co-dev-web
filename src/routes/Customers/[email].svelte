@@ -68,7 +68,7 @@
                 value={customer.data.customer_contact_number} />
             <FieldWithValue
                 name="Password"
-                value={customer.data.customer_password_hash} />
+                value={customer.data.customer_password} />
         {:catch e}
             {e}
         {/await}

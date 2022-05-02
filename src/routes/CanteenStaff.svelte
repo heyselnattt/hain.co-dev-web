@@ -3,8 +3,8 @@
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
     import ButtonAddRecord from "$lib/components/buttons/ButtonAddRecord.svelte";
     import CanteenStaffTableRow from "$lib/components/tableRows/CanteenStaffTableRow.svelte";
-    import FixedLoadingScreen from "$lib/components/otherComponents/FixedLoadingScreen.svelte";
     import {staffs} from "$lib/stores/staffStore";
+    import TableLoadingScreen from "$lib/components/otherComponents/TableLoadingScreen.svelte";
 
     let staffNumber = 1;
     const counter = (): number => {
@@ -59,7 +59,7 @@
                     Position - username
                     Address - email -->
             {#await $staffs}
-                <FixedLoadingScreen/>
+                <TableLoadingScreen/>
             {:then staff}
                 {#each staff.data as info}
                     <!--TODO add property for the link for the individual staff

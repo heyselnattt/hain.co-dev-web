@@ -4,8 +4,8 @@
     import CustomersTableRow from "$lib/components/tableRows/CustomersTableRow.svelte";
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
     import ButtonAddRecord from "$lib/components/buttons/ButtonAddRecord.svelte";
-    import FixedLoadingScreen from "$lib/components/otherComponents/FixedLoadingScreen.svelte";
     import {customers} from "$lib/stores/customerStores";
+    import TableLoadingScreen from "$lib/components/otherComponents/TableLoadingScreen.svelte";
 
     let itemNumber = 1;
     const counter = (): number => {
@@ -42,7 +42,7 @@
                 </tr>
             </thead>
             {#await $customers}
-                <FixedLoadingScreen/>
+                <TableLoadingScreen/>
             {:then customer}
 
                 {#each customer.data as info}

@@ -1,12 +1,14 @@
 <script>
     import Discard from "$lib/components/buttons/Discard.svelte";
-    import FieldWithoutValue from "$lib/components/otherComponents/FieldWithoutValue.svelte";
     import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
-    import ButtonAddRecord from "$lib/components/buttons/ButtonAddRecord.svelte";
     import axios from "$lib/api/index";
-import ButtonSwitch from "$lib/components/buttons/ButtonSwitch.svelte";
+    import ButtonSwitch from "$lib/components/buttons/ButtonSwitch.svelte";
+    import {goto} from "$app/navigation";
 
+    export let value;
+    export let name;
+    export let confirmPassword = "";
     let admin = {
         admin_full_name: null,
         admin_username: null,
@@ -19,11 +21,16 @@ import ButtonSwitch from "$lib/components/buttons/ButtonSwitch.svelte";
         try {
             let response = await axios.post('/admin/new_admin', admin)
             console.log(response)
+            await goto("../Admin")
         } catch (e) {
             console.log(e)
         }
     }
 </script>
+
+<svelte:head>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@600&display=swap" rel="stylesheet"/>
+</svelte:head>
 
 <NavbarSolo/>
 
@@ -33,7 +40,7 @@ import ButtonSwitch from "$lib/components/buttons/ButtonSwitch.svelte";
             <ButtonBack link="../Admin"/>
         </div>
         <div class="column is-4">
-            <p class="text has-text-link">
+            <p class="text1 has-text-link">
                 New Administrator
             </p>
         </div>
@@ -45,66 +52,53 @@ import ButtonSwitch from "$lib/components/buttons/ButtonSwitch.svelte";
     <div class="columns pt-5 is-multiline">
         <div class="column is-12"></div>
         <div class="column is-12"></div>
-            <!-- TODO add confirm password logic-->
-<!--        <div class="column is-12"></div>-->
-<!--        <div class="column is-12"></div>-->
-<!--        <div class="column is-12"></div>-->
-<!--        <FieldWithValue name="Name" value="" bind:value={admin.admin_full_name}/>-->
-<!--        <FieldWithValue name="Password" value="" bind:value={admin.admin_password}/>-->
-<!--        <div class="column is-12"></div>-->
-<!--        <FieldWithValue name="Username" value="" bind:value={admin.admin_username}/>-->
-<!--        <FieldWithValue name="Confirm Password" value=""/>-->
-<!--        <div class="column is-12"></div>-->
-<!--        <div class="column is-12"></div>-->
-<!--        <div class="column is-12"></div>-->
-<!--        <div class="column is-12"></div>-->
-        <!-- TODO Style text fields and buttons -->
-        <!-- Name
-        <input type="text" bind:value={admin.admin_full_name}/>
-        Username
-        <input type="text" bind:value={admin.admin_username}/>
-        Password
-        <input type="password" bind:value={admin.admin_password}/> -->
-        <FieldWithoutValue 
-            name="Name"
-            type='text'
-            bind:value={admin.admin_full_name} />
-        <FieldWithoutValue 
-            name="Username"
-            type='text'
-            bind:value={admin.admin_username} />
-        <FieldWithoutValue 
-            name="Password"
-            type='password'
-            bind:value={admin.admin_password} />
+        <div class="column is-12"></div>
+        <div class="column is-3 is-offset-2">
+            <p class="pText has-text-link ml-4 mb-1">
+               Full Name
+            </p>
+            <input class="pText input is-rounded" type="text" bind:value={admin.admin_full_name}/>
+        </div>
+        <div class="column is-3 is-offset-2">
+            <p class="pText has-text-link ml-4 mb-1">
+                Username
+            </p>
+            <input class="pText input is-rounded" type="text" bind:value={admin.admin_username}/>
+        </div>
+        <div class="column is-12"></div>
+        <div class="column is-3 is-offset-2">
+            <p class="pText has-text-link ml-4 mb-1">
+                Password
+            </p>
+            <input class="pText input is-rounded" type="password" bind:value={admin.admin_password}/>
+        </div>
+        <div class="column is-12"></div>
+        <div class="column is-12"></div>
+        <div class="column is-12"></div>
+        <div class="column is-12"></div>
     </div>
-
     <div class="has-text-centered">
         <ButtonSwitch 
             isOn={admin.admin_is_active}/>
     </div>
 
     <!-- Add record button -->
-    <!-- <div class="mb- has-text-centered">
-        <ButtonAddRecord link="../Admin"/>
-        TODO redirect pabalik sa parent page
-        <button on:click={addAdminToDatabase}>Add Admin</button>
-    </div> -->
-
-    <div class="column is-12"></div>
-    <div class="column is-12"></div>
-    <div class="column is-12"></div>
-
-    <div class="has-text-centered">
-        <ButtonAddRecord
-            click={addAdminToDatabase}
-            link="../Admin" />
+    <div class="mb- has-text-centered">
+        <button class="btn-txt button is-link is-rounded" on:click={addAdminToDatabase}>Add Admin</button>
     </div>
 </div>
 
 <style>
-    .text {
+    .text1 {
         font-family: 'Karla', sans-serif;
         font-size: 40px;
+    }
+    .pText {
+        font-family: 'Karla', sans-serif;
+        font-size: 20px;
+    }
+    .btn-txt {
+        font-size: 20px;
+        font-family: 'Karla', sans-serif;
     }
 </style>

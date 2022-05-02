@@ -26,6 +26,30 @@
             console.log(e)
         }
     }
+
+    let input;
+    let container;
+    let image;
+    let placeholder;
+    let showImage = false;
+
+    function onChange() {
+        const file = input.files[0];
+        console.log(input.files);
+        if (file) {
+            showImage = true;
+
+            const reader = new FileReader();
+            reader.addEventListener("load", function () {
+                image.setAttribute("src", reader.result);
+            });
+            reader.readAsDataURL(file);
+            console.log()
+
+            return;
+        }
+        showImage = false;
+    }
 </script>
 
 <NavbarSolo/>
@@ -113,5 +137,11 @@
     .pText {
         font-family: 'Karla', sans-serif;
         font-size: 20px;
+    }
+
+    img {
+        display: flex;
+        max-height: 300px;
+        margin-bottom: 1.5rem;
     }
 </style>
