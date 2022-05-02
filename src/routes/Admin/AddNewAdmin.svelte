@@ -3,11 +3,11 @@
     import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
     import axios from "$lib/api/index";
+    import {goto} from "$app/navigation";
 
     export let value;
     export let name;
-    export let defaultValue = "";
-
+    export let confirmPassword = "";
     let admin = {
         admin_full_name: null,
         admin_username: null,
@@ -20,6 +20,7 @@
         try {
             let response = await axios.post('/admin/new_admin', admin)
             console.log(response)
+            await goto("../Admin")
         } catch (e) {
             console.log(e)
         }
@@ -53,28 +54,22 @@
         <div class="column is-12"></div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
-                Name
+               Full Name
             </p>
-            <input class="pText input is-rounded" type="text" bind:value={value}/>
+            <input class="pText input is-rounded" type="text" bind:value={admin.admin_full_name}/>
         </div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
-                Contact No.
+                Username
             </p>
-            <input class="pText input is-rounded" type="text" bind:value={value}/>
+            <input class="pText input is-rounded" type="text" bind:value={admin.admin_username}/>
         </div>
         <div class="column is-12"></div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
-                ID No.
-            </p>
-            <input class="pText input is-rounded" type="text" bind:value={value}/>
-        </div>
-        <div class="column is-3 is-offset-2">
-            <p class="pText has-text-link ml-4 mb-1">
                 Password
             </p>
-            <input class="pText input is-rounded" type="text" bind:value={value}/>
+            <input class="pText input is-rounded" type="password" bind:value={admin.admin_password}/>
         </div>
         <div class="column is-12"></div>
         <div class="column is-12"></div>
@@ -84,8 +79,6 @@
 
     <!-- Add record button -->
     <div class="mb- has-text-centered">
-        <!-- <ButtonAddRecord link="../Admin"/> -->
-        <!-- TODO redirect pabalik sa parent page -->
         <button class="btn-txt button is-link is-rounded" on:click={addAdminToDatabase}>Add Admin</button>
     </div>
 </div>
