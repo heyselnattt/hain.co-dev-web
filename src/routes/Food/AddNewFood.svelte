@@ -15,6 +15,30 @@
             avatar = e.target.result
         };
     }
+
+    let input;
+    let container;
+    let image;
+    let placeholder;
+    let showImage = false;
+
+    function onChange() {
+        const file = input.files[0];
+        console.log(input.files);
+        if (file) {
+            showImage = true;
+
+            const reader = new FileReader();
+            reader.addEventListener("load", function () {
+                image.setAttribute("src", reader.result);
+            });
+            reader.readAsDataURL(file);
+            console.log()
+
+            return;
+        }
+        showImage = false;
+    }
 </script>
 
 <NavbarSolo/>
@@ -45,30 +69,19 @@
         <FieldWithValue name="Price" value=""/>
         <div class="column is-2"></div>
 
-        <div class="column is-3 file has-name">
-            {#if avatar}
-                <img class="avatar" src="{avatar}" alt="d"/>
-            {:else}
-                <img class="avatar" src="../static/images/imageUpload.svg" alt=""/>
-            {/if}
-
-            <input style="display:none" type="file" accept=".jpg, .jpeg, .png" on:change={(e)=>onFileSelected(e)}
-                   bind:this={fileinput}>
-            <label class="file-label">
-                <input class="file-input" type="file" name="resume">
-                <span class="file-cta">
-                    <span class="file-icon">
-                        <i class="fas fa-upload"></i>
-                    </span>
-                    <span class="upload" on:click={()=>{fileinput.click();}}>
-                        Choose a file…
-                    </span>
-                </span>
-            </label>
+        <!-- File Picker -->
+        <div class="column is-2">
+            <input bind:this={input} on:change={onChange} multiple type="file" class="mb-4"/>
+                <div class="new" bind:this={container}>
+                    {#if showImage}
+                        <img bind:this={image} src="" alt="Preview" />
+                    {:else}
+                        <span bind:this={placeholder}>Image Preview</span>
+                    {/if}
+                </div>
         </div>
-        <div class="column is-12"></div>
 
-        <!-- wala pang dropdown for product type, and file upload para sa image-->
+        <div class="column is-12"></div>
     </div>
 
     <div class="mb-6 has-text-centered">
@@ -88,15 +101,9 @@
         font-size: 40px;
     }
 
-    .upload {
+    img {
         display: flex;
-        cursor: pointer;
-    }
-
-    .avatar {
-        display: flex;
-        height: 150px;
-        width: 150px;
+        max-height: 300px;
         margin-bottom: 1.5rem;
     }
 </style>
