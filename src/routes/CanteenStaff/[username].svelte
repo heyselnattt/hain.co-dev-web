@@ -21,9 +21,10 @@
 <script lang="ts">
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
     import ButtonSave from "$lib/components/buttons/ButtonSave.svelte";
+    import ButtonSwitch from "$lib/components/buttons/ButtonSwitch.svelte";
     import FieldWithValue from "$lib/components/otherComponents/FieldWithValue.svelte";
     import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
-
+    
     export let canteenStaff;
     const identifyType = (code) => {
         switch(code) {
@@ -80,7 +81,7 @@
                 value={staff.data.staff_username} />
             <FieldWithValue
                 name="Password"
-                value={staff.data.staff_password_hash} />
+                value={staff.data.staff_password} />
         {:catch e}
             {e}
         {/await}
@@ -90,9 +91,15 @@
 </div>
 
 <div class="columns is-centered has-text-link pb-6">
-    <p class="switch-labels mt-3 mr-4">Inactive</p>
-    <ButtonSwitch/>
-    <p class="switch-labels mt-3 ml-4">Active</p>
+    {#await canteenStaff}
+        Waiting data
+    {:then staff}
+        <ButtonSwitch 
+            isOn={staff.data.staff_is_active}
+        />
+    {:catch e}
+        {e}
+    {/await}
 </div>
 
 <style>

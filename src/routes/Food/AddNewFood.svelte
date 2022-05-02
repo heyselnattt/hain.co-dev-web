@@ -1,19 +1,30 @@
-<script lang="ts">
+<script>
+    import Discard from "$lib/components/buttons/Discard.svelte";
+    import FieldWithoutValue from "$lib/components/otherComponents/FieldWithoutValue.svelte";
     import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
     import ButtonAddRecord from "$lib/components/buttons/ButtonAddRecord.svelte";
-    import Discard from "$lib/components/buttons/Discard.svelte";
-    import FieldWithValue from "$lib/components/otherComponents/FieldWithValue.svelte";
+    import axios from "$lib/api/index";
+    import ButtonSwitch from "$lib/components/buttons/ButtonSwitch.svelte";
 
-    let avatar, fileinput;
+    let product = {
+        product_name: null,
+        product_price: null,
+        product_image_link: null,
+        product_stock: null,
+        product_description: null,
+        product_type: null,
+        product_is_active: true,
+        product_code: null
+    }
 
-    const onFileSelected = (e) => {
-        let image = e.target.files[0];
-        let reader = new FileReader();
-        reader.readAsDataURL(image);
-        reader.onload = e => {
-            avatar = e.target.result
-        };
+    const addProductToDatabase = async () => {
+        try {
+            let response = await axios.post('/product/new_product', product)
+            console.log(response)
+        } catch (e) {
+            console.log(e)
+        }
     }
 
     let input;
@@ -44,13 +55,13 @@
 <NavbarSolo/>
 
 <div class="container">
-    <div class="columns pt-5 is-multiline has-text-centered">
+    <div class="columns  pt-5 is-multiline has-text-centered">
         <div class="column is-4">
             <ButtonBack link="../Food"/>
         </div>
         <div class="column is-4">
             <p class="text has-text-link">
-                New Food
+                New Product
             </p>
         </div>
         <div class="column is-3 ml-6">
@@ -60,35 +71,62 @@
 
     <div class="columns pt-5 is-multiline">
         <div class="column is-12"></div>
-        <FieldWithValue name="Product Name" value=""/>
-        <div class="column is-2"></div>
-        <div class="column is-3 control">
-            <p class="has-text-link"></p>
-            <textarea class="textarea has-fixed-size" placeholder="Description"></textarea>
-        </div>
-        <FieldWithValue name="Price" value=""/>
-        <div class="column is-2"></div>
-
-        <!-- File Picker -->
-        <div class="column is-2">
-            <input bind:this={input} on:change={onChange} multiple type="file" class="mb-4"/>
-                <div class="new" bind:this={container}>
-                    {#if showImage}
-                        <img bind:this={image} src="" alt="Preview" />
-                    {:else}
-                        <span bind:this={placeholder}>Image Preview</span>
-                    {/if}
-                </div>
-        </div>
-
         <div class="column is-12"></div>
+        <FieldWithoutValue 
+            name="Name"
+            type='text'
+            bind:value={product.product_name} />
+        <FieldWithoutValue 
+            name="Price"
+            type='number'
+            bind:value={product.product_price} />
+        <FieldWithoutValue 
+            name="Stock"
+            type='number'
+            bind:value={product.product_stock} />
+        <FieldWithoutValue 
+            name="Product Type"
+            type='number'
+            bind:value={product.product_type} />
+        <FieldWithoutValue 
+            name="Product Description"
+            type='number'
+            bind:value={product.product_description} />
+        <FieldWithoutValue 
+            name="Product Code"
+            type='text'
+            bind:value={product.product_code} />
+        <FieldWithoutValue
+            name="Food Image Link"
+            type='text'
+            bind:value={product.product_image_link} />
+        <div class="column is-3 is-offset-2 pt-5 pl-4 has-text-link">
+            <ButtonSwitch 
+                isOn={product.product_is_active}/>
+        </div>
+        <div class="column is-3 is-offset-2">
+            <div class="pText has-text-link ml-4 mb-1">
+                <p>Image Preview</p>
+                <figure class="avatar mt-2">
+                    <img src="{product.product_image_link}" alt=""/>
+                </figure>
+            </div>
+        </div>
     </div>
 
-    <div class="mb-6 has-text-centered">
-        <ButtonAddRecord link="../Food" />
+    <div class="column is-12"></div>
+    <div class="column is-12"></div>
+
+    <div class="has-text-centered">
+        <ButtonAddRecord
+            click={addProductToDatabase}
+            link="../Food" />
     </div>
+
+    <div class="column is-12"></div>
+    <div class="column is-12"></div>
+    <div class="column is-12"></div>
 </div>
-
 
 <style>
     .text {
@@ -96,9 +134,9 @@
         font-size: 40px;
     }
 
-    p {
+    .pText {
         font-family: 'Karla', sans-serif;
-        font-size: 40px;
+        font-size: 20px;
     }
 
     img {

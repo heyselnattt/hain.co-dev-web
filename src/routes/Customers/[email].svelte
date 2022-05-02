@@ -77,20 +77,20 @@
 </div>
 
 <div class="columns is-centered has-text-link pb-6">
-    <p class="switch-labels mt-3 mr-4">Inactive</p>
-<!--    TODO FIX TO RENDER THE IS ACTIVE -->
-    <ButtonSwitch/>
-    <p class="switch-labels mt-3 ml-4">Active</p>
+    {#await customer}
+        Waiting data
+    {:then customer}
+        <ButtonSwitch 
+            isOn={customer.data.customer_is_active}
+        />
+    {:catch e}
+        {e}
+    {/await}
 </div>
 
 <style>
     .text {
         font-family: 'Karla', sans-serif;
         font-size: 40px;
-    }
-
-    .switch-labels {
-        font-family: 'Karla', sans-serif;
-        font-size: 25px;
     }
 </style>

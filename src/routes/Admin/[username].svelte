@@ -21,6 +21,7 @@
 <script>
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
     import ButtonSave from "$lib/components/buttons/ButtonSave.svelte";
+    import ButtonSwitch from "$lib/components/buttons/ButtonSwitch.svelte";
     import FieldWithValue from "$lib/components/otherComponents/FieldWithValue.svelte";
     import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
 
@@ -57,9 +58,6 @@
             <FieldWithValue
                 name="Username"
                 value={admin.data.admin_username}/>
-            <FieldWithValue
-                name="Activity"
-                value={admin.data.admin_is_active}/>
             <FieldWithValue 
                 name="Password"
                 value={admin.data.admin_password}/>
@@ -69,6 +67,18 @@
 
         <div class="column is-12"></div>
     </div>
+</div>
+
+<div class="columns is-centered has-text-link pb-6">
+    {#await admin}
+        Waiting data
+    {:then admin}
+        <ButtonSwitch 
+            isOn={admin.data.admin_is_active}
+        />
+    {:catch e}
+        {e}
+    {/await}
 </div>
 
 <style>

@@ -3,6 +3,7 @@
     import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
     import axios from "$lib/api/index";
+    import ButtonSwitch from "$lib/components/buttons/ButtonSwitch.svelte";
     import {goto} from "$app/navigation";
 
     export let value;
@@ -75,6 +76,10 @@
         <div class="column is-12"></div>
         <div class="column is-12"></div>
         <div class="column is-12"></div>
+    </div>
+    <div class="has-text-centered">
+        <ButtonSwitch 
+            isOn={admin.admin_is_active}/>
     </div>
 
     <!-- Add record button -->
