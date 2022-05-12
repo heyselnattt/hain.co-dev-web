@@ -58,7 +58,8 @@ def count_rows():
         table_schema NOT IN ('pg_catalog', 'information_schema') AND
         table_name NOT LIKE ('%position') AND
         table_name NOT LIKE ('%interval') AND
-        table_name NOT LIKE ('%type')
+        table_name NOT LIKE ('%type') AND 
+        table_name NOT LIKE ('%status')
         and table_type='BASE TABLE'
     ORDER BY
         table_name;
@@ -70,4 +71,4 @@ def count_rows():
 
 
 if __name__ == '__main__':
-    count_rows()
+    print(count_rows())
