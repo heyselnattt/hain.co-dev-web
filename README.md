@@ -20,7 +20,7 @@ For the Python server, first you should create a Python virtual environment and 
 python -m venv venv
 
 # activate the venv
-cd venv/Scripts && activate 
+venv\Scripts\activate
 
 # install dependencies
 pip install -r requirements.txt
