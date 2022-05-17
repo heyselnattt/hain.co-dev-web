@@ -20,6 +20,7 @@
         {#await $row_count}
             <FixedLoadingScreen/>
         {:then row_count}
+            {console.log(row_count)}
             <Card name="Customers"
                   entries={row_count['data'][1]['rows']}
                   sub="customers"
@@ -31,7 +32,7 @@
                   imagePath="images/canteenStaffIcon.png"
                   link="CanteenStaff"/>
             <Card name="Products"
-                  entries={row_count['data'][2]['rows']}
+                  entries={row_count['data'][3]['rows']}
                   sub="items"
                   imagePath="images/foodIcon.png"
                   link="Food"/>
@@ -40,9 +41,9 @@
                   sub="records"
                   imagePath="images/adminIcon.png"
                   link="Admin"/>
-            <Card name="Reports"
-                  entries={row_count['data'][3]['rows']}
-                  sub="entries"
+            <Card name="Orders"
+                  entries={row_count['data'][2]['rows']}
+                  sub="orders"
                   imagePath="images/reportIcon.png"
                   link="Reports"/>
             <Card name="Transactions"

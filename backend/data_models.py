@@ -4,9 +4,9 @@ import datetime as dt
 
 # enum types
 from backend.enums.product_type import ProductType
-from backend.enums.record_interval import RecordInterval
 from backend.enums.transaction_type import TransactionType
 from backend.enums.work_position import CanteenPosition, AdminPosition
+from backend.enums.order_status import OrderStatus
 
 
 class Customer(BaseModel):
@@ -56,5 +56,10 @@ class Transaction(BaseModel):
     transaction_date: dt.datetime
 
 
-class Record(BaseModel):
-    record_interval: RecordInterval
+class Order(BaseModel):
+    order_product_code: str
+    order_customer_email: str
+    order_request: str
+    order_date: dt.datetime
+    order_staff_username: str
+    order_status: OrderStatus

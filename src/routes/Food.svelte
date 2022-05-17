@@ -27,13 +27,13 @@
     }
 </script>
 
-<NavbarWithSearch />
+<NavbarWithSearch/>
 
 
 <div class="container">
     <div class="columns has-text-centered pt-5">
         <div class="column is-4">
-            <ButtonBack link="Database" />
+            <ButtonBack link="Database"/>
         </div>
         <div class="column is-4">
             <p class="text has-text-link">
@@ -48,14 +48,14 @@
     <div class="column is-10 is-offset-1 pl-5 pt-0">
         <table class="table is-hoverable is-fullwidth">
             <thead>
-                <tr>
-                    <th>No.</th>
-                    <th>Product Name</th>
-                    <th>Price</th>
-                    <th>Type</th>
-                    <th>Product Code</th>
-                    <th></th>
-                </tr>
+            <tr>
+                <th>No.</th>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Type</th>
+                <th>Product Code</th>
+                <th></th>
+            </tr>
             </thead>
             <!-- Temporary placeholders:
                     Product name - name
@@ -64,9 +64,7 @@
             {#await $products}
                 <TableLoadingScreen/>
             {:then food}
-
                 {#each food.data as product}
-                    <!--TODO add property for the link for the individual product-->
                     <FoodTableRow
                         num={counter()}
                         productName={product.product_name}

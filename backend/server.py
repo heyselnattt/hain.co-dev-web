@@ -9,7 +9,7 @@ from backend.data_models import (
     Product,
     Staff,
     Customer,
-    Admin, Transaction, Record
+    Admin, Transaction
 )
 
 from backend.database.database_operation import DatabaseOperator
@@ -640,22 +640,22 @@ def add_transaction(id: int, transaction: Transaction) -> Transaction:
 
 
 # === RECORD ===
-
-@app.get('/record',
-         status_code=status.HTTP_200_OK)
-def get_all_record() -> list[Record]:
-    pass
-
-
-@app.get('/record/{id}')
-def get_record_by_id(id: int) -> Record:
-    pass
-
-
-# TODO change the id variable to properly match the database rows
-@app.post('/record/{id}')
-def add_record(id: int, updated_record: Record) -> Record:
-    pass
+#
+# @app.get('/record',
+#          status_code=status.HTTP_200_OK)
+# def get_all_record() -> list[Record]:
+#     pass
+#
+#
+# @app.get('/record/{id}')
+# def get_record_by_id(id: int) -> Record:
+#     pass
+#
+#
+# # TODO change the id variable to properly match the database rows
+# @app.post('/record/{id}')
+# def add_record(id: int, updated_record: Record) -> Record:
+#     pass
 
 
 # === META ===

@@ -6,7 +6,6 @@ from backend.data_models import (
     Product,
     Staff,
     Transaction,
-    Record
 )
 from backend.database.security import create_salt, encrypt_password
 from backend.database.database_operation import DatabaseOperator
