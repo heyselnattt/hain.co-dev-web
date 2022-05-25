@@ -20,7 +20,6 @@
         {#await $row_count}
             <FixedLoadingScreen/>
         {:then row_count}
-            {console.log(row_count)}
             <Card name="Customers"
                   entries={row_count['data'][1]['rows']}
                   sub="customers"
