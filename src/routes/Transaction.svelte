@@ -1,7 +1,27 @@
-<script>
+<script lang="ts">
     import NavbarWithSearch from "$lib/components/navbars/NavbarWithSearch.svelte";
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
     import TransactionTableRow from "$lib/components/tableRows/TransactionTableRow.svelte";
+    import {audits} from "$lib/stores/transactionStore";
+    import TableLoadingScreen from "$lib/components/otherComponents/TableLoadingScreen.svelte";
+
+    let recordNumber = 1;
+    const counter = (): number => {
+        return recordNumber++;
+    }
+
+    const identifyType = (code) => {
+        switch (code) {
+            case 1:
+                return "ORDER"
+
+            case 2:
+                return "BUY"
+
+            case 3:
+                return "ADMIN/STAFF"
+        }
+    }
 </script>
 
 <svelte:head>
@@ -26,22 +46,30 @@
         <table class="table is-hoverable is-fullwidth">
             <thead>
                 <tr>
-                    <th>Transaction ID</th>
-                    <th>Name</th>
+                    <th>ID</th>
+                    <th>Agent</th>
                     <th>Description</th>
                     <th>Amount</th>
                     <th>Type</th>
+                    <th>Date</th>
                 </tr>
             </thead>
-            <TransactionTableRow num="0001" name="Bantugan, Dea" desc="buy rice and adobo" amount="40.00" type="Order"/>
-            <TransactionTableRow num="0002" name="Beltran, Sheng" desc="buy RC" amount="10.00" type="Buy"/>
-            <TransactionTableRow num="0003" name="Albis, Anne" desc="buy sopas" amount="20.00" type="Order"/>
-            <TransactionTableRow num="0004" name="Perry, Katy" desc="buy royal, rice, hotdog" amount="50.00" type="Order"/>
-            <TransactionTableRow num="0005" name="Mendes Shawn" desc="buy clover, buy RC" amount="18.00" type="Order"/>
-            <TransactionTableRow num="0006" name="Cabello, Camilla" desc="buy pork steak" amount="40.00" type="Order"/>
-            <TransactionTableRow num="0007" name="Gomez, Selena" desc="edit the student's info" amount="----" type="Admin"/>
-            <TransactionTableRow num="0008" name="Mendoza, Maine" desc="buy 5 RC" amount="50.00" type="Buy"/>
-            <TransactionTableRow num="0009" name="Kim, Sunwoo" desc="buy rice" amount="15.00" type="Buy"/>
+
+            {#await $audits}
+                <TableLoadingScreen/>
+            {:then audit}
+                {#each audit.data as info}
+                    <TransactionTableRow
+                        id={counter()}
+                        agent={info.transaction_agent}
+                        description={info.transaction_description}
+                        amount={info.transaction_amount}
+                        type={identifyType(info.transaction_type)}
+                        date={info.transaction_date}/>
+                {/each}
+            {:catch err}
+                <p>{err.message}</p>
+            {/await}
         </table>
     </div>
 </div>
