@@ -26,22 +26,23 @@
     import ButtonSave from "$lib/components/buttons/ButtonSave.svelte";
     import ButtonSwitch from "$lib/components/buttons/ButtonSwitch.svelte";
     import Dropdown from "$lib/components/otherComponents/Dropdown.svelte";
-import Food from "../Food.svelte";
+    import Food from "../Food.svelte";
+
     const identifyType = (code) => {
-            switch(code) {
-                case 1:
-                    return "Breakfast"
+        switch (code) {
+            case 1:
+                return "Breakfast"
 
-                case 2:
-                    return "Lunch"
+            case 2:
+                return "Lunch"
 
-                case 3:
-                    return "Drinks"
+            case 3:
+                return "Drinks"
 
-                case 4:
-                    return "Desserts"
-            }
+            case 4:
+                return "Desserts"
         }
+    }
 
     export let product;
 </script>
@@ -71,28 +72,28 @@ import Food from "../Food.svelte";
             <!-- TODO switch to bound inputs -->
             <FieldWithValue
                 name="Product Name"
-                value={food.data.product_name} />
+                value={food.data.product_name}/>
             <FieldWithValue
                 name="Price"
-                value={food.data.product_price} />
+                value={food.data.product_price}/>
             <FieldWithValue
                 name="Stock"
-                value={food.data.product_stock} />
-            <Dropdown 
+                value={food.data.product_stock}/>
+            <Dropdown
                 name="Product Type"
-                type={food.data.product_type} />
+                type={food.data.product_type}/>
             <FieldWithValue
                 name="Product Description"
-                value={food.data.product_description} />
+                value={food.data.product_description}/>
             <FieldWithValue
                 name="Product Code"
                 value={food.data.product_code}/>
             <FieldWithValue
                 name="Food image Link"
-                value={food.data.product_image_link} />
+                value={food.data.product_image_link}/>
             <div class="column is-3 is-offset-2 pt-5 pl-4 has-text-link">
-                <ButtonSwitch 
-                    isOn={food.data.product_is_active} />
+                <ButtonSwitch
+                    isOn={food.data.product_is_active}/>
             </div>
             <div class="column is-3 is-offset-2">
                 <div class="pText has-text-link ml-4 mb-1">
@@ -118,7 +119,7 @@ import Food from "../Food.svelte";
         font-family: 'Karla', sans-serif;
         font-size: 40px;
     }
-    
+
     .pText {
         font-family: 'Karla', sans-serif;
         font-size: 20px;
