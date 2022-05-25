@@ -44,8 +44,8 @@
             <Card name="Orders"
                   entries={row_count['data'][2]['rows']}
                   sub="orders"
-                  imagePath="images/reportIcon.png"
-                  link="Reports"/>
+                  imagePath="images/ordersIcon.png"
+                  link="Orders"/>
             <Card name="Transactions"
                   entries={row_count['data'][5]['rows']}
                   sub="entries"
