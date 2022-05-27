@@ -50,7 +50,6 @@
                     <th>Name</th>
                     <th>Position</th>
                     <th>Contact No.</th>
-                    <th>Address</th>
                     <th></th>
                 </tr>
             </thead>
@@ -70,7 +69,6 @@
                         name={info.staff_full_name}
                         position={identifyType(info.staff_position)}
                         contactNum={info.staff_contact_number}
-                        address={info.staff_address}
                         link={`/CanteenStaff/${info.staff_username}`}/>
                 {/each}
             {:catch err}
