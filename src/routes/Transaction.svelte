@@ -46,7 +46,7 @@
         <table class="table is-hoverable is-fullwidth">
             <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>No.</th>
                     <th>Agent</th>
                     <th>Description</th>
                     <th>Amount</th>

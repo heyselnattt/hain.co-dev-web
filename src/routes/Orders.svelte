@@ -49,13 +49,13 @@
         <table class="table is-hoverable is-fullwidth">
             <thead>
                 <tr>
-                    <th>Product Code</th>
+                    <th>ID</th>
+                    <th>Code</th>
                     <th>Customer Email</th>
                     <th>Order Request</th>
                     <th>Order Date</th>
                     <th>Staff</th>
                     <th>Order Status</th>
-                    <th>Order Number</th>
                 </tr>
             </thead>
             {#await $orders}
@@ -66,7 +66,7 @@
                         productCode={info.order_product_code}
                         customerEmail={info.order_customer_email}
                         orderRequest={info.order_requests}
-                        orderDate={info.order_product}
+                        orderDate={info.order_date}
                         staffUsername={info.order_staff_username}
                         orderStatus={identifyType(info.order_status)}
                         orderNumber={info.order_number}/>
