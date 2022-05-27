@@ -23,9 +23,6 @@
 
 <script>
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
-    import ButtonSave from "$lib/components/buttons/ButtonSave.svelte";
-    import ButtonSwitch from "$lib/components/buttons/ButtonSwitch.svelte";
-    import FieldWithValue from "$lib/components/otherComponents/FieldWithValue.svelte";
     import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
     import {goto} from "$app/navigation";
 
