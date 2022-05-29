@@ -3,6 +3,7 @@
     import NavbarWithSearch from "$lib/components/navbars/NavbarWithSearch.svelte";
     import OrdersTableRow from "$lib/components/tableRows/OrdersTableRow.svelte";
     import TableLoadingScreen from "$lib/components/otherComponents/TableLoadingScreen.svelte"
+    import {orders} from "$lib/stores/orderStore";
 
     let orderNumber = 1;
     const counter = (): number => {
@@ -48,23 +49,32 @@
         <table class="table is-hoverable is-fullwidth">
             <thead>
                 <tr>
-                    <th>Product Code</th>
+                    <th>ID</th>
+                    <th>Code</th>
                     <th>Customer Email</th>
                     <th>Order Request</th>
                     <th>Order Date</th>
-                    <th>Staff Username</th>
+                    <th>Staff</th>
                     <th>Order Status</th>
-                    <th>Order Number</th>
                 </tr>
             </thead>
-                <OrdersTableRow
-                    productCode=null
-                    customerEmail=null
-                    orderRequest=null
-                    orderDate=null
-                    staffUsername=null
-                    orderStatus=null
-                    orderNumber=null />
+            {#await $orders}
+                <TableLoadingScreen/>
+            {:then order}
+                {#each order.data as info}
+                    <OrdersTableRow
+                        productCode={info.order_product_code}
+                        customerEmail={info.order_customer_email}
+                        orderRequest={info.order_requests}
+                        orderDate={info.order_date}
+                        staffUsername={info.order_staff_username}
+                        orderStatus={identifyType(info.order_status)}
+                        orderNumber={info.order_number}/>
+                {/each}
+            {:catch err}
+                <p>{err.message}</p>
+            {/await}
+
         </table>
     </div>
 </div>

@@ -10,13 +10,13 @@
 
 <tbody>
     <tr class="text is-clickable">
+        <th>{orderNumber}</th>
         <th>{productCode}</th>
-        <td>{customerEmail}</td>
-        <td>{orderRequest}</td>
-        <td>{orderDate}</td>
-        <td>{staffUsername}</td>
-        <td>{orderStatus}</td>
-        <td>{orderNumber}</td>
+        <th>{customerEmail}</th>
+        <th>{orderRequest}</th>
+        <th>{orderDate}</th>
+        <th>{staffUsername}</th>
+        <th>{orderStatus}</th>
     </tr>
 </tbody>
 

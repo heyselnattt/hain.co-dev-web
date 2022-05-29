@@ -3,65 +3,48 @@
 
     export async function load({fetch, params}) {
         try {
-            const username = params.username;
-            const canteenStaff = await axios.get(`/staff/${username}`);
-            const oldUsername = canteenStaff.data.staff_username;
-            console.log(canteenStaff)
+            const emailAddress = params.username;
+            const customer = await axios.get(`/customer/${emailAddress}`);
+            const oldEmail = customer.data.customer_email
+            console.log(customer)
             return {
                 props: {
-                    canteenStaff,
-                    oldUsername
+                    customer,
+                    oldEmail
                 }
             }
         } catch (e) {
             return {
-                error: new Error('Can\'t fetch the canteen staff')
+                error: new Error('Can\'t fetch the customer information')
             }
         }
     }
 </script>
 
-<script lang="ts">
+<script>
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
     import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
     import {goto} from "$app/navigation";
 
-    export let canteenStaff;
-    export let oldUsername;
+    export let customer;
+    export let oldEmail;
 
-    let newStaff = {
-        staff_full_name: null,
-        staff_contact_number: null,
-        staff_username: null,
-        staff_password: null,
-        staff_position: 1,
-        staff_is_active: true
-    }
+    let newCustomer = {
+        customer_first_name: null,
+        customer_middle_name: null,
+        customer_last_name: null,
+        customer_password: null,
+        customer_email: null,
+        customer_contact_number: null,
+        customer_is_active: true
+    };
 
-    let positions = [
-        {value: 1, position: "CHEF"},
-        {value: 2, position: "CASHIER"},
-        {value: 3, position: "SERVER"}
-    ]
-
-    const identifyType = (code) => {
-        switch (code) {
-            case 1:
-                return "Chef"
-
-            case 2:
-                return "Cashier"
-
-            case 3:
-                return "Server"
-        }
-    }
-
-    const updateStaffToDatabase = async () => {
+    const updateCustomerToDatabase = async () => {
         try {
-            let response = await axios.put(`/staff/update_staff/${oldUsername}`, newStaff)
+            console.log(newCustomer)
+            let response = await axios.put(`/customer/update_customer/${oldEmail}`, newCustomer)
             console.log(response)
-            await goto('../CanteenStaff');
+            await goto('../Customers');
         } catch (e) {
             console.log(e);
         }
@@ -71,21 +54,20 @@
 <svelte:head>
     <link href="https://fonts.googleapis.com/css2?family=Karla:wght@600&display=swap" rel="stylesheet"/>
 </svelte:head>
-
 <NavbarSolo/>
 
 <div class="container">
     <div class="columns  pt-5 is-multiline has-text-centered">
         <div class="column is-4">
-            <ButtonBack link="../CanteenStaff"/>
+            <ButtonBack link="../Customers"/>
         </div>
         <div class="column is-4">
             <p class="text has-text-link">
-                Canteen Staff's Information
+                Customer's Information
             </p>
         </div>
         <div class="column is-3 ml-6">
-            <button class="button is-rounded is-info btn-txt" on:click={updateStaffToDatabase}>
+            <button class="button is-rounded is-info btn-txt" on:click={updateCustomerToDatabase}>
                 <p class="ml-4 mr-4 has-text-white">
                     Save
                 </p>
@@ -97,66 +79,66 @@
         <div class="column is-12">
             <div class="has-text-centered pText">Make sure to fill up all information boxes</div>
         </div>
-        {#await canteenStaff}
+        {#await customer}
             Waiting data
-        {:then staff}
-            <!-- TODO switch to bound inputs -->
+        {:then customer}
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    Current Name: {staff.data.staff_full_name}
+                    Current First Name: {customer.data.customer_first_name}
                 </p>
-                <input class="pText input is-rounded" type="text" bind:value={newStaff.staff_full_name}/>
+                <input class="pText input is-rounded" type="text" bind:value={newCustomer.customer_first_name}/>
             </div>
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    Current Position: {identifyType(staff.data.staff_position)}
+                    Current Middle Name: {customer.data.customer_middle_name}
                 </p>
-                <select bind:value={newStaff.staff_position} class="pText input is-rounded">
-                    {#each positions as pos}
-                        <option value={pos.value}>
-                            {pos.position}
-                        </option>
-                    {/each}
-                </select>
+                <input class="pText input is-rounded" type="text" bind:value={newCustomer.customer_middle_name}/>
             </div>
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    Current Contact Number: {staff.data.staff_contact_number}
+                    Current Last Name: {customer.data.customer_last_name}
                 </p>
-                <input class="pText input is-rounded" type="text" bind:value={newStaff.staff_contact_number}/>
+                <input class="pText input is-rounded" type="text" bind:value={newCustomer.customer_last_name}/>
             </div>
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    Current Username: {staff.data.staff_username}
+                    Current Email: {customer.data.customer_email}
                 </p>
-                <input class="pText input is-rounded" type="text" bind:value={newStaff.staff_username}/>
+                <input class="pText input is-rounded" type="text" bind:value={newCustomer.customer_email}/>
             </div>
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    Current Password: {staff.data.staff_password}
+                    Current Contact Number: {customer.data.customer_contact_number}
                 </p>
-                <input class="pText input is-rounded" type="password" bind:value={newStaff.staff_password}/>
+                <input class="pText input is-rounded" type="text" bind:value={newCustomer.customer_contact_number}/>
+            </div>
+
+            <div class="column is-3 is-offset-2">
+                <p class="pText has-text-link ml-4 mb-1">
+                    Current Password: {customer.data.customer_password}
+                </p>
+                <input class="pText input is-rounded" type="password" bind:value={newCustomer.customer_password}/>
             </div>
         {:catch e}
             {e}
         {/await}
         <div class="column is-12">
             <div class="columns is-centered has-text-link pb-6">
-                {#await canteenStaff}
+                {#await customer}
                     Waiting data
-                {:then staff}
+                {:then customer}
                     <div class="field">
-                        {#if staff.data.staff_is_active}
-                            <div class="pText has-text-centered">Staff Currently Active</div>
+                        {#if customer.data.customer_is_active}
+                            <div class="pText has-text-centered">Customer Currently Active</div>
                         {:else}
-                            <div class="pText has-text-centered">Staff Currently Inactive</div>
+                            <div class="pText has-text-centered">Customer Currently Inactive</div>
                         {/if}
                         <input id="switchLarge switchColorDefault switchRoundedDefault"
                                type="checkbox"
                                name="switchLarge switchColorDefault switchRoundedDefault"
                                class="switch is-large is-link is-rounded"
-                               bind:checked={newStaff.staff_is_active}>
-                        {#if newStaff.staff_is_active}
+                               bind:checked={newCustomer.customer_is_active}>
+                        {#if newCustomer.customer_is_active}
                             <label for="switchLarge switchColorDefault switchRoundedDefault">Active</label>
                         {:else}
                             <label for="switchLarge switchColorDefault switchRoundedDefault">Inactive</label>
@@ -167,7 +149,6 @@
                 {/await}
             </div>
         </div>
-        <div class="column is-12"></div>
     </div>
 </div>
 
