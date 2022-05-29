@@ -109,27 +109,27 @@
 
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    Current Name: {food.data.product_name}
+                    <span>*</span> Current Name: {food.data.product_name}
                 </p>
                 <input class="pText input is-rounded" type="text" bind:value={newProduct.product_name}/>
             </div>
             <!-- TODO number validation -->
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    Current Price: {food.data.product_price}
+                    <span>*</span> Current Price: {food.data.product_price}
                 </p>
                 <input class="pText input is-rounded" type="number" bind:value={newProduct.product_price}/>
             </div>
             <!-- TODO number validation -->
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    Current Stock: {food.data.product_stock}
+                    <span>*</span> Current Stock: {food.data.product_stock}
                 </p>
                 <input class="pText input is-rounded" type="number" bind:value={newProduct.product_stock}/>
             </div>
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    Current Type: {identifyType(food.data.product_type)}
+                    <span>*</span> Current Type: {identifyType(food.data.product_type)}
                 </p>
                 <select bind:value={newProduct.product_type} class="pText input is-rounded">
                     {#each types as pos}
@@ -142,19 +142,19 @@
             <!-- TODO make sure unique -->
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    Current Code: {food.data.product_code}
+                    <span>*</span> Current Code: {food.data.product_code}
                 </p>
                 <input class="pText input is-rounded" type="text" bind:value={newProduct.product_code}/>
             </div>
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    Current Link: {food.data.product_image_link}
+                    <span>*</span> Current Link: {food.data.product_image_link}
                 </p>
                 <input class="pText input is-rounded" type="text" bind:value={newProduct.product_image_link}/>
             </div>
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    Current Description: {food.data.product_description}
+                    <span>*</span> Current Description: {food.data.product_description}
                 </p>
                 <textarea class="pText input tall-textarea" bind:value={newProduct.product_description}></textarea>
             </div>
@@ -174,9 +174,9 @@
             <div class="column is-12 has-text-centered">
                 <div class="field">
                     {#if food.data.product_is_active}
-                        <div class="pText has-text-centered">Product Currently Active</div>
+                        <div class="pText has-text-centered"><span>*</span> Product Currently Active</div>
                     {:else}
-                        <div class="pText has-text-centered">Product Currently Inactive</div>
+                        <div class="pText has-text-centered"><span>*</span> Product Currently Inactive</div>
                     {/if}
                     <input id="switchLarge switchColorDefault switchRoundedDefault"
                            type="checkbox"
@@ -223,6 +223,10 @@
     .tall-textarea {
         height: 18rem;
         border-radius: 20px;
+    }
+
+    span {
+        color: red
     }
 </style>
 

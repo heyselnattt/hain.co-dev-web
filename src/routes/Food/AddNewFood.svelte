@@ -83,20 +83,20 @@
 
     <div class="columns pt-5 is-multiline">
         <FieldWithoutValue
-            name="Name"
+            name="* Name"
             type='text'
             bind:value={product.product_name}/>
         <FieldWithoutValue
-            name="Price"
+            name="* Price"
             type='number'
             bind:value={product.product_price}/>
         <FieldWithoutValue
-            name="Stock"
+            name="* Stock"
             type='number'
             bind:value={product.product_stock}/>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
-                Product Type
+                <span>*</span> Product Type
             </p>
             <select bind:value={product.product_type} class="pText input is-rounded">
                 {#each foodTypes as food}
@@ -107,16 +107,16 @@
             </select>
         </div>
         <FieldWithoutValue
-            name="Product Description"
+            name="* Product Description"
             type='textarea'
             bind:value={product.product_description}/>
         <FieldWithoutValue
-            name="Product Code"
+            name="* Product Code"
             type='text'
             bind:value={product.product_code}/>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
-                Food Image Link
+                <span>*</span> Food Image Link
             </p>
             <input class="pText input is-rounded" type="text" bind:value={product.product_image_link} required/>
         </div>
@@ -138,9 +138,9 @@
                    class="switch is-large is-link is-rounded"
                    bind:checked={product.product_is_active}>
             {#if product.product_is_active}
-                <label for="switchLarge switchColorDefault switchRoundedDefault">Active</label>
+                <label for="switchLarge switchColorDefault switchRoundedDefault"> <span>*</span> Active</label>
             {:else}
-                <label for="switchLarge switchColorDefault switchRoundedDefault">Inactive</label>
+                <label for="switchLarge switchColorDefault switchRoundedDefault"> <span>*</span> Inactive</label>
             {/if}
         </div>
     </div>

@@ -51,7 +51,7 @@
         <div class="column is-12"></div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
-                First Name
+                <span>*</span> First Name
             </p>
             <input class="pText input is-rounded" type="text" bind:value={customer.customer_first_name} required/>
         </div>
@@ -64,25 +64,25 @@
         <div class="column is-12"></div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
-                Last Name
+                <span>*</span> Last Name
             </p>
             <input class="pText input is-rounded" type="text" bind:value={customer.customer_last_name} required/>
         </div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
-                Email Address
+                <span>*</span> Email Address
             </p>
             <input class="pText input is-rounded" type="email" bind:value={customer.customer_email} required/>
         </div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
-                Contact Number
+                <span>*</span> Contact Number
             </p>
             <input class="pText input is-rounded" type="text" bind:value={customer.customer_contact_number} required/>
         </div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
-                Password
+                <span>*</span> Password
             </p>
             <input class="pText input is-rounded" type="password" bind:value={customer.customer_password} required/>
         </div>
@@ -97,11 +97,12 @@
                    class="switch is-large is-link is-rounded"
                    bind:checked={customer.customer_is_active}>
             {#if customer.customer_is_active}
-                <label for="switchLarge switchColorDefault switchRoundedDefault">Active</label>
+                <label for="switchLarge switchColorDefault switchRoundedDefault"><span>*</span> Active</label>
             {:else}
-                <label for="switchLarge switchColorDefault switchRoundedDefault">Inactive</label>
+                <label for="switchLarge switchColorDefault switchRoundedDefault"><span>*</span> Inactive</label>
             {/if}
         </div>
+        <div class="column is-12"></div>
     </div>
 
     <!-- Add record button -->
@@ -122,5 +123,9 @@
     .btn-txt {
         font-size: 20px;
         font-family: 'Karla', sans-serif;
+    }
+
+    span {
+        color: red;
     }
 </style>
