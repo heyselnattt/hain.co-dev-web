@@ -41,7 +41,8 @@
 
     const updateCustomerToDatabase = async () => {
         try {
-            console.log(newCustomer)
+            if(isNaN(newCustomer.customer_middle_name))
+                newCustomer.customer_middle_name = 'N/A'
             let response = await axios.put(`/customer/update_customer/${oldEmail}`, newCustomer)
             console.log(response)
             await goto('../Customers');
@@ -77,7 +78,7 @@
 
     <div class="columns pt-5 is-multiline">
         <div class="column is-12">
-            <div class="has-text-centered pText">Make sure to fill up all information boxes</div>
+            <div class="has-text-centered pText">Make sure to fill up all required information boxes</div>
         </div>
         {#await customer}
             Waiting data
