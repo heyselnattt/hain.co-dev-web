@@ -41,7 +41,8 @@
 
     const updateCustomerToDatabase = async () => {
         try {
-            console.log(newCustomer)
+            if(isNaN(newCustomer.customer_middle_name))
+                newCustomer.customer_middle_name = 'N/A'
             let response = await axios.put(`/customer/update_customer/${oldEmail}`, newCustomer)
             console.log(response)
             await goto('../Customers');
@@ -77,14 +78,14 @@
 
     <div class="columns pt-5 is-multiline">
         <div class="column is-12">
-            <div class="has-text-centered pText">Make sure to fill up all information boxes</div>
+            <div class="has-text-centered pText">Make sure to fill up all required information boxes</div>
         </div>
         {#await customer}
             Waiting data
         {:then customer}
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    Current First Name: {customer.data.customer_first_name}
+                    <span>*</span> Current First Name: {customer.data.customer_first_name}
                 </p>
                 <input class="pText input is-rounded" type="text" bind:value={newCustomer.customer_first_name}/>
             </div>
@@ -96,26 +97,26 @@
             </div>
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    Current Last Name: {customer.data.customer_last_name}
+                    <span>*</span> Current Last Name: {customer.data.customer_last_name}
                 </p>
                 <input class="pText input is-rounded" type="text" bind:value={newCustomer.customer_last_name}/>
             </div>
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    Current Email: {customer.data.customer_email}
+                    <span>*</span> Current Email: {customer.data.customer_email}
                 </p>
                 <input class="pText input is-rounded" type="text" bind:value={newCustomer.customer_email}/>
             </div>
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    Current Contact Number: {customer.data.customer_contact_number}
+                    <span>*</span> Current Contact Number: {customer.data.customer_contact_number}
                 </p>
                 <input class="pText input is-rounded" type="text" bind:value={newCustomer.customer_contact_number}/>
             </div>
 
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    Current Password: {customer.data.customer_password}
+                    <span>*</span> Current Password: {customer.data.customer_password}
                 </p>
                 <input class="pText input is-rounded" type="password" bind:value={newCustomer.customer_password}/>
             </div>
@@ -129,9 +130,9 @@
                 {:then customer}
                     <div class="field">
                         {#if customer.data.customer_is_active}
-                            <div class="pText has-text-centered">Customer Currently Active</div>
+                            <div class="pText has-text-centered"> <span>*</span> Customer Currently Active</div>
                         {:else}
-                            <div class="pText has-text-centered">Customer Currently Inactive</div>
+                            <div class="pText has-text-centered"> <span>*</span> Customer Currently Inactive</div>
                         {/if}
                         <input id="switchLarge switchColorDefault switchRoundedDefault"
                                type="checkbox"
@@ -166,5 +167,9 @@
     .btn-txt {
         font-size: 20px;
         font-family: 'Karla', sans-serif;
+    }
+
+    span {
+        color: red;
     }
 </style>

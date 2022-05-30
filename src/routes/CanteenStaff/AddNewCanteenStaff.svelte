@@ -59,25 +59,25 @@
         <div class="column is-12"></div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
-                Full Name
+                <span>*</span> Full Name
             </p>
             <input class="pText input is-rounded" type="text" bind:value={staff.staff_full_name} required/>
         </div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
-                Contact No.
+                <span>*</span> Contact No.
             </p>
             <input class="pText input is-rounded" type="text" bind:value={staff.staff_contact_number} required/>
         </div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
-                Username
+                <span>*</span> Username
             </p>
             <input class="pText input is-rounded" type="text" bind:value={staff.staff_username} required/>
         </div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
-                Position
+                <span>*</span> Position
             </p>
             <select bind:value={staff.staff_position} class="pText input is-rounded">
                 {#each positions as pos}
@@ -89,13 +89,13 @@
         </div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
-                Address
+                <span>*</span> Address
             </p>
             <input class="pText input is-rounded" type="text" bind:value={staff.staff_address} required/>
         </div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
-                Password
+                <span>*</span> Password
             </p>
             <input class="pText input is-rounded" type="password" bind:value={staff.staff_password} required/>
         </div>
@@ -111,11 +111,12 @@
                    class="switch is-large is-link is-rounded"
                    bind:checked={staff.staff_is_active}>
             {#if staff.staff_is_active}
-                <label for="switchLarge switchColorDefault switchRoundedDefault">Active</label>
+                <label for="switchLarge switchColorDefault switchRoundedDefault"> <span>*</span> Active</label>
             {:else}
-                <label for="switchLarge switchColorDefault switchRoundedDefault">Inactive</label>
+                <label for="switchLarge switchColorDefault switchRoundedDefault"> <span>*</span> Inactive</label>
             {/if}
         </div>
+        <div class="column is-12"></div>
     </div>
 
     <!-- Add record button -->
@@ -136,5 +137,9 @@
     .btn-txt {
         font-size: 20px;
         font-family: 'Karla', sans-serif;
+    }
+
+    span {
+        color: red;
     }
 </style>

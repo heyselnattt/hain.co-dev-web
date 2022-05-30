@@ -56,20 +56,20 @@
         <div class="column is-12"></div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
-                Full Name
+                <span>*</span> Full Name
             </p>
             <input class="pText input is-rounded" type="text" bind:value={admin.admin_full_name}/>
         </div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
-                Username
+                <span>*</span> Username
             </p>
             <input class="pText input is-rounded" type="text" bind:value={admin.admin_username}/>
         </div>
         <div class="column is-12"></div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
-                Password
+                <span>*</span> Password
             </p>
             <input class="pText input is-rounded" type="password" bind:value={admin.admin_password}/>
         </div>
@@ -86,9 +86,9 @@
                    class="switch is-large is-link is-rounded"
                    bind:checked={admin.admin_is_active}>
             {#if admin.admin_is_active}
-                <label for="switchLarge switchColorDefault switchRoundedDefault">Active</label>
+                <label for="switchLarge switchColorDefault switchRoundedDefault"> <span>*</span> Active</label>
             {:else}
-                <label for="switchLarge switchColorDefault switchRoundedDefault">Inactive</label>
+                <label for="switchLarge switchColorDefault switchRoundedDefault"> <span>*</span> Inactive</label>
             {/if}
         </div>
     </div>
@@ -113,5 +113,9 @@
     .btn-txt {
         font-size: 20px;
         font-family: 'Karla', sans-serif;
+    }
+
+    span {
+        color: red;
     }
 </style>

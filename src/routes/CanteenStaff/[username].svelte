@@ -103,13 +103,13 @@
             <!-- TODO switch to bound inputs -->
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    Current Name: {staff.data.staff_full_name}
+                    <span>*</span> Current Name: {staff.data.staff_full_name}
                 </p>
                 <input class="pText input is-rounded" type="text" bind:value={newStaff.staff_full_name}/>
             </div>
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    Current Position: {identifyType(staff.data.staff_position)}
+                    <span>*</span> Current Position: {identifyType(staff.data.staff_position)}
                 </p>
                 <select bind:value={newStaff.staff_position} class="pText input is-rounded">
                     {#each positions as pos}
@@ -121,19 +121,19 @@
             </div>
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    Current Contact Number: {staff.data.staff_contact_number}
+                    <span>*</span> Current Contact Number: {staff.data.staff_contact_number}
                 </p>
                 <input class="pText input is-rounded" type="text" bind:value={newStaff.staff_contact_number}/>
             </div>
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    Current Username: {staff.data.staff_username}
+                    <span>*</span> Current Username: {staff.data.staff_username}
                 </p>
                 <input class="pText input is-rounded" type="text" bind:value={newStaff.staff_username}/>
             </div>
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    Current Password: {staff.data.staff_password}
+                    <span>*</span> Current Password: {staff.data.staff_password}
                 </p>
                 <input class="pText input is-rounded" type="password" bind:value={newStaff.staff_password}/>
             </div>
@@ -147,9 +147,9 @@
                 {:then staff}
                     <div class="field">
                         {#if staff.data.staff_is_active}
-                            <div class="pText has-text-centered">Staff Currently Active</div>
+                            <div class="pText has-text-centered"> <span>*</span> Staff Currently Active</div>
                         {:else}
-                            <div class="pText has-text-centered">Staff Currently Inactive</div>
+                            <div class="pText has-text-centered"> <span>*</span> Staff Currently Inactive</div>
                         {/if}
                         <input id="switchLarge switchColorDefault switchRoundedDefault"
                                type="checkbox"
@@ -185,5 +185,9 @@
     .btn-txt {
         font-size: 20px;
         font-family: 'Karla', sans-serif;
+    }
+
+    span {
+        color: red
     }
 </style>

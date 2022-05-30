@@ -84,19 +84,19 @@
             <!-- TODO: yung is active pa na checkbox ilagay -->
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    Current Name: {admin.data.admin_full_name}
+                    <span>*</span> Current Name: {admin.data.admin_full_name}
                 </p>
                 <input class="pText input is-rounded" type="text" bind:value={newAdmin.admin_full_name}/>
             </div>
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    Current Username: {admin.data.admin_username}
+                    <span>*</span> Current Username: {admin.data.admin_username}
                 </p>
                 <input class="pText input is-rounded" type="text" bind:value={newAdmin.admin_username}/>
             </div>
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    Current Password: {admin.data.admin_password}
+                    <span>*</span> Current Password: {admin.data.admin_password}
                 </p>
                 <input class="pText input is-rounded" type="password" bind:value={newAdmin.admin_password}/>
             </div>
@@ -110,9 +110,9 @@
                 {:then admin}
                     <div class="field">
                         {#if admin.data.admin_is_active}
-                            <div class="pText has-text-centered">Admin Currently Active</div>
+                            <div class="pText has-text-centered"> <span>*</span> Admin Currently Active</div>
                         {:else}
-                            <div class="pText has-text-centered">Admin Currently Inactive</div>
+                            <div class="pText has-text-centered"> <span>*</span> Admin Currently Inactive</div>
                         {/if}
                         <input id="switchLarge switchColorDefault switchRoundedDefault"
                                type="checkbox"
@@ -148,5 +148,9 @@
     .btn-txt {
         font-size: 20px;
         font-family: 'Karla', sans-serif;
+    }
+
+    span {
+        color: red
     }
 </style>
