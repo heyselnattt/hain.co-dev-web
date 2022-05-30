@@ -35,10 +35,10 @@
                 return "Lunch"
 
             case 3:
-                return "Drinks"
+                return "Desserts"
 
             case 4:
-                return "Desserts"
+                return "Extra"
         }
     }
 
