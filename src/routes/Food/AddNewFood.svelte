@@ -37,27 +37,6 @@
 
     let input;
     let container;
-    let image;
-    let placeholder;
-    let showImage = false;
-
-    function onChange() {
-        const file = input.files[0];
-        console.log(input.files);
-        if (file) {
-            showImage = true;
-
-            const reader = new FileReader();
-            reader.addEventListener("load", function () {
-                image.setAttribute("src", reader.result);
-            });
-            reader.readAsDataURL(file);
-            console.log()
-
-            return;
-        }
-        showImage = false;
-    }
 </script>
 
 <svelte:head>
@@ -82,50 +61,63 @@
     </div>
 
     <div class="columns pt-5 is-multiline">
-        <FieldWithoutValue
-            name="* Name"
-            type='text'
-            bind:value={product.product_name}/>
-        <FieldWithoutValue
-            name="* Price"
-            type='number'
-            bind:value={product.product_price}/>
-        <FieldWithoutValue
-            name="* Stock"
-            type='number'
-            bind:value={product.product_stock}/>
+        <div class="column is-3 is-offset-2">
+            <p class="pText has-text-link ml-4 mb-1">
+                <span>*</span> Product Name
+            </p>
+            <input class="pText input is-rounded" type="text" bind:value={product.product_name}/>
+        </div>
+        <div class="column is-3 is-offset-2">
+            <p class="pText has-text-link ml-4 mb-1">
+                <span>*</span> Product Price
+            </p>
+            <input class="pText input is-rounded" type="number" bind:value={product.product_price}/>
+        </div>
+        <div class="column is-3 is-offset-2">
+            <p class="pText has-text-link ml-4 mb-1">
+                <span>*</span> Product Stock
+            </p>
+            <input class="pText input is-rounded" type="number" bind:value={product.product_stock}/>
+        </div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
                 <span>*</span> Product Type
             </p>
             <select bind:value={product.product_type} class="pText input is-rounded">
-                {#each foodTypes as food}
-                    <option value={food.value}>
-                        {food.type}
+                {#each foodTypes as pos}
+                    <option value={pos.value}>
+                        {pos.position}
                     </option>
                 {/each}
             </select>
         </div>
-        <FieldWithoutValue
-            name="* Product Description"
-            type='textarea'
-            bind:value={product.product_description}/>
-        <FieldWithoutValue
-            name="* Product Code"
-            type='text'
-            bind:value={product.product_code}/>
+        <!-- TODO make sure unique -->
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
-                <span>*</span> Food Image Link
+                <span>*</span> Product Code
             </p>
-            <input class="pText input is-rounded" type="text" bind:value={product.product_image_link} required/>
+            <input class="pText input is-rounded" type="text" bind:value={product.product_code}/>
         </div>
-
+        <div class="column is-3 is-offset-2">
+            <p class="pText has-text-link ml-4 mb-1">
+                <span>*</span> Product Image Link
+            </p>
+            <input class="pText input is-rounded" type="text" bind:value={product.product_image_link}/>
+        </div>
+        <div class="column is-3 is-offset-2">
+            <p class="pText has-text-link ml-4 mb-1">
+                <span>*</span> Product Description
+            </p>
+            <textarea class="pText input tall-textarea" bind:value={product.product_description}></textarea>
+        </div>
         <div class="column is-3 is-offset-2">
             <div class="pText has-text-link ml-4 mb-1">
                 <p>Image Preview</p>
-                <figure class="avatar mt-2">
-                    <img src="{product.product_image_link}" alt=""/>
+                <figure class="mt-4 avatar food-image">
+                    {#if isNaN(product.product_image_link)}
+                        <img src="{product.product_image_link}" alt=""
+                             style="border-radius: 20px; border: hsl(223, 85%, 41%)  5px double"/>
+                    {/if}
                 </figure>
             </div>
         </div>
@@ -164,9 +156,24 @@
         font-size: 20px;
     }
 
-    img {
+    .avatar {
         display: flex;
-        max-height: 300px;
-        margin-bottom: 1.5rem;
+        aspect-ratio: 4 / 5 auto;
+        max-width: 250px;
+        margin-top: 1.5rem;
+    }
+
+    .btn-txt {
+        font-size: 20px;
+        font-family: 'Karla', sans-serif;
+    }
+
+    .tall-textarea {
+        height: 18rem;
+        border-radius: 20px;
+    }
+
+    span {
+        color: red
     }
 </style>
