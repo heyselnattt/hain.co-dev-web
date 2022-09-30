@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Karla:wght@600&display=swap" rel="stylesheet"/>
 </svelte:head>
 
-<div class="column is-2 mx-5">
+<div class="column is-3 mx-5">
     <a href={link}>
         <div class="card">
             <div class="card-image is-flex is-justify-content-center pt-4">
