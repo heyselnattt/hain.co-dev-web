@@ -44,12 +44,11 @@
             {#await $customers}
                 <TableLoadingScreen/>
             {:then customer}
-
                 {#each customer.data as info}
                     <!--TODO add property for the link for the individual product-->
                     <CustomersTableRow
                         num={counter()}
-                        name={`${info.customer_first_name} ${info.customer_middle_name} ${info.customer_last_name}`}
+                        name={`${info.customer_first_name} ${info.customer_last_name}`}
                         contactNum={info.customer_contact_number}
                         email={info.customer_email}
                         link={`/Customers/${info.customer_email}`}/>

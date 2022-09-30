@@ -15,7 +15,7 @@
 <div class="container">
     <div class="columns  pt-5 is-multiline has-text-centered">
         <div class="column is-4">
-                <ButtonBack link="../Customers"/>
+            <ButtonBack link="../Customers"/>
         </div>
         <div class="column is-4">
             <p class="text has-text-link">

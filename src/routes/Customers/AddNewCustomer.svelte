@@ -7,7 +7,6 @@
 
     let customer = {
         customer_first_name: null,
-        customer_middle_name: null,
         customer_last_name: null,
         customer_password: null,
         customer_email: null,
@@ -55,13 +54,6 @@
             </p>
             <input class="pText input is-rounded" type="text" bind:value={customer.customer_first_name} required/>
         </div>
-        <div class="column is-3 is-offset-2">
-            <p class="pText has-text-link ml-4 mb-1">
-                Middle Name
-            </p>
-            <input class="pText input is-rounded" type="text" bind:value={customer.customer_middle_name}/>
-        </div>
-        <div class="column is-12"></div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
                 <span>*</span> Last Name
