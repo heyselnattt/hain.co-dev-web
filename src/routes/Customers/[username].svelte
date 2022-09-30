@@ -1,7 +1,7 @@
 <script context="module">
     import axios from "$lib/api/index"
 
-    export async function load({fetch, params}) {
+    export async function load({params}) {
         try {
             const emailAddress = params.username;
             const customer = await axios.get(`/customer/${emailAddress}`);
@@ -31,7 +31,7 @@
 
     let newCustomer = {
         customer_first_name: null,
-        customer_middle_name: null,
+        //customer_middle_name: null,
         customer_last_name: null,
         customer_password: null,
         customer_email: null,
@@ -41,8 +41,6 @@
 
     const updateCustomerToDatabase = async () => {
         try {
-            if(isNaN(newCustomer.customer_middle_name))
-                newCustomer.customer_middle_name = 'N/A'
             let response = await axios.put(`/customer/update_customer/${oldEmail}`, newCustomer)
             console.log(response)
             await goto('../Customers');
@@ -88,12 +86,6 @@
                     <span>*</span> Current First Name: {customer.data.customer_first_name}
                 </p>
                 <input class="pText input is-rounded" type="text" bind:value={newCustomer.customer_first_name}/>
-            </div>
-            <div class="column is-3 is-offset-2">
-                <p class="pText has-text-link ml-4 mb-1">
-                    Current Middle Name: {customer.data.customer_middle_name}
-                </p>
-                <input class="pText input is-rounded" type="text" bind:value={newCustomer.customer_middle_name}/>
             </div>
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
