@@ -14,7 +14,7 @@
         <th>{productCode}</th>
         <th>{customerEmail}</th>
         <th>{orderRequest}</th>
-        <th>{orderDate}</th>
+        <th>{new Date(orderDate).toLocaleDateString()}</th>
         <th>{staffUsername}</th>
         <th>{orderStatus}</th>
     </tr>
