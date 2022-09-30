@@ -1,7 +1,7 @@
 <script context="module">
     import axios from "$lib/api/index"
 
-    export async function load({fetch, params}) {
+    export async function load({params}) {
         try {
             const productCode = params.code;
             const product = await axios.get(`/product/${productCode}`);
@@ -57,10 +57,10 @@
     }
 
     let types = [
-        {value: 1, position: "BREAKFAST"},
-        {value: 2, position: "LUNCH"},
-        {value: 3, position: "DESSERT"},
-        {value: 4, position: "EXTRA"}
+        {value: 1, type: "BREAKFAST"},
+        {value: 2, type: "LUNCH"},
+        {value: 3, type: "DESSERT"},
+        {value: 4, type: "EXTRA"}
     ]
 
     const updateProductToDatabase = async () => {
@@ -134,7 +134,7 @@
                 <select bind:value={newProduct.product_type} class="pText input is-rounded">
                     {#each types as pos}
                         <option value={pos.value}>
-                            {pos.position}
+                            {pos.type}
                         </option>
                     {/each}
                 </select>
