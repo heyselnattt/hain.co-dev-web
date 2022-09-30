@@ -24,6 +24,7 @@
   "type": "module",
   "dependencies": {
     "axios": "^0.26.1",
-    "bulma-switch": "^2.0.4"
+    "bulma-switch": "^2.0.4",
+    "moment": "^2.29.4"
   }
 }
