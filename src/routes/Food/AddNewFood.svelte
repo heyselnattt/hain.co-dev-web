@@ -18,7 +18,7 @@
         product_code: null
     }
 
-    let foodTypes = [
+    let types = [
         {value: 1, type: "BREAKFAST"},
         {value: 2, type: "LUNCH"},
         {value: 3, type: "DESSERT"},
@@ -84,9 +84,9 @@
                 <span>*</span> Product Type
             </p>
             <select bind:value={product.product_type} class="pText input is-rounded">
-                {#each foodTypes as pos}
+                {#each types as pos}
                     <option value={pos.value}>
-                        {pos.position}
+                        {pos.type}
                     </option>
                 {/each}
             </select>
