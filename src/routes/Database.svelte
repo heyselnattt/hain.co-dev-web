@@ -19,7 +19,10 @@
         Database
     </p>
 
-    <div class="columns is-0 mt-3">
+    <div class="columns is-0 mt-3 is-centered">
+        {#await $row_count}
+            <FixedLoadingScreen/>
+        {:then row_count}
         <div class="column is-4 card p-3">
             <div class="is-align-items-center w-100p h-100p is-flex is-flex-direction-column">
                 <!-- revenue -->
@@ -50,9 +53,6 @@
         </div>
         <div class="column is-8 p-0">
             <div class="columns is-centered is-multiline">
-                {#await $row_count}
-                    <FixedLoadingScreen/>
-                {:then row_count}
                     <Card name="Customers"
                           entries={row_count['data'][1]['rows']}
                           sub="customers"
@@ -83,15 +83,15 @@
                           sub="entries"
                           imagePath="images/transactionIcon.png"
                           link="Transaction"/>
-                {:catch error}
-                    <p>{error}</p>
-                {/await}
         
                 <!-- {#each Array(100) as a}
                 <Card name="{a}" sub="{a}-sub" link="/"/>
                 {/each} -->
             </div>
         </div>
+        {:catch error}
+            <p>{error}</p>
+        {/await}
     </div>
 </div>
 
