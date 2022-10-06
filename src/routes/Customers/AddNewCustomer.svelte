@@ -23,6 +23,8 @@
             console.log(e);
         }
     }
+
+    let pattern = "([a-zA-z0-9!@#$%^&*(),.;'\\_\\\\]{6,})"
 </script>
 
 <svelte:head>
@@ -76,7 +78,7 @@
             <p class="pText has-text-link ml-4 mb-1">
                 <span>*</span> Password
             </p>
-            <input class="pText input is-rounded" type="password" bind:value={customer.customer_password} required/>
+            <input class="pText input is-rounded" type="password" pattern="{pattern}" title="6 or more characters" bind:value={customer.customer_password} required/>
         </div>
         <div class="column is-12"></div>
     </div>
@@ -99,7 +101,7 @@
 
     <!-- Add record button -->
     <div class="mb- has-text-centered">
-        <button class="btn-txt button is-link is-rounded" on:click={addCustomerToDatabase}>Add Customer</button>
+        <button class="btn-txt button is-link is-rounded" type="submit" on:click={() => console.log("Helow")}>Add Customer</button>
     </div>
 </div>
 

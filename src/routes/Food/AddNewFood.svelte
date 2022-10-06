@@ -1,22 +1,22 @@
 <script>
     import Discard from "$lib/components/buttons/Discard.svelte";
-    import FieldWithoutValue from "$lib/components/otherComponents/FieldWithoutValue.svelte";
     import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
-    import ButtonAddRecord from "$lib/components/buttons/ButtonAddRecord.svelte";
     import axios from "$lib/api/index";
     import {goto} from "$app/navigation";
+    import uploadImageToAPI from "../../lib/helper/uploadImageToAPI.js";
 
     let product = {
-        product_name: null,
-        product_price: null,
-        product_image_link: null,
-        product_stock: null,
-        product_description: null,
-        product_type: null,
-        product_is_active: true,
-        product_code: null
+        productCode: "",
+        productName: "",
+        productDescription: "",
+        productPrice: 0,
+        productIsActive: true,
+        productImage: "",
+        productType: 1
     }
+
+    let selectedImage;
 
     let types = [
         {value: 1, type: "BREAKFAST"},
@@ -27,12 +27,20 @@
 
     const addProductToDatabase = async () => {
         try {
-            let response = await axios.post('/product/new_product', product)
+            product.productImage = await uploadImageToAPI(selectedImage);
+            console.log(product.productImage);
+            let response = await axios.post('/product/createProduct', product)
             console.log(response)
+            alert("Product Added Successfully")
             await goto("../Food")
         } catch (e) {
             console.log(e)
         }
+    }
+
+    function onImageSelect(e) {
+        selectedImage = e.target.files[0]
+        console.log(selectedImage)
     }
 
     let input;
@@ -65,25 +73,19 @@
             <p class="pText has-text-link ml-4 mb-1">
                 <span>*</span> Product Name
             </p>
-            <input class="pText input is-rounded" type="text" bind:value={product.product_name}/>
+            <input class="pText input is-rounded" type="text" bind:value={product.productName}/>
         </div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
                 <span>*</span> Product Price
             </p>
-            <input class="pText input is-rounded" type="number" bind:value={product.product_price}/>
-        </div>
-        <div class="column is-3 is-offset-2">
-            <p class="pText has-text-link ml-4 mb-1">
-                <span>*</span> Product Stock
-            </p>
-            <input class="pText input is-rounded" type="number" bind:value={product.product_stock}/>
+            <input class="pText input is-rounded" type="number" bind:value={product.productPrice}/>
         </div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
                 <span>*</span> Product Type
             </p>
-            <select bind:value={product.product_type} class="pText input is-rounded">
+            <select bind:value={product.productType} class="pText input is-rounded">
                 {#each types as pos}
                     <option value={pos.value}>
                         {pos.type}
@@ -96,30 +98,22 @@
             <p class="pText has-text-link ml-4 mb-1">
                 <span>*</span> Product Code
             </p>
-            <input class="pText input is-rounded" type="text" bind:value={product.product_code}/>
-        </div>
-        <div class="column is-3 is-offset-2">
-            <p class="pText has-text-link ml-4 mb-1">
-                <span>*</span> Product Image Link
-            </p>
-            <input class="pText input is-rounded" type="text" bind:value={product.product_image_link}/>
+            <input class="pText input is-rounded" type="text" bind:value={product.productCode}/>
         </div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
                 <span>*</span> Product Description
             </p>
-            <textarea class="pText input tall-textarea" bind:value={product.product_description}></textarea>
+            <textarea class="pText input tall-textarea" bind:value={product.productDescription}></textarea>
         </div>
         <div class="column is-3 is-offset-2">
-            <div class="pText has-text-link ml-4 mb-1">
-                <p>Image Preview</p>
-                <figure class="mt-4 avatar food-image">
-                    {#if isNaN(product.product_image_link)}
-                        <img src="{product.product_image_link}" alt=""
-                             style="border-radius: 20px; border: hsl(223, 85%, 41%)  5px double"/>
-                    {/if}
-                </figure>
-            </div>
+            <p class="pText has-text-link ml-4 mb-1">
+                <span>*</span> Product Image
+            </p>
+            <input class="pText input is-rounded"
+                   type="file"
+                   accept="image/*"
+                   on:change={onImageSelect}/>
         </div>
     </div>
     <div class="has-text-centered">
