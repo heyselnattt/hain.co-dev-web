@@ -70,7 +70,7 @@
             {#await $audits}
                 <TableLoadingScreen/>
             {:then audit}
-                {#each audit.data as info}
+                {#each audit as info}
                     <TransactionTableRow
                         id={counter()}
                         agent={info.transaction_agent}

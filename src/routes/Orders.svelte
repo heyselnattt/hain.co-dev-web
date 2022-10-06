@@ -61,7 +61,7 @@
             {#await $orders}
                 <TableLoadingScreen/>
             {:then order}
-                {#each order.data as info}
+                {#each order as info}
                     <OrdersTableRow
                         productCode={info.order_product_code}
                         customerEmail={info.order_customer_email}

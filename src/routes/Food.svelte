@@ -64,7 +64,7 @@
             {#await $products}
                 <TableLoadingScreen/>
             {:then food}
-                {#each food.data as product}
+                {#each food as product}
                     <FoodTableRow
                         num={counter()}
                         productName={product.product_name}

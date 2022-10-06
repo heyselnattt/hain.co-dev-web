@@ -37,7 +37,7 @@
         {#await $admins}
             <FixedLoadingScreen/>
         {:then admin}
-            {#each admin.data as info}
+            {#each admin as info}
                 <Card
                     name={info.admin_username}
                     sub={info.admin_full_name}

@@ -30,18 +30,17 @@
     export let oldEmail;
 
     let newCustomer = {
-        customer_first_name: null,
-        //customer_middle_name: null,
-        customer_last_name: null,
-        customer_password: null,
-        customer_email: null,
-        customer_contact_number: null,
-        customer_is_active: true
+        customerFirstName: null,
+        customerLastName: null,
+        customerPassword: null,
+        customerEmail: null,
+        customerContactNumber: null,
+        customerIsActive: true
     };
 
     const updateCustomerToDatabase = async () => {
         try {
-            let response = await axios.put(`/customer/update_customer/${oldEmail}`, newCustomer)
+            let response = await axios.put(`/customer/updateCustomer/${oldEmail}`, newCustomer)
             console.log(response)
             await goto('../Customers');
         } catch (e) {
@@ -85,32 +84,32 @@
                 <p class="pText has-text-link ml-4 mb-1">
                     <span>*</span> Current First Name: {customer.data.customer_first_name}
                 </p>
-                <input class="pText input is-rounded" type="text" bind:value={newCustomer.customer_first_name}/>
+                <input class="pText input is-rounded" type="text" bind:value={newCustomer.customerFirstName}/>
             </div>
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
                     <span>*</span> Current Last Name: {customer.data.customer_last_name}
                 </p>
-                <input class="pText input is-rounded" type="text" bind:value={newCustomer.customer_last_name}/>
+                <input class="pText input is-rounded" type="text" bind:value={newCustomer.customerLastName}/>
             </div>
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
                     <span>*</span> Current Email: {customer.data.customer_email}
                 </p>
-                <input class="pText input is-rounded" type="text" bind:value={newCustomer.customer_email}/>
+                <input class="pText input is-rounded" type="text" bind:value={newCustomer.customerEmail}/>
             </div>
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
                     <span>*</span> Current Contact Number: {customer.data.customer_contact_number}
                 </p>
-                <input class="pText input is-rounded" type="text" bind:value={newCustomer.customer_contact_number}/>
+                <input class="pText input is-rounded" type="text" bind:value={newCustomer.customerContactNumber}/>
             </div>
 
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
                     <span>*</span> Current Password: {customer.data.customer_password}
                 </p>
-                <input class="pText input is-rounded" type="password" bind:value={newCustomer.customer_password}/>
+                <input class="pText input is-rounded" type="password" bind:value={newCustomer.customerPassword}/>
             </div>
         {:catch e}
             {e}
@@ -130,8 +129,8 @@
                                type="checkbox"
                                name="switchLarge switchColorDefault switchRoundedDefault"
                                class="switch is-large is-link is-rounded"
-                               bind:checked={newCustomer.customer_is_active}>
-                        {#if newCustomer.customer_is_active}
+                               bind:checked={newCustomer.customerIsActive}>
+                        {#if newCustomer.customerIsActive}
                             <label for="switchLarge switchColorDefault switchRoundedDefault">Active</label>
                         {:else}
                             <label for="switchLarge switchColorDefault switchRoundedDefault">Inactive</label>

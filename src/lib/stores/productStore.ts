@@ -12,7 +12,8 @@ export const products = readable(null, function start(set) {
 
 async function getProducts() {
     try {
-        return await axios.get('/product');
+        const {data} = await axios.get('/product');
+        return data.products;
     } catch (e) {
         console.log(e);
     }

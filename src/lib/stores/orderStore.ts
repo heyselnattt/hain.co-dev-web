@@ -12,7 +12,8 @@ export const orders = readable(null, function start(set) {
 
 async function getOrders() {
     try {
-        return await axios.get('/order');
+        const {data} = await axios.get('/order');
+        return data.orders
     } catch (e) {
         console.log(e);
     }

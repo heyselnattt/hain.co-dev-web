@@ -12,7 +12,8 @@ export const admins = readable(null, function start(set) {
 
 async function getAdmin() {
     try {
-        return await axios.get('/admin');
+        const {data} = await axios.get('/admin');
+        return data.admins
     } catch (e) {
         console.log(e);
     }

@@ -35,8 +35,8 @@
             <thead>
                 <tr>
                     <th>No.</th>
-                    <th>Name</th>
-                    <th>Contact No.</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
                     <th>Email</th>
                     <th></th>
                 </tr>
@@ -44,12 +44,12 @@
             {#await $customers}
                 <TableLoadingScreen/>
             {:then customer}
-                {#each customer.data as info}
+                {#each customer as info}
                     <!--TODO add property for the link for the individual product-->
                     <CustomersTableRow
                         num={counter()}
-                        name={`${info.customer_first_name} ${info.customer_last_name}`}
-                        contactNum={info.customer_contact_number}
+                        name={info.customer_first_name}
+                        customerLastName={info.customer_last_name}
                         email={info.customer_email}
                         link={`/Customers/${info.customer_email}`}/>
                 {/each}

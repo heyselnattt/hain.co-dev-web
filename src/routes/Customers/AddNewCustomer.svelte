@@ -6,17 +6,16 @@
     import {goto} from "$app/navigation";
 
     let customer = {
-        customer_first_name: null,
-        customer_last_name: null,
-        customer_password: null,
-        customer_email: null,
-        customer_contact_number: null,
-        customer_is_active: true
+        customerFirstName: null,
+        customerLastName: null,
+        customerPassword: null,
+        customerEmail: null,
+        customerIsActive: true
     };
 
     const addCustomerToDatabase = async () => {
         try {
-            let response = await axios.post('/customer/new_customer', customer);
+            let response = await axios.post('/customer/createCustomer', customer);
             console.log(response);
             await goto("../Customers");
         } catch (e) {
@@ -54,31 +53,25 @@
             <p class="pText has-text-link ml-4 mb-1">
                 <span>*</span> First Name
             </p>
-            <input class="pText input is-rounded" type="text" bind:value={customer.customer_first_name} required/>
+            <input class="pText input is-rounded" type="text" bind:value={customer.customerFirstName} required/>
         </div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
                 <span>*</span> Last Name
             </p>
-            <input class="pText input is-rounded" type="text" bind:value={customer.customer_last_name} required/>
+            <input class="pText input is-rounded" type="text" bind:value={customer.customerLastName} required/>
         </div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
                 <span>*</span> Email Address
             </p>
-            <input class="pText input is-rounded" type="email" bind:value={customer.customer_email} required/>
-        </div>
-        <div class="column is-3 is-offset-2">
-            <p class="pText has-text-link ml-4 mb-1">
-                <span>*</span> Contact Number
-            </p>
-            <input class="pText input is-rounded" type="text" bind:value={customer.customer_contact_number} required/>
+            <input class="pText input is-rounded" type="email" bind:value={customer.customerEmail} required/>
         </div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
                 <span>*</span> Password
             </p>
-            <input class="pText input is-rounded" type="password" pattern="{pattern}" title="6 or more characters" bind:value={customer.customer_password} required/>
+            <input class="pText input is-rounded" type="password" pattern="{pattern}" title="6 or more characters" bind:value={customer.customerPassword} required/>
         </div>
         <div class="column is-12"></div>
     </div>
@@ -89,8 +82,8 @@
                    type="checkbox"
                    name="switchLarge switchColorDefault switchRoundedDefault"
                    class="switch is-large is-link is-rounded"
-                   bind:checked={customer.customer_is_active}>
-            {#if customer.customer_is_active}
+                   bind:checked={customer.customerIsActive}>
+            {#if customer.customerIsActive}
                 <label for="switchLarge switchColorDefault switchRoundedDefault"><span>*</span> Active</label>
             {:else}
                 <label for="switchLarge switchColorDefault switchRoundedDefault"><span>*</span> Inactive</label>
@@ -101,7 +94,7 @@
 
     <!-- Add record button -->
     <div class="mb- has-text-centered">
-        <button class="btn-txt button is-link is-rounded" type="submit" on:click={() => console.log("Helow")}>Add Customer</button>
+        <button class="btn-txt button is-link is-rounded" type="submit" on:click={addCustomerToDatabase}>Add Customer</button>
     </div>
 </div>
 

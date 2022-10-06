@@ -53,14 +53,10 @@
                     <th></th>
                 </tr>
             </thead>
-          
-            <!-- Temporary placeholders:
-                    Position - username
-                    Address - email -->
             {#await $staffs}
                 <TableLoadingScreen/>
             {:then staff}
-                {#each staff.data as info}
+                {#each staff as info}
                     <!--TODO add property for the link for the individual staff
                         TODO add property to access the object
                     -->

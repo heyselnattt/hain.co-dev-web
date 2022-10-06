@@ -19,6 +19,7 @@ async function getRowCounts() {
      */
     try {
         const {data} = await axios.get('/meta/rowCount')
+        console.log(data)
         return data
     } catch (e) {
         console.log(e);
