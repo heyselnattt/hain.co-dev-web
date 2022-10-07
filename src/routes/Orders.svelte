@@ -16,13 +16,13 @@
                 return "Incoming"
 
             case 2:
-                return "Processing"
+                return "Unfulfilled"
 
             case 3:
-                return "Fulfilled"
+                return "Processing"
 
             case 4:
-                return "Unprocessed"
+                return "Fulfilled"
         }
     }
 </script>
