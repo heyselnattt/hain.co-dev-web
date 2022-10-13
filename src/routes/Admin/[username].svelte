@@ -4,8 +4,8 @@
     export async function load({fetch, params}) {
         try {
             const username = params.username;
-            const admin = await axios.get(`/admin/${username}`);
-            const oldUsername = admin.data.admin_username
+            const admin = await axios.get(`/admin/auth/${username}`);
+            const oldUsername = admin.data.adminDetails.admin_username
             console.log(admin)
             return {
                 props: {
@@ -29,6 +29,8 @@
     export let admin;
     export let oldUsername;
 
+    let adminDetails = admin.data.adminDetails;
+
     let newAdmin = {
         admin_full_name: null,
         admin_username: null,
@@ -39,7 +41,7 @@
 
     const updateAdminToDatabase = async () => {
         try {
-            let response = await axios.put(`/admin/update_admin/${oldUsername}`, newAdmin)
+            let response = await axios.put(`/admin/updateAdmin/${oldUsername}`, newAdmin)
             console.log(response)
             await goto('../Admin');
         } catch (e) {
@@ -84,19 +86,19 @@
             <!-- TODO: yung is active pa na checkbox ilagay -->
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    <span>*</span> Current Name: {admin.data.admin_full_name}
+                    <span>*</span> Current Name: {adminDetails.admin_full_name}
                 </p>
                 <input class="pText input is-rounded" type="text" bind:value={newAdmin.admin_full_name}/>
             </div>
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    <span>*</span> Current Username: {admin.data.admin_username}
+                    <span>*</span> Current Username: {adminDetails.admin_username}
                 </p>
                 <input class="pText input is-rounded" type="text" bind:value={newAdmin.admin_username}/>
             </div>
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    <span>*</span> Current Password: {admin.data.admin_password}
+                    <span>*</span> Current Password: {adminDetails.admin_password}
                 </p>
                 <input class="pText input is-rounded" type="password" bind:value={newAdmin.admin_password}/>
             </div>
@@ -109,7 +111,7 @@
                     Waiting data
                 {:then admin}
                     <div class="field">
-                        {#if admin.data.admin_is_active}
+                        {#if adminDetails.admin_is_active}
                             <div class="pText has-text-centered"> <span>*</span> Admin Currently Active</div>
                         {:else}
                             <div class="pText has-text-centered"> <span>*</span> Admin Currently Inactive</div>

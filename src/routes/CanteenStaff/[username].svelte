@@ -4,8 +4,8 @@
     export async function load({fetch, params}) {
         try {
             const username = params.username;
-            const canteenStaff = await axios.get(`/staff/${username}`);
-            const oldUsername = canteenStaff.data.staff_username;
+            const canteenStaff = await axios.get(`/staff/auth/${username}`);
+            const oldUsername = canteenStaff.data.staffDetails.staff_username;
             console.log(canteenStaff)
             return {
                 props: {
@@ -28,6 +28,8 @@
 
     export let canteenStaff;
     export let oldUsername;
+
+    let canteenStaffDetails = canteenStaff.data.staffDetails;
 
     let newStaff = {
         staff_full_name: null,
@@ -59,7 +61,7 @@
 
     const updateStaffToDatabase = async () => {
         try {
-            let response = await axios.put(`/staff/update_staff/${oldUsername}`, newStaff)
+            let response = await axios.put(`/staff/updateStaff/${oldUsername}`, newStaff)
             console.log(response)
             await goto('../CanteenStaff');
         } catch (e) {
@@ -103,13 +105,13 @@
             <!-- TODO switch to bound inputs -->
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    <span>*</span> Current Name: {staff.data.staff_full_name}
+                    <span>*</span> Current Name: {canteenStaffDetails.staff_full_name}
                 </p>
                 <input class="pText input is-rounded" type="text" bind:value={newStaff.staff_full_name}/>
             </div>
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    <span>*</span> Current Position: {identifyType(staff.data.staff_position)}
+                    <span>*</span> Current Position: {identifyType(canteenStaffDetails.staff_position)}
                 </p>
                 <select bind:value={newStaff.staff_position} class="pText input is-rounded">
                     {#each positions as pos}
@@ -121,19 +123,19 @@
             </div>
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    <span>*</span> Current Contact Number: {staff.data.staff_contact_number}
+                    <span>*</span> Current Contact Number: {canteenStaffDetails.staff_contact_number}
                 </p>
                 <input class="pText input is-rounded" type="text" bind:value={newStaff.staff_contact_number}/>
             </div>
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    <span>*</span> Current Username: {staff.data.staff_username}
+                    <span>*</span> Current Username: {canteenStaffDetails.staff_username}
                 </p>
                 <input class="pText input is-rounded" type="text" bind:value={newStaff.staff_username}/>
             </div>
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    <span>*</span> Current Password: {staff.data.staff_password}
+                    <span>*</span> Current Password: {canteenStaffDetails.staff_password}
                 </p>
                 <input class="pText input is-rounded" type="password" bind:value={newStaff.staff_password}/>
             </div>
@@ -146,7 +148,7 @@
                     Waiting data
                 {:then staff}
                     <div class="field">
-                        {#if staff.data.staff_is_active}
+                        {#if canteenStaffDetails.staff_is_active}
                             <div class="pText has-text-centered"> <span>*</span> Staff Currently Active</div>
                         {:else}
                             <div class="pText has-text-centered"> <span>*</span> Staff Currently Inactive</div>

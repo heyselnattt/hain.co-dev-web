@@ -4,8 +4,8 @@
     export async function load({params}) {
         try {
             const emailAddress = params.username;
-            const customer = await axios.get(`/customer/${emailAddress}`);
-            const oldEmail = customer.data.customer_email
+            const customer = await axios.get(`/customer/auth/${emailAddress}`);
+            const oldEmail = customer.data.customerDetails.customer_email
             console.log(customer)
             return {
                 props: {
@@ -29,12 +29,14 @@
     export let customer;
     export let oldEmail;
 
+    let customerDetails = customer.data.customerDetails;
+
     let newCustomer = {
         customerFirstName: null,
         customerLastName: null,
         customerPassword: null,
         customerEmail: null,
-        customerContactNumber: null,
+        // customerContactNumber: null,
         customerIsActive: true
     };
 
@@ -82,32 +84,32 @@
         {:then customer}
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    <span>*</span> Current First Name: {customer.data.customer_first_name}
+                    <span>*</span> Current First Name: {customerDetails.customer_first_name}
                 </p>
                 <input class="pText input is-rounded" type="text" bind:value={newCustomer.customerFirstName}/>
             </div>
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    <span>*</span> Current Last Name: {customer.data.customer_last_name}
+                    <span>*</span> Current Last Name: {customerDetails.customer_last_name}
                 </p>
                 <input class="pText input is-rounded" type="text" bind:value={newCustomer.customerLastName}/>
             </div>
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    <span>*</span> Current Email: {customer.data.customer_email}
+                    <span>*</span> Current Email: {customerDetails.customer_email}
                 </p>
                 <input class="pText input is-rounded" type="text" bind:value={newCustomer.customerEmail}/>
             </div>
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    <span>*</span> Current Contact Number: {customer.data.customer_contact_number}
+                    <span>*</span> Current Contact Number: {customerDetails.customer_contact_number}
                 </p>
                 <input class="pText input is-rounded" type="text" bind:value={newCustomer.customerContactNumber}/>
             </div>
 
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    <span>*</span> Current Password: {customer.data.customer_password}
+                    <span>*</span> Current Password: {customerDetails.customer_password}
                 </p>
                 <input class="pText input is-rounded" type="password" bind:value={newCustomer.customerPassword}/>
             </div>
@@ -120,7 +122,7 @@
                     Waiting data
                 {:then customer}
                     <div class="field">
-                        {#if customer.data.customer_is_active}
+                        {#if customerDetails.customer_is_active}
                             <div class="pText has-text-centered"> <span>*</span> Customer Currently Active</div>
                         {:else}
                             <div class="pText has-text-centered"> <span>*</span> Customer Currently Inactive</div>
