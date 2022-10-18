@@ -5,8 +5,7 @@
     import LogoutNavbar from "$lib/components/navbars/LogoutNavbar.svelte";
     import FixedLoadingScreen from "$lib/components/otherComponents/FixedLoadingScreen.svelte";
 
-    export let todayAmount = 5000;
-    export let thisWeekAmount = 8550;
+
 </script>
 
 <svelte:head>

@@ -50,6 +50,7 @@
                         </p>
                         <input class="input is-rounded mx-6 mb-3"
                                type="text"
+                               required
                                placeholder="ID Number"
                                bind:value={username}/>
                         <p class="text has-text-link ml-6 mb-2 pl-3">
@@ -57,6 +58,9 @@
                         </p>
                         <input class="input is-rounded mx-6"
                                type="password"
+                               title="Must be atleast 8 characters"
+                               pattern="[a-zA-Z0-9]{8,}"
+                               required
                                placeholder="Password"
                                bind:value={password}/>
                     </div>
