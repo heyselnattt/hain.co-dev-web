@@ -76,7 +76,7 @@
                         orderRequest={info.order_requests}
                         orderDate={info.order_date}
                         staffUsername={info.order_staff_username}
-                        orderStatus={identifyType(info.order_status)}
+                        orderStatus={info.order_status}
                         orderNumber={info.order_number}/>
                 {/each}
             {:catch err}
