@@ -1,5 +1,4 @@
 <script lang="ts">
-
     import NavbarWithSearch from "$lib/components/navbars/NavbarWithSearch.svelte";
     import CustomersTableRow from "$lib/components/tableRows/CustomersTableRow.svelte";
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";

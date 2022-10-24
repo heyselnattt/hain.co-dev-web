@@ -5,7 +5,6 @@
     import LogoutNavbar from "$lib/components/navbars/LogoutNavbar.svelte";
     import FixedLoadingScreen from "$lib/components/otherComponents/FixedLoadingScreen.svelte";
 
-
 </script>
 
 <svelte:head>

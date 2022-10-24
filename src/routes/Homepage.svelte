@@ -1,8 +1,32 @@
 <script lang="ts">
     import HomeNavbar from "$lib/components/navbars/HomeNavbar.svelte";
+    import axios from "axios";
+    import {onMount} from "svelte";
+    import {goto} from "$app/navigation";
 
-    let username: string
-    let password: string
+    let userInfo = {
+        username: "",
+        password: ""
+    }
+
+    onMount(async () => {
+        if (localStorage.getItem("admin")) {
+            await goto("/Database")
+        }
+    })
+    const addToLocalStorage = async () => {
+        try {
+            const {data} = await axios.get(`http://localhost:8080/api/admin/auth/${userInfo.username}`);
+            const adminInfo = data.adminDetails;
+            console.log(adminInfo);
+            if (adminInfo.admin_password === userInfo.password) {
+                localStorage.setItem("admin", JSON.stringify(userInfo));
+                await goto("/Database");
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
 </script>
 
 <svelte:head>
@@ -52,23 +76,19 @@
                                type="text"
                                required
                                placeholder="ID Number"
-                               bind:value={username}/>
+                               bind:value={userInfo.username}/>
                         <p class="text has-text-link ml-6 mb-2 pl-3">
                             Password
                         </p>
                         <input class="input is-rounded mx-6"
                                type="password"
-                               title="Must be atleast 8 characters"
-                               pattern="[a-zA-Z0-9]{8,}"
                                required
                                placeholder="Password"
-                               bind:value={password}/>
+                               bind:value={userInfo.password}/>
                     </div>
                 </section>
                 <!-- TODO add the session for logging in -->
-                <a href="Database">
-                    <button class="button is-link is-rounded mt-5">Login</button>
-                </a>
+                <button class="button is-link is-rounded mt-5" on:click={addToLocalStorage}>Login</button>
             </div>
         </div>
     </div>

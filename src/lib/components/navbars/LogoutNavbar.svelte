@@ -1,5 +1,11 @@
-<!-- TODO add logout logic -->
+<script>
+    import {goto} from "$app/navigation";
 
+    const logout = async () => {
+        localStorage.removeItem("admin")
+        await goto("/")
+    }
+</script>
 <svelte:head>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"/>
     <link href="https://fonts.googleapis.com/css2?family=Karla:wght@600&display=swap" rel="stylesheet"/>
@@ -13,9 +19,9 @@
     </div>
     <div class="navbar-end mr-6 buttons">
         <div class="navbar-item">
-            <a class="text button has-text-link" href="Homepage">
+            <button class="text button has-text-link" on:click={logout}>
                 Logout
-            </a>
+            </button>
         </div>
     </div>
 </nav>
