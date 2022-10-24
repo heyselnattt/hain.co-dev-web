@@ -5,6 +5,14 @@
     import CanteenStaffTableRow from "$lib/components/tableRows/CanteenStaffTableRow.svelte";
     import {staffs} from "$lib/stores/staffStore";
     import TableLoadingScreen from "$lib/components/otherComponents/TableLoadingScreen.svelte";
+    import {onMount} from "svelte";
+    import {goto} from "$app/navigation";
+
+    onMount(async () => {
+        if (!localStorage.getItem("admin")) {
+            await goto("/");
+        }
+    })
 
     let staffNumber = 1;
     const counter = (): number => {

@@ -4,6 +4,14 @@
     import TransactionTableRow from "$lib/components/tableRows/TransactionTableRow.svelte";
     import {audits} from "$lib/stores/transactionStore";
     import TableLoadingScreen from "$lib/components/otherComponents/TableLoadingScreen.svelte";
+    import {onMount} from "svelte";
+    import {goto} from "$app/navigation";
+
+    onMount(async () => {
+        if (!localStorage.getItem("admin")) {
+            await goto("/");
+        }
+    })
 
     const binderLink = "http://localhost:8888/lab/tree/reports.ipynb"
 

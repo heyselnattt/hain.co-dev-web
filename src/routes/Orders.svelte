@@ -4,6 +4,14 @@
     import OrdersTableRow from "$lib/components/tableRows/OrdersTableRow.svelte";
     import TableLoadingScreen from "$lib/components/otherComponents/TableLoadingScreen.svelte"
     import {orders} from "$lib/stores/orderStore";
+    import {onMount} from "svelte";
+    import {goto} from "$app/navigation";
+
+    onMount(async () => {
+        if (!localStorage.getItem("admin")) {
+            await goto("/");
+        }
+    })
 
     let orderNumber = 1;
     const counter = (): number => {

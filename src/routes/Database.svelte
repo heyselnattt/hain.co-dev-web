@@ -4,7 +4,14 @@
     import Card from "$lib/components/otherComponents/Card.svelte";
     import LogoutNavbar from "$lib/components/navbars/LogoutNavbar.svelte";
     import FixedLoadingScreen from "$lib/components/otherComponents/FixedLoadingScreen.svelte";
+    import {goto} from "$app/navigation";
+    import {onMount} from "svelte";
 
+    onMount(async () => {
+        if (!localStorage.getItem("admin")) {
+            await goto("/");
+        }
+    })
 </script>
 
 <svelte:head>

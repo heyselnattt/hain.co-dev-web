@@ -5,6 +5,14 @@
     import ButtonAddRecord from "$lib/components/buttons/ButtonAddRecord.svelte";
     import {customers} from "$lib/stores/customerStores";
     import TableLoadingScreen from "$lib/components/otherComponents/TableLoadingScreen.svelte";
+    import {onMount} from "svelte";
+    import {goto} from "$app/navigation";
+
+    onMount(async () => {
+        if (!localStorage.getItem("admin")) {
+            await goto("/");
+        }
+    })
 
     let itemNumber = 1;
     const counter = (): number => {
