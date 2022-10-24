@@ -51,7 +51,6 @@
         <th>{orderRequest}</th>
         <th>{new Date(orderDate).toLocaleDateString()}</th>
         <th>{staffUsername}</th>
-        <th>{orderStatus}</th>
         <td>
             <div class="select is-small">
                 <select bind:value={newStatus}
