@@ -5,8 +5,6 @@
     import axios from "$lib/api";
     import {goto} from "$app/navigation";
 
-    export let value;
-    export let name;
     let staff = {
         staff_full_name: null,
         staff_contact_number: null,
@@ -102,23 +100,6 @@
         <div class="column is-12"></div>
         <div class="column is-12"></div>
     </div>
-
-    <div class="has-text-centered">
-        <div class="field">
-            <input id="switchLarge switchColorDefault switchRoundedDefault"
-                   type="checkbox"
-                   name="switchLarge switchColorDefault switchRoundedDefault"
-                   class="switch is-large is-link is-rounded"
-                   bind:checked={staff.staff_is_active}>
-            {#if staff.staff_is_active}
-                <label for="switchLarge switchColorDefault switchRoundedDefault"> <span>*</span> Active</label>
-            {:else}
-                <label for="switchLarge switchColorDefault switchRoundedDefault"> <span>*</span> Inactive</label>
-            {/if}
-        </div>
-        <div class="column is-12"></div>
-    </div>
-
     <!-- Add record button -->
     <div class="mb- has-text-centered">
         <button class="btn-txt button is-link is-rounded" on:click={addStaffToDatabase}>Add Canteen Staff</button>

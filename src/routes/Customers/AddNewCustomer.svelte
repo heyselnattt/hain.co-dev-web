@@ -47,6 +47,8 @@
         </div>
     </div>
 
+    <div class="column is-12"></div>
+    <div class="column is-12"></div>
     <div class="columns pt-5 is-multiline">
         <div class="column is-12"></div>
         <div class="column is-3 is-offset-2">
@@ -76,22 +78,10 @@
         <div class="column is-12"></div>
     </div>
 
-    <div class="has-text-centered">
-        <div class="field">
-            <input id="switchLarge switchColorDefault switchRoundedDefault"
-                   type="checkbox"
-                   name="switchLarge switchColorDefault switchRoundedDefault"
-                   class="switch is-large is-link is-rounded"
-                   bind:checked={customer.customerIsActive}>
-            {#if customer.customerIsActive}
-                <label for="switchLarge switchColorDefault switchRoundedDefault"><span>*</span> Active</label>
-            {:else}
-                <label for="switchLarge switchColorDefault switchRoundedDefault"><span>*</span> Inactive</label>
-            {/if}
-        </div>
-        <div class="column is-12"></div>
-    </div>
-
+    <div class="column is-12"></div>
+    <div class="column is-12"></div>
+    <div class="column is-12"></div>
+    <div class="column is-12"></div>
     <!-- Add record button -->
     <div class="mb- has-text-centered">
         <button class="btn-txt button is-link is-rounded" type="submit" on:click={addCustomerToDatabase}>Add Customer</button>

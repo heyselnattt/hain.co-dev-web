@@ -6,10 +6,6 @@
     import ButtonSwitch from "$lib/components/buttons/ButtonSwitch.svelte";
     import {goto} from "$app/navigation";
 
-    export let value;
-    export let name;
-
-
     let admin = {
         admin_full_name: null,
         admin_username: null,
@@ -78,21 +74,6 @@
         <div class="column is-12"></div>
         <div class="column is-12"></div>
     </div>
-    <div class="has-text-centered">
-        <div class="field">
-            <input id="switchLarge switchColorDefault switchRoundedDefault"
-                   type="checkbox"
-                   name="switchLarge switchColorDefault switchRoundedDefault"
-                   class="switch is-large is-link is-rounded"
-                   bind:checked={admin.admin_is_active}>
-            {#if admin.admin_is_active}
-                <label for="switchLarge switchColorDefault switchRoundedDefault"> <span>*</span> Active</label>
-            {:else}
-                <label for="switchLarge switchColorDefault switchRoundedDefault"> <span>*</span> Inactive</label>
-            {/if}
-        </div>
-    </div>
-
     <!-- Add record button -->
     <div class="mb- has-text-centered">
         <button class="btn-txt button is-link is-rounded" on:click={addAdminToDatabase}>Add Admin</button>
