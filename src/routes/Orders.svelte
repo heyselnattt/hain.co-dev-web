@@ -14,9 +14,9 @@
     })
 
     let orderNumber = 1;
-    const counter = (): number => {
-        return orderNumber++;
-    }
+    const counter = (): number => (
+        orderNumber++
+    )
 
     const identifyType = (code: number): string => {
         switch(code) {
@@ -48,7 +48,7 @@
         </div>
         <div class="column is-4">
             <p class="text has-text-link">
-                Orders
+                Orders Today
             </p>
         </div>
     </div>
@@ -77,7 +77,7 @@
                         orderDate={info.order_date}
                         staffUsername={info.order_staff_username}
                         orderStatus={info.order_status}
-                        orderNumber={info.order_number}/>
+                        orderNumber={counter()}/>
                 {/each}
             {:catch err}
                 <p>{err.message}</p>

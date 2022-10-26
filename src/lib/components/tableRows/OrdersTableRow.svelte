@@ -43,13 +43,17 @@
     }
 </script>
 
+<svelte:head>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@600&display=swap" rel="stylesheet"/>
+</svelte:head>
+
 <tbody>
     <tr class="text is-clickable">
         <th>{orderNumber}</th>
         <th>{productCode}</th>
         <th>{customerEmail}</th>
         <th>{orderRequest}</th>
-        <th>{new Date(orderDate).toLocaleDateString()}</th>
+        <th>{new Date(orderDate).toLocaleString()}</th>
         <th>{staffUsername}</th>
         <td>
             <div class="select is-small">
@@ -77,5 +81,10 @@
 <style>
     .text {
         font-size: 17px;
+    }
+
+    option, select {
+        font-family: Karla, sans-serif;
+        font-size: 14px;
     }
 </style>
