@@ -46,7 +46,7 @@
             <ButtonBack link="Database"/>
         </div>
         <div class="column is-4">
-            <p class="text has-text-link">
+            <p class="text has-text-link has-text-weight-bold">
                 Transactions
             </p>
         </div>

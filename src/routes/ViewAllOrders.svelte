@@ -6,6 +6,7 @@
     import {orders} from "$lib/stores/orderStore";
     import {onMount} from "svelte";
     import {goto} from "$app/navigation";
+    import AllOrdersTableRow from "$lib/components/tableRows/AllOrdersTableRow.svelte";
 
     export let link: string = " ";
 
@@ -46,21 +47,12 @@
 <div class="container">
     <div class="columns has-text-centered pt-5">
         <div class="column is-4 has-text-centered">
-            <ButtonBack link="Database"/>
+            <ButtonBack link="Orders"/>
         </div>
         <div class="column is-4">
             <p class="text has-text-link has-text-weight-bold">
-                Orders Today
+                Orders
             </p>
-        </div>
-        <div class="column is-4">
-            <a href = ViewAllOrders>
-                <button class="button is-rounded is-link btn-txt">
-                    <p class="ml-4 mr-4">
-                        View all orders
-                    </p>
-                </button>
-            </a>
         </div>
     </div>
 
@@ -81,13 +73,13 @@
                 <TableLoadingScreen/>
             {:then order}
                 {#each order as info}
-                    <OrdersTableRow
+                    <AllOrdersTableRow
                         productCode={info.order_product_code}
                         customerEmail={info.order_customer_email}
                         orderRequest={info.order_requests}
                         orderDate={info.order_date}
                         staffUsername={info.order_staff_username}
-                        orderStatus={info.order_status}
+                        orderStatus={identifyType(info.order_status)}
                         orderNumber={counter()}/>
                 {/each}
             {:catch err}

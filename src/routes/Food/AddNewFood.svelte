@@ -117,20 +117,6 @@
         </div>
     </div>
     <div class="has-text-centered">
-        <div class="field">
-            <input id="switchLarge switchColorDefault switchRoundedDefault"
-                   type="checkbox"
-                   name="switchLarge switchColorDefault switchRoundedDefault"
-                   class="switch is-large is-link is-rounded"
-                   bind:checked={product.product_is_active}>
-            {#if product.product_is_active}
-                <label for="switchLarge switchColorDefault switchRoundedDefault"> <span>*</span> Active</label>
-            {:else}
-                <label for="switchLarge switchColorDefault switchRoundedDefault"> <span>*</span> Inactive</label>
-            {/if}
-        </div>
-    </div>
-    <div class="has-text-centered">
         <div class="mb- has-text-centered">
             <button class="btn-txt button is-link is-rounded" on:click={addProductToDatabase}>Add Product</button>
         </div>

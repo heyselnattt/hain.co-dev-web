@@ -1,12 +1,18 @@
 <script>
     import { fade } from 'svelte/transition'
     import { Rainbow } from 'svelte-loading-spinners'
+    import { onMount } from 'svelte';
 
     let hide = false;
+    export let infinite = false;
 
-    setTimeout(() => {
-        hide = true;
-    }, 5000);
+    onMount(() => {
+        if (!infinite) {
+            setTimeout(() => {
+                hide = true;
+            }, 5000);
+        }
+    })
 </script>
 
 <svelte:head>

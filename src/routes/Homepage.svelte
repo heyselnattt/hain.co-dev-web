@@ -1,8 +1,9 @@
 <script lang="ts">
     import HomeNavbar from "$lib/components/navbars/HomeNavbar.svelte";
-    import axios from "axios";
+    import axios from "$lib/api/index";
     import {onMount} from "svelte";
     import {goto} from "$app/navigation";
+    import LoadingScreen from "$lib/components/otherComponents/LoadingScreen.svelte";
 
     let userInfo = {
         username: "",
@@ -14,16 +15,22 @@
             await goto("/Database")
         }
     })
+
+    let loading = false;
+
     const addToLocalStorage = async () => {
         try {
-            const {data} = await axios.get(`http://localhost:8080/api/admin/auth/${userInfo.username}`);
+            loading = true;
+            const {data} = await axios.get(`/admin/auth/${userInfo.username}`);
             const adminInfo = data.adminDetails;
             console.log(adminInfo);
             if (adminInfo.admin_password === userInfo.password) {
                 localStorage.setItem("admin", JSON.stringify(userInfo));
+                loading = false;
                 await goto("/Database");
             }
         } catch (e) {
+            loading = false;
             console.log(e);
         }
     }
@@ -40,6 +47,9 @@
     />
 </svelte:head>
 
+{#if loading}
+<LoadingScreen infinite={true}/>
+{:else}
 <HomeNavbar/>
 
 <div class="container">
@@ -93,6 +103,8 @@
         </div>
     </div>
 </div>
+
+{/if}
 
 <style>
     h1 {
