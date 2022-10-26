@@ -5,7 +5,7 @@
         try {
             const productCode = params.code;
             const product = await axios.get(`/product/${productCode}`);
-            const oldProductCode = product.data.product_code;
+            const oldProductCode = product.data.product.product_code;
             console.log(product)
             return {
                 props: {
@@ -25,6 +25,7 @@
     import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
     import {goto} from "$app/navigation";
+    import uploadImageToAPI from "$lib/helper/uploadImageToAPI.js";
 
     const identifyType = (code) => {
         switch (code) {
@@ -45,16 +46,19 @@
     export let product;
     export let oldProductCode;
 
+    let productDetails = product.data.product;
+
     let newProduct = {
-        product_name: null,
-        product_price: null,
-        product_image_link: null,
-        product_stock: null,
-        product_description: null,
-        product_type: null,
-        product_is_active: true,
-        product_code: null
+        productCode: oldProductCode,
+        productName: "",
+        productDescription: "",
+        productPrice: 0,
+        productIsActive: true,
+        productImage: "",
+        productType: 1
     }
+
+    let selectedImage;
 
     let types = [
         {value: 1, type: "BREAKFAST"},
@@ -65,12 +69,18 @@
 
     const updateProductToDatabase = async () => {
         try {
-            let response = await axios.put(`/product/update_product/${oldProductCode}`, newProduct)
+            newProduct.productImage = await uploadImageToAPI(selectedImage);
+            let response = await axios.put(`/product/updateProduct/${oldProductCode}`, newProduct)
             console.log(response)
             await goto('../Food');
         } catch (e) {
             console.log(e);
         }
+    }
+
+    function onImageSelect(e) {
+        selectedImage = e.target.files[0]
+        console.log(selectedImage)
     }
 </script>
 
@@ -109,29 +119,23 @@
 
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    <span>*</span> Current Name: {food.data.product_name}
+                    <span>*</span> Current Name: {productDetails.product_name}
                 </p>
-                <input class="pText input is-rounded" type="text" bind:value={newProduct.product_name}/>
+                <input class="pText input is-rounded" type="text" bind:value={newProduct.productName}/>
             </div>
             <!-- TODO number validation -->
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    <span>*</span> Current Price: {food.data.product_price}
+                    <span>*</span> Current Price: {productDetails.product_price}
                 </p>
-                <input class="pText input is-rounded" type="number" bind:value={newProduct.product_price}/>
+                <input class="pText input is-rounded" type="number" bind:value={newProduct.productPrice}/>
             </div>
             <!-- TODO number validation -->
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    <span>*</span> Current Stock: {food.data.product_stock}
+                    <span>*</span> Current Type: {identifyType(productDetails.product_type)}
                 </p>
-                <input class="pText input is-rounded" type="number" bind:value={newProduct.product_stock}/>
-            </div>
-            <div class="column is-3 is-offset-2">
-                <p class="pText has-text-link ml-4 mb-1">
-                    <span>*</span> Current Type: {identifyType(food.data.product_type)}
-                </p>
-                <select bind:value={newProduct.product_type} class="pText input is-rounded">
+                <select bind:value={newProduct.productType} class="pText input is-rounded">
                     {#each types as pos}
                         <option value={pos.value}>
                             {pos.type}
@@ -142,38 +146,34 @@
             <!-- TODO make sure unique -->
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    <span>*</span> Current Code: {food.data.product_code}
+                    <span>*</span> Current Code: {oldProductCode}
+                    <br>
+                    <span class="note">You cannot modify product code once set</span>
                 </p>
-                <input class="pText input is-rounded" type="text" bind:value={newProduct.product_code}/>
+                <input class="pText input is-rounded" type="text" disabled bind:value={oldProductCode}/>
             </div>
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    <span>*</span> Current Link: {food.data.product_image_link}
+                    <span>*</span> Current Description: {productDetails.product_description}
                 </p>
-                <input class="pText input is-rounded" type="text" bind:value={newProduct.product_image_link}/>
+                <textarea class="pText input tall-textarea" bind:value={newProduct.productDescription}></textarea>
             </div>
             <div class="column is-3 is-offset-2">
-                <p class="pText has-text-link ml-4 mb-1">
-                    <span>*</span> Current Description: {food.data.product_description}
+                <p class="pText has-text-link ml-4 mb-2">
+                    <span>*</span> Current Product Image:
                 </p>
-                <textarea class="pText input tall-textarea" bind:value={newProduct.product_description}></textarea>
-            </div>
-            <div class="column is-3 is-offset-2">
-                <div class="pText has-text-link ml-4 mb-1">
-                    <p>Image Preview</p>
-                    <figure class="mt-4 avatar food-image">
-                        {#if isNaN(newProduct.product_image_link)}
-                            <img src="{newProduct.product_image_link}" alt="" style="border-radius: 20px; border: hsl(223, 85%, 41%)  5px double"/>
-                        {/if}
-                    </figure>
-                </div>
+                <img src={productDetails.product_image_link} alt="">
+                <input class="pText input is-rounded mb-5"
+                       type="file"
+                       accept="image/*"
+                       on:change={onImageSelect}/>
             </div>
 
             <div class="column is-12"></div>
 
             <div class="column is-12 has-text-centered">
                 <div class="field">
-                    {#if food.data.product_is_active}
+                    {#if productDetails.product_is_active}
                         <div class="pText has-text-centered"><span>*</span> Product Currently Active</div>
                     {:else}
                         <div class="pText has-text-centered"><span>*</span> Product Currently Inactive</div>
@@ -182,8 +182,8 @@
                            type="checkbox"
                            name="switchLarge switchColorDefault switchRoundedDefault"
                            class="switch is-large is-link is-rounded"
-                           bind:checked={newProduct.product_is_active}>
-                    {#if newProduct.product_is_active}
+                           bind:checked={newProduct.productIsActive}>
+                    {#if newProduct.productIsActive}
                         <label class="pText" for="switchLarge switchColorDefault switchRoundedDefault">Active</label>
                     {:else}
                         <label class="pText" for="switchLarge switchColorDefault switchRoundedDefault">Inactive</label>
@@ -227,6 +227,12 @@
 
     span {
         color: red
+    }
+
+    .note {
+        color: gray;
+        display: block;
+        font-size: 13px;
     }
 </style>
 

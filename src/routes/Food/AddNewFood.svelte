@@ -42,9 +42,6 @@
         selectedImage = e.target.files[0]
         console.log(selectedImage)
     }
-
-    let input;
-    let container;
 </script>
 
 <svelte:head>
@@ -97,6 +94,8 @@
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
                 <span>*</span> Product Code
+                <br>
+                <span class="note">You cannot modify product code once set</span>
             </p>
             <input class="pText input is-rounded" type="text" bind:value={product.productCode}/>
         </div>
@@ -169,5 +168,11 @@
 
     span {
         color: red
+    }
+
+    .note {
+        color: gray;
+        display: block;
+        font-size: 13px;
     }
 </style>
