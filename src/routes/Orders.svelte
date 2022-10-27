@@ -3,11 +3,11 @@
     import NavbarWithSearch from "$lib/components/navbars/NavbarWithSearch.svelte";
     import OrdersTableRow from "$lib/components/tableRows/OrdersTableRow.svelte";
     import TableLoadingScreen from "$lib/components/otherComponents/TableLoadingScreen.svelte"
-    import {orders} from "$lib/stores/orderStore";
+    import {orderToday} from "$lib/stores/orderStore";
     import {onMount} from "svelte";
     import {goto} from "$app/navigation";
 
-    export let link: string = " ";
+    const link: string = " ";
 
     onMount(async () => {
         if (!localStorage.getItem("admin")) {
@@ -54,7 +54,7 @@
             </p>
         </div>
         <div class="column is-4">
-            <a href = ViewAllOrders>
+            <a href="/ViewAllOrders">
                 <button class="button is-rounded is-link btn-txt">
                     <p class="ml-4 mr-4">
                         View all orders
@@ -77,7 +77,7 @@
                     <th>Order Status</th>
                 </tr>
             </thead>
-            {#await $orders}
+            {#await $orderToday}
                 <TableLoadingScreen/>
             {:then order}
                 {#each order as info}

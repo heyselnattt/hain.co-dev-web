@@ -1,7 +1,6 @@
 <script lang="ts">
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
     import NavbarWithSearch from "$lib/components/navbars/NavbarWithSearch.svelte";
-    import OrdersTableRow from "$lib/components/tableRows/OrdersTableRow.svelte";
     import TableLoadingScreen from "$lib/components/otherComponents/TableLoadingScreen.svelte"
     import {orders} from "$lib/stores/orderStore";
     import {onMount} from "svelte";
