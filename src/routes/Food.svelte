@@ -7,6 +7,7 @@
     import TableLoadingScreen from "$lib/components/otherComponents/TableLoadingScreen.svelte";
     import {onMount} from "svelte";
     import {goto} from "$app/navigation";
+    import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
 
     onMount(async () => {
         if (!localStorage.getItem("admin")) {
@@ -35,7 +36,7 @@
     }
 </script>
 
-<NavbarWithSearch/>
+<NavbarSolo/>
 
 
 <div class="container">
