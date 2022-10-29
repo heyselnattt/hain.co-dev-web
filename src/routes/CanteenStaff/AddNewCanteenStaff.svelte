@@ -6,13 +6,12 @@
     import {goto} from "$app/navigation";
 
     let staff = {
-        staff_full_name: null,
-        staff_contact_number: null,
-        staff_username: null,
-        staff_password: null,
-        staff_address: null,
-        staff_position: 1,
-        staff_is_active: true
+        staffFullName: null,
+        staffContactNumber: null,
+        staffUsername: null,
+        staffPassword: null,
+        staffPosition: 1,
+        staffIsActive: true
     }
 
     let positions = [
@@ -23,8 +22,10 @@
 
     const addStaffToDatabase = async () => {
         try {
-            let response = await axios.post('/staff/new_staff', staff)
+            console.log(staff)
+            let response = await axios.post('/staff/createStaff', staff)
             console.log(response)
+            alert('Staff added successfully!')
             await goto("../CanteenStaff")
         } catch (e) {
             console.log(e)
@@ -59,43 +60,37 @@
             <p class="pText has-text-link ml-4 mb-1">
                 <span>*</span> Full Name
             </p>
-            <input class="pText input is-rounded" type="text" bind:value={staff.staff_full_name} required/>
+            <input class="pText input is-rounded" type="text" bind:value={staff.staffFullName} required/>
         </div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
                 <span>*</span> Contact No.
             </p>
-            <input class="pText input is-rounded" type="text" bind:value={staff.staff_contact_number} required/>
+            <input class="pText input is-rounded" type="text" bind:value={staff.staffContactNumber} required/>
         </div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
                 <span>*</span> Username
             </p>
-            <input class="pText input is-rounded" type="text" bind:value={staff.staff_username} required/>
+            <input class="pText input is-rounded" type="text" bind:value={staff.staffUsername} required/>
+        </div>
+        <div class="column is-3 is-offset-2">
+            <p class="pText has-text-link ml-4 mb-1">
+                <span>*</span> Password
+            </p>
+            <input class="pText input is-rounded" type="password" bind:value={staff.staffPassword} required/>
         </div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
                 <span>*</span> Position
             </p>
-            <select bind:value={staff.staff_position} class="pText input is-rounded">
+            <select bind:value={staff.staffPosition} class="pText input is-rounded">
                 {#each positions as pos}
                     <option value={pos.value}>
                         {pos.position}
                     </option>
                 {/each}
             </select>
-        </div>
-        <div class="column is-3 is-offset-2">
-            <p class="pText has-text-link ml-4 mb-1">
-                <span>*</span> Address
-            </p>
-            <input class="pText input is-rounded" type="text" bind:value={staff.staff_address} required/>
-        </div>
-        <div class="column is-3 is-offset-2">
-            <p class="pText has-text-link ml-4 mb-1">
-                <span>*</span> Password
-            </p>
-            <input class="pText input is-rounded" type="password" bind:value={staff.staff_password} required/>
         </div>
         <div class="column is-12"></div>
         <div class="column is-12"></div>

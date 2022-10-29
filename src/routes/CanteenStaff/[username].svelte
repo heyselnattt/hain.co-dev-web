@@ -32,12 +32,12 @@
     let canteenStaffDetails = canteenStaff.data.staffDetails;
 
     let newStaff = {
-        staff_full_name: null,
-        staff_contact_number: null,
-        staff_username: null,
-        staff_password: null,
-        staff_position: 1,
-        staff_is_active: true
+        staffFullName: null,
+        staffContactNumber: null,
+        staffUsername: null,
+        staffPassword: null,
+        staffPosition: 1,
+        staffIsActive: true
     }
 
     let positions = [
@@ -61,8 +61,10 @@
 
     const updateStaffToDatabase = async () => {
         try {
-            let response = await axios.put(`/staff/updateStaff/${oldUsername}`, newStaff)
+            console.log(newStaff)
+            let response = await axios.put(`/staff/updateStaff/${oldUsername}`, newStaff);
             console.log(response)
+            alert('Staff added successfully!')
             await goto('../CanteenStaff');
         } catch (e) {
             console.log(e);
@@ -107,13 +109,13 @@
                 <p class="pText has-text-link ml-4 mb-1">
                     <span>*</span> Current Name: {canteenStaffDetails.staff_full_name}
                 </p>
-                <input class="pText input is-rounded" type="text" bind:value={newStaff.staff_full_name}/>
+                <input class="pText input is-rounded" type="text" bind:value={newStaff.staffFullName}/>
             </div>
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
                     <span>*</span> Current Position: {identifyType(canteenStaffDetails.staff_position)}
                 </p>
-                <select bind:value={newStaff.staff_position} class="pText input is-rounded">
+                <select bind:value={newStaff.staffPosition} class="pText input is-rounded">
                     {#each positions as pos}
                         <option value={pos.value}>
                             {pos.position}
@@ -125,19 +127,19 @@
                 <p class="pText has-text-link ml-4 mb-1">
                     <span>*</span> Current Contact Number: {canteenStaffDetails.staff_contact_number}
                 </p>
-                <input class="pText input is-rounded" type="text" bind:value={newStaff.staff_contact_number}/>
+                <input class="pText input is-rounded" type="text" bind:value={newStaff.staffContactNumber}/>
             </div>
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
                     <span>*</span> Current Username: {canteenStaffDetails.staff_username}
                 </p>
-                <input class="pText input is-rounded" type="text" bind:value={newStaff.staff_username}/>
+                <input class="pText input is-rounded" type="text" bind:value={newStaff.staffUsername}/>
             </div>
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
                     <span>*</span> Current Password: {canteenStaffDetails.staff_password}
                 </p>
-                <input class="pText input is-rounded" type="password" bind:value={newStaff.staff_password}/>
+                <input class="pText input is-rounded" type="password" bind:value={newStaff.staffPassword}/>
             </div>
         {:catch e}
             {e}
@@ -157,8 +159,8 @@
                                type="checkbox"
                                name="switchLarge switchColorDefault switchRoundedDefault"
                                class="switch is-large is-link is-rounded"
-                               bind:checked={newStaff.staff_is_active}>
-                        {#if newStaff.staff_is_active}
+                               bind:checked={newStaff.staffIsActive}>
+                        {#if newStaff.staffIsActive}
                             <label for="switchLarge switchColorDefault switchRoundedDefault">Active</label>
                         {:else}
                             <label for="switchLarge switchColorDefault switchRoundedDefault">Inactive</label>
