@@ -26,6 +26,8 @@
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
     import {goto} from "$app/navigation";
     import uploadImageToAPI from "$lib/helper/uploadImageToAPI.js";
+  import { notifs } from "$lib/stores/notificationStore";
+  import NotificationContainer from "$lib/components/systemNotification/notification-container.svelte";
 
     const identifyType = (code) => {
         switch (code) {
@@ -68,18 +70,51 @@
     ]
 
     const updateProductToDatabase = async () => {
+        let msg = 'Product '
+        let errors = 0
+        Object.keys(newProduct).map(prop => {
+            if(prop === 'productPrice') {
+                if(newProduct[prop] <= 0) {
+                    msg += !errors ? `${prop.split('product').join('')}` : `, ${prop.split('product').join('')}`
+                    errors++
+                }
+            }
+            if(prop !== 'productIsActive' && prop !== 'productType' && prop !== 'productPrice' && prop !== 'productCode') {
+                if(!newProduct[prop]) {
+                    msg += !errors ? `${prop.split('product').join('')}` : `, ${prop.split('product').join('')}`
+                    errors++
+                }
+            }
+        })
+        msg += errors ? ' are a required fields' : ' is a required field'
+
+        if(errors) {
+            $notifs = [...$notifs, {
+                msg,
+                type: 'error',
+                id: `${Math.random() * 99}${new Date().getTime()}`
+            }]
+            return
+        }
+
         try {
             newProduct.productImage = await uploadImageToAPI(selectedImage);
             let response = await axios.put(`/product/updateProduct/${oldProductCode}`, newProduct)
             console.log(response)
             await goto('../Food');
         } catch (e) {
+            $notifs = [...$notifs, {
+                msg: 'Error in updating product',
+                type: 'error',
+                id: `${Math.random() * 99}${new Date().getTime()}`
+            }]
             console.log(e);
         }
     }
 
     function onImageSelect(e) {
         selectedImage = e.target.files[0]
+        newProduct.productImage = selectedImage
         console.log(selectedImage)
     }
 </script>
@@ -89,6 +124,7 @@
 </svelte:head>
 
 <NavbarSolo/>
+<NotificationContainer />
 
 <div class="container">
     <div class="columns pt-5 is-multiline has-text-centered">

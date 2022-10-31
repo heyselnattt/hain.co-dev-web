@@ -5,6 +5,8 @@
     import axios from "$lib/api/index";
     import {goto} from "$app/navigation";
     import uploadImageToAPI from "../../lib/helper/uploadImageToAPI.js";
+    import { notifs } from "$lib/stores/notificationStore";
+    import NotificationContainer from "$lib/components/systemNotification/notification-container.svelte";
 
     let product = {
         productCode: "",
@@ -26,6 +28,33 @@
     ]
 
     const addProductToDatabase = async () => {
+        let msg = 'Product '
+        let errors = 0
+        Object.keys(product).map(prop => {
+            if(prop === 'productPrice') {
+                if(product[prop] <= 0) {
+                    msg += !errors ? `${prop.split('product').join('')}` : `, ${prop.split('product').join('')}`
+                    errors++
+                }
+            }
+            if(prop !== 'productIsActive' && prop !== 'productType' && prop !== 'productPrice') {
+                if(!product[prop]) {
+                    msg += !errors ? `${prop.split('product').join('')}` : `, ${prop.split('product').join('')}`
+                    errors++
+                }
+            }
+        })
+        msg += errors ? ' are a required fields' : ' is a required field'
+
+        if(errors) {
+            $notifs = [...$notifs, {
+                msg,
+                type: 'error',
+                id: `${Math.random() * 99}${new Date().getTime()}`
+            }]
+            return
+        }
+
         try {
             product.productImage = await uploadImageToAPI(selectedImage);
             console.log(product.productImage);
@@ -34,12 +63,18 @@
             alert("Product Added Successfully")
             await goto("../Food")
         } catch (e) {
+            $notifs = [...$notifs, {
+                msg: `Error in adding new product`,
+                type: 'error',
+                id: `${Math.random() * 99}${new Date().getTime()}`
+            }]
             console.log(e)
         }
     }
 
     function onImageSelect(e) {
         selectedImage = e.target.files[0]
+        product.productImage = selectedImage
         console.log(selectedImage)
     }
 </script>
@@ -49,6 +84,7 @@
 </svelte:head>
 
 <NavbarSolo/>
+<NotificationContainer />
 
 <div class="container">
     <div class="columns  pt-5 is-multiline has-text-centered">
@@ -76,7 +112,7 @@
             <p class="pText has-text-link ml-4 mb-1">
                 <span>*</span> Product Price
             </p>
-            <input class="pText input is-rounded" type="number" bind:value={product.productPrice}/>
+            <input min={0} class="pText input is-rounded" type="number" bind:value={product.productPrice}/>
         </div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
