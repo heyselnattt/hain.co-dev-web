@@ -36,12 +36,14 @@
         customerLastName: null,
         customerPassword: null,
         customerEmail: null,
-        // customerContactNumber: null,
+        customerGcashNumber: null,
+        customerGcashName: null,
         customerIsActive: true
     };
 
     const updateCustomerToDatabase = async () => {
         try {
+            console.log(newCustomer)
             let response = await axios.put(`/customer/updateCustomer/${oldEmail}`, newCustomer)
             console.log(response)
             await goto('../Customers');
@@ -102,16 +104,21 @@
             </div>
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
-                    <span>*</span> Current Contact Number: {customerDetails.customer_contact_number}
-                </p>
-                <input class="pText input is-rounded" type="text" bind:value={newCustomer.customerContactNumber}/>
-            </div>
-
-            <div class="column is-3 is-offset-2">
-                <p class="pText has-text-link ml-4 mb-1">
                     <span>*</span> Current Password: {customerDetails.customer_password}
                 </p>
                 <input class="pText input is-rounded" type="password" bind:value={newCustomer.customerPassword}/>
+            </div>
+            <div class="column is-3 is-offset-2">
+                <p class="pText has-text-link ml-4 mb-1">
+                    <span>*</span> Current Gcash Name: {customerDetails.customer_gcash_name}
+                </p>
+                <input class="pText input is-rounded" type="text" bind:value={newCustomer.customerGcashName}/>
+            </div>
+            <div class="column is-3 is-offset-2">
+                <p class="pText has-text-link ml-4 mb-1">
+                    <span>*</span> Current Gcash Number: {customerDetails.customer_gcash_number}
+                </p>
+                <input class="pText input is-rounded" type="text" bind:value={newCustomer.customerGcashNumber}/>
             </div>
         {:catch e}
             {e}

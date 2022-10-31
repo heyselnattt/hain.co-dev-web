@@ -10,6 +10,8 @@
         customerLastName: null,
         customerPassword: null,
         customerEmail: null,
+        customerGcashNumber: null,
+        customerGcashName: null,
         customerIsActive: true
     };
 
@@ -47,8 +49,6 @@
         </div>
     </div>
 
-    <div class="column is-12"></div>
-    <div class="column is-12"></div>
     <div class="columns pt-5 is-multiline">
         <div class="column is-12"></div>
         <div class="column is-3 is-offset-2">
@@ -75,13 +75,20 @@
             </p>
             <input class="pText input is-rounded" type="password" pattern="{pattern}" title="6 or more characters" bind:value={customer.customerPassword} required/>
         </div>
+        <div class="column is-3 is-offset-2">
+            <p class="pText has-text-link ml-4 mb-1">
+                <span>*</span> Gcash Name
+            </p>
+            <input class="pText input is-rounded" type="text" bind:value={customer.customerGcashName} required/>
+        </div>
+        <div class="column is-3 is-offset-2">
+            <p class="pText has-text-link ml-4 mb-1">
+                <span>*</span> Gcash Number
+            </p>
+            <input class="pText input is-rounded" type="email" bind:value={customer.customerGcashNumber} required/>
+        </div>
         <div class="column is-12"></div>
     </div>
-
-    <div class="column is-12"></div>
-    <div class="column is-12"></div>
-    <div class="column is-12"></div>
-    <div class="column is-12"></div>
     <!-- Add record button -->
     <div class="mb- has-text-centered">
         <button class="btn-txt button is-link is-rounded" type="submit" on:click={addCustomerToDatabase}>Add Customer</button>
