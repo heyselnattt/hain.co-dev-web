@@ -55,9 +55,9 @@
         <th>{orderRequest}</th>
         <th>{new Date(orderDate).toLocaleString()}</th>
         <th>{staffUsername}</th>
-        <td>
+        <th>
            {orderStatus}
-        </td>
+        </th>
     </tr>
 </tbody>
 
