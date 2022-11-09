@@ -32,7 +32,20 @@
                 return "Processing"
 
             case 4:
+                return "Ready"
+
+            case 5:
                 return "Fulfilled"
+        }
+    }
+
+    const identifyPaymentMethod = (code: number): string => {
+        switch(code) {
+            case 1:
+                return "CASH"
+
+            case 2:
+                return "GCASH"
         }
     }
 </script>
@@ -64,7 +77,7 @@
                     <th>Customer Email</th>
                     <th>Order Request</th>
                     <th>Order Date</th>
-                    <th>Staff</th>
+                    <th>Payment Method</th>
                     <th>Order Status</th>
                 </tr>
             </thead>
@@ -77,7 +90,7 @@
                         customerEmail={info.order_customer_email}
                         orderRequest={info.order_requests}
                         orderDate={info.order_date}
-                        staffUsername={info.order_staff_username}
+                        staffUsername={identifyPaymentMethod(info.order_payment_method)}
                         orderStatus={identifyType(info.order_status)}
                         orderNumber={counter()}/>
                 {/each}

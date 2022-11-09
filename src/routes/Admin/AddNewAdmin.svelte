@@ -10,11 +10,11 @@
   import validators from "$lib/validators";
 
     let admin = {
-        admin_full_name: null,
-        admin_username: null,
-        admin_password: null,
-        admin_position: 1,
-        admin_is_active: true,
+        adminFullName: null,
+        adminUsername: null,
+        adminPassword: null,
+        adminIsSuperadmin: true,
+        adminIsActive: true,
     }
 
     const addAdminToDatabase = async () => {
@@ -45,8 +45,8 @@
             return
         }
         try {
-            let response = await axios.post('/admin/new_admin', admin)
-            console.log(response)
+            let response = await axios.post('/admin/createAdmin', admin)
+            alert("Admin added successfully")
             await goto("../Admin")
         } catch (e) {
             $notifs = [...$notifs, {
@@ -89,20 +89,20 @@
             <p class="pText has-text-link ml-4 mb-1">
                 <span>*</span> Full Name
             </p>
-            <input class="pText input is-rounded" type="text" bind:value={admin.admin_full_name}/>
+            <input class="pText input is-rounded" type="text" bind:value={admin.adminFullName}/>
         </div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
                 <span>*</span> Username
             </p>
-            <input class="pText input is-rounded" type="text" bind:value={admin.admin_username}/>
+            <input class="pText input is-rounded" type="text" bind:value={admin.adminUsername}/>
         </div>
         <div class="column is-12"></div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
                 <span>*</span> Password
             </p>
-            <input class="pText input is-rounded" type="password" bind:value={admin.admin_password}/>
+            <input class="pText input is-rounded" type="password" bind:value={admin.adminPassword}/>
         </div>
         <div class="column is-12"></div>
         <div class="column is-12"></div>

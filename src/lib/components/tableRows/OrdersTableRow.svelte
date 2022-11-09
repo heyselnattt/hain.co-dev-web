@@ -35,11 +35,16 @@
     let newStatus;
 
     const updateOrderStatus = async () => {
-        const newStatusInt = parseInt(newStatus);
-        const response = await axios.patch(`/order/updateOrderStatus/${orderNumber}`, {
-            orderStatus: newStatusInt
-        })
-        console.log(response)
+        try {
+            const newStatusInt = parseInt(newStatus);
+            const response = await axios.patch(`/order/updateOrderStatus/${orderNumber}`, {
+                orderStatus: newStatusInt
+            })
+            alert("Order status updated successfully")
+            console.log(response)
+        } catch (e) {
+            console.log(e)
+        }
     }
 </script>
 
@@ -66,12 +71,15 @@
                     {:else if orderStatus === 3}
                         <option selected disabled>PROCESSING</option>
                     {:else if orderStatus === 4}
+                        <option selected disabled>READY</option>
+                    {:else if orderStatus === 5}
                         <option selected disabled>FULFILLED</option>
                     {/if}
                     <option value="1">INCOMING</option>
                     <option value="2">UNFULFILLED</option>
                     <option value="3">PROCESSING</option>
-                    <option value="4">FULFILLED</option>
+                    <option value="4">READY</option>
+                    <option value="5">FULFILLED</option>
                 </select>
             </div>
         </td>
