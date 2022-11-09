@@ -32,27 +32,27 @@
                 {#await $revenue}
                     <FixedLoadingScreen/>
                 {:then revenue}
-                    <div class="karla has-text-black txt-weight-900 txt-size-50">
+                    <div class="montserrat has-text-black txt-weight-900 txt-size-50">
                         REVENUE
                     </div>
                     <!-- date -->
-                    <div class="karla has-text-black">
+                    <div class="montserrat has-text-black">
                         As of {new Date().toLocaleString()}
                     </div>
                     <!-- today's sales -->
-                    <div class="karla has-text-link txt-weight-900 txt-size-30 w-100p pl-5">
+                    <div class="montserrat has-text-link txt-weight-900 txt-size-30 w-100p pl-5">
                         <br>TODAY:
                     </div>
                     <!-- today's amount -->
-                    <div class="karla has-text-link txt-weight-900 txt-size-70">
+                    <div class="montserrat has-text-link txt-weight-900 txt-size-70">
                         {revenue.dayRevenue}
                     </div>
                     <!-- this week's sales -->
-                    <div class="karla has-text-black txt-size-30 w-100p pl-5">
+                    <div class="montserrat has-text-black txt-size-30 w-100p pl-5">
                         <br>THIS WEEK:
                     </div>
                     <!-- this week's amount -->
-                    <div class="karla has-text-black txt-size-40">
+                    <div class="montserrat has-text-black txt-size-40">
                         {revenue.weeklyRevenue}
                     </div>
 
@@ -110,7 +110,7 @@
 
 <style>
     .text {
-        font-family: 'Karla', sans-serif;
+        font-family: 'Montserrat', sans-serif;
         font-size: 40px;
     }
 

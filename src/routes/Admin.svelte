@@ -20,10 +20,6 @@
     }
 </script>
 
-<svelte:head>
-    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@600&display=swap" rel="stylesheet"/>
-</svelte:head>
-
 <NavbarSolo/>
 
 <div class="container">
@@ -61,7 +57,7 @@
 
 <style>
     .text {
-        font-family: 'Karla', sans-serif;
+        font-family: 'Montserrat', sans serif;
         font-size: 40px;
     }
 </style>

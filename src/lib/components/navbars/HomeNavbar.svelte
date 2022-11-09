@@ -12,6 +12,6 @@
 
 <style>
     .title {
-        font-family: 'Lobster', cursive;
+        font-family: 'Titan One', cursive;
     }
 </style>

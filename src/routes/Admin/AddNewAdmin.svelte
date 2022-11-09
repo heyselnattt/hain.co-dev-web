@@ -5,9 +5,9 @@
     import axios from "$lib/api/index";
     import ButtonSwitch from "$lib/components/buttons/ButtonSwitch.svelte";
     import {goto} from "$app/navigation";
-  import { notifs } from "$lib/stores/notificationStore";
-  import NotificationContainer from "$lib/components/systemNotification/notification-container.svelte";
-  import validators from "$lib/validators";
+    import { notifs } from "$lib/stores/notificationStore";
+    import NotificationContainer from "$lib/components/systemNotification/notification-container.svelte";
+    import validators from "$lib/validators";
 
     let admin = {
         adminFullName: null,
@@ -58,10 +58,6 @@
         }
     }
 </script>
-
-<svelte:head>
-    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@600&display=swap" rel="stylesheet"/>
-</svelte:head>
 
 <NavbarSolo/>
 <NotificationContainer />
@@ -117,18 +113,18 @@
 
 <style>
     .text1 {
-        font-family: 'Karla', sans-serif;
+        font-family: 'Montserrat', sans-serif;
         font-size: 40px;
     }
 
     .pText {
-        font-family: 'Karla', sans-serif;
+        font-family: 'Montserrat', sans-serif;
         font-size: 20px;
     }
 
     .btn-txt {
         font-size: 20px;
-        font-family: 'Karla', sans-serif;
+        font-family: 'Montserrat', sans-serif;
     }
 
     span {

@@ -5,7 +5,7 @@
     import {goto} from "$app/navigation";
     import LoadingScreen from "$lib/components/otherComponents/LoadingScreen.svelte";
     import { notifs } from "$lib/stores/notificationStore";
-  import validators from "$lib/validators";
+    import validators from "$lib/validators";
 
     let userInfo = {
         username: "",
@@ -74,17 +74,6 @@
     }
 </script>
 
-<svelte:head>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Karla:wght@600&display=swap"
-        rel="stylesheet"
-    />
-    <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
-    />
-</svelte:head>
-
 {#if loading}
 <LoadingScreen infinite={true}/>
 {:else}
@@ -95,7 +84,7 @@
         <div class="column is-4 is-offset-2">
             <section class="section pt-0"></section>
             <section class="section is-flex is-justify-content-center pb-3">
-                <img src="images/Blue_Circle.png" alt="logo" class="logo"/>
+                <img src="images/logo_1.png" alt="logo" class="logo"/>
             </section>
             <section class="section is-medium pb-0 has-text-centered is-paddingless">
                 <h1 class="has-text-link">
@@ -146,16 +135,17 @@
 
 <style>
     h1 {
-        font-family: 'Lobster', cursive;
+        font-family: 'Titan One', cursive;
         font-size: 45px;
     }
 
     .text {
-        font-family: 'Karla', sans-serif;
+        font-family: 'Montserrat', sans-serif;
         font-size: 18px;
     }
 
     .logo {
-        max-width: 350px;
+        min-width: 350px;
+       
     }
 </style>

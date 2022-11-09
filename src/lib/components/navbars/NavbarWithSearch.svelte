@@ -27,11 +27,11 @@
 
 <style>
     .title {
-        font-family: 'Lobster', cursive;
+        font-family: 'Titan One', cursive;
         font-size: 50px;
     }
 
     .text {
-        font-family: 'Karla', sans-serif;
+        font-family: 'Montserrat', sans-serif;
     }
 </style>
