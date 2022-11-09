@@ -2,6 +2,7 @@
     import Homepage from "./Homepage.svelte";
     import LoadingScreen from "$lib/components/otherComponents/LoadingScreen.svelte"
     import {onMount} from 'svelte';
+    import NotificationContainer from "$lib/components/systemNotification/notification-container.svelte";
 
     let isLoaded: boolean = false
 
@@ -13,6 +14,7 @@
 
 
 {#if isLoaded}
+    <NotificationContainer />
     <Homepage/>
     <style>
         :global(body) {

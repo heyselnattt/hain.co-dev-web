@@ -5,6 +5,9 @@
     import axios from "$lib/api/index";
     import ButtonSwitch from "$lib/components/buttons/ButtonSwitch.svelte";
     import {goto} from "$app/navigation";
+  import { notifs } from "$lib/stores/notificationStore";
+  import NotificationContainer from "$lib/components/systemNotification/notification-container.svelte";
+  import validators from "$lib/validators";
 
     let admin = {
         adminFullName: null,
@@ -15,12 +18,42 @@
     }
 
     const addAdminToDatabase = async () => {
+        let msg = ''
+        let errors = 0
+        Object.keys(admin).map(prop => {
+            if(!admin[prop]) {
+                msg += !errors ? `${prop.split('admin_').join('').split('_').join(' ')}` : `, ${prop.split('admin_').join('')}`
+                errors++
+            }
+        })
+        msg += errors ? ' are a required fields' : 'is a required field'
+        if(errors) {
+            $notifs = [...$notifs, {
+                msg,
+                type: 'error',
+                id: `${Math.random() * 99}${new Date().getTime()}`
+            }]
+            return
+        }
+
+        if(!validators.isPassValid(admin.admin_password)) {
+            $notifs = [...$notifs, {
+                msg: 'Password does not meet the criteria for security',
+                type: 'error',
+                id: `${Math.random() * 99}${new Date().getTime()}`
+            }]
+            return
+        }
         try {
             let response = await axios.post('/admin/createAdmin', admin)
             alert("Admin added successfully")
             await goto("../Admin")
         } catch (e) {
-            alert("Error adding admin")
+            $notifs = [...$notifs, {
+                msg: 'Error adding a new admin',
+                type: 'error',
+                id: `${Math.random() * 99}${new Date().getTime()}`
+            }]
             console.log(e)
         }
     }
@@ -31,6 +64,7 @@
 </svelte:head>
 
 <NavbarSolo/>
+<NotificationContainer />
 
 <div class="container">
     <div class="columns  pt-5 is-multiline has-text-centered">

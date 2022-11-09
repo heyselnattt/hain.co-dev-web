@@ -4,6 +4,8 @@
     import {onMount} from "svelte";
     import {goto} from "$app/navigation";
     import LoadingScreen from "$lib/components/otherComponents/LoadingScreen.svelte";
+    import { notifs } from "$lib/stores/notificationStore";
+  import validators from "$lib/validators";
 
     let userInfo = {
         username: "",
@@ -19,6 +21,36 @@
     let loading = false;
 
     const addToLocalStorage = async () => {
+        let msg = ''
+        let error = false
+        let errorCounter = 0
+        Object.keys(userInfo).map(prop => {
+            if(!userInfo[prop]) {
+                error = true
+                errorCounter++
+                msg += msg.length == 0 ? `${prop}` : `and ${prop}`
+            }
+        })
+        msg += errorCounter > 1 ? ' are required fields' : ' is a required field'
+
+        if(error) {
+            $notifs = [...$notifs, {
+                msg,
+                type: 'error',
+                id: `${(Math.random() * 99) + 1}${new Date().getTime()}`
+            }]
+            return
+        }
+
+        if(!validators.isPassValid(userInfo.password)) {
+            $notifs = [...$notifs, {
+                msg: 'Password does not meet the security criteria',
+                type: 'error',
+                id: `${(Math.random() * 99) + 1}${new Date().getTime()}`
+            }]
+            return
+        }
+
         try {
             loading = true;
             const {data} = await axios.get(`/admin/auth/${userInfo.username}`);
@@ -27,9 +59,15 @@
             if (adminInfo.admin_password === userInfo.password) {
                 localStorage.setItem("admin", JSON.stringify(userInfo));
                 loading = false;
-                await goto("/Database");
+                goto("/Database");
             }
         } catch (e) {
+            // Change msg for the client
+            $notifs = [...$notifs, {
+                msg: `${e}`,
+                type: 'error',
+                id: `${(Math.random() * 99) + 1}${new Date().getTime()}`
+            }]
             loading = false;
             console.log(e);
         }

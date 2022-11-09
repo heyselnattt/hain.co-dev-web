@@ -25,6 +25,9 @@
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
     import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
     import {goto} from "$app/navigation";
+    import { notifs } from "$lib/stores/notificationStore";
+    import validators from "$lib/validators";
+    import NotificationContainer from "$lib/components/systemNotification/notification-container.svelte";
 
     export let canteenStaff;
     export let oldUsername;
@@ -60,13 +63,71 @@
     }
 
     const updateStaffToDatabase = async () => {
+        let msg = ''
+        let errors = 0
+        Object.keys(newStaff).map(prop => {
+            if(!newStaff[prop]) {
+                msg += !errors ? `${prop.split('staff').join('')}` : `, ${prop.split('staff').join('')}`
+                errors++
+            }
+        })
+        msg += errors ? ' are required fields' : ' is a required field'
+        if(errors) {
+            $notifs = [...$notifs, {
+                msg,
+                type: 'error',
+                id: `${Math.random() * 99}${new Date().getTime()}`
+            }]
+            return
+        }
+
+        if(validators.containsLettersAndCharacters(newStaff.staffContactNumber)) {
+            $notifs = [...$notifs, {
+                msg: 'Contact No. cannot have letters and/or special characters',
+                type: 'error',
+                id: `${Math.random() * 99}${new Date().getTime()}`
+            }]
+            return
+        }
+
+        if(newStaff.staffContactNumber.length != 11) {
+            $notifs = [...$notifs, {
+                msg: 'Gash number must be exactly 11 numbers e.g 09xx-xxx-xxxx',
+                type: 'error',
+                id: `${(Math.random() * 99) + 1}${new Date().getTime()}`
+            }]
+            return
+        }
+
+        if(!newStaff.staffContactNumber.substring(0, 2).match('09')) {
+            $notifs = [...$notifs, {
+                msg: 'Gcash number must be start with 09 e.g 09xx-xxx-xxxx',
+                type: 'error',
+                id: `${(Math.random() * 99) + 1}${new Date().getTime()}`
+            }]
+            return
+        }
+
+        if(!validators.isPassValid(newStaff.staffPassword)) {
+            $notifs = [...$notifs, {
+                msg: 'Password does not meet the criteria for security',
+                type: 'error',
+                id: `${(Math.random() * 99) + 1}${new Date().getTime()}`
+            }]
+            return
+        }
         try {
             console.log(newStaff)
             let response = await axios.put(`/staff/updateStaff/${oldUsername}`, newStaff);
             console.log(response)
-            alert('Staff added successfully!')
+            alert('Staff updated successfully!')
             await goto('../CanteenStaff');
         } catch (e) {
+            $notifs = [...$notifs, {
+                msg: `Error in updating staff`,
+                type: 'error',
+                id: `${(Math.random() * 99) + 1}${new Date().getTime()}`
+            }]
             console.log(e);
         }
     }
@@ -77,6 +138,7 @@
 </svelte:head>
 
 <NavbarSolo/>
+<NotificationContainer />
 
 <div class="container">
     <div class="columns  pt-5 is-multiline has-text-centered">

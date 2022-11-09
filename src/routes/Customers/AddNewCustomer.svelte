@@ -4,6 +4,9 @@
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
     import axios from "$lib/api";
     import {goto} from "$app/navigation";
+    import { notifs } from "$lib/stores/notificationStore";
+    import NotificationContainer from "$lib/components/systemNotification/notification-container.svelte";
+  import validators from "$lib/validators";
 
     let customer = {
         customerFirstName: null,
@@ -16,16 +19,86 @@
     };
 
     const addCustomerToDatabase = async () => {
+        let msg = ''
+        let error = false
+        let errorCounter = 0
+        Object.keys(customer).map((prop, i) => {
+            if(!customer[prop]) {
+                errorCounter++
+                error = true
+                msg = !msg.length ? `${prop.split('customer').join('')}` : `${msg}, ${prop.split('customer').join('')}`
+            }
+        })
+        msg += ` ${errorCounter > 1 ? 'are' : 'is a'} reqiured field${errorCounter > 1 ? 's' : ''}`
+
+        if(error) {
+            $notifs = [...$notifs, {
+                msg,
+                type: 'error',
+                id: `${(Math.random() * 99) + 1}${new Date().getTime()}`
+            }]
+            return
+        }
+
+        if(!validators.isEmailValid(customer.customerEmail)) {
+            $notifs = [...$notifs, {
+                msg: 'Email is invalid',
+                type: 'error',
+                id: `${(Math.random() * 99) + 1}${new Date().getTime()}`
+            }]
+            return
+        }
+
+        if(!validators.isPassValid(customer.customerPassword)) {
+            $notifs = [...$notifs, {
+                msg: 'Password does not meet the criteria for the security',
+                type: 'error',
+                id: `${(Math.random() * 99) + 1}${new Date().getTime()}`
+            }]
+            return
+        }
+
+        if(validators.containsLettersAndCharacters(customer.customerGcashNumber)) {
+            $notifs = [...$notifs, {
+                msg: 'Gash number cannot have a letter or special characters',
+                type: 'error',
+                id: `${(Math.random() * 99) + 1}${new Date().getTime()}`
+            }]
+            return
+        }
+
+        if(customer.customerGcashNumber.length != 11) {
+            $notifs = [...$notifs, {
+                msg: 'Gash number must be exactly 11 numbers e.g 09xx-xxx-xxxx',
+                type: 'error',
+                id: `${(Math.random() * 99) + 1}${new Date().getTime()}`
+            }]
+            return
+        }
+
+        if(!customer.customerGcashNumber.substring(0, 2).match('09')) {
+            $notifs = [...$notifs, {
+                msg: 'Gcash number must be start with 09 e.g 09xx-xxx-xxxx',
+                type: 'error',
+                id: `${(Math.random() * 99) + 1}${new Date().getTime()}`
+            }]
+            return
+        }
+
         try {
             let response = await axios.post('/customer/createCustomer', customer);
             console.log(response);
-            await goto("../Customers");
+            goto("../Customers");
         } catch (e) {
+            $notifs = [...$notifs, {
+                // customize the msg for the client
+                msg: `${e}`,
+                type: 'error',
+                id: `${Math.random() * 99}${new Date().getTime()}`
+            }]
             console.log(e);
         }
     }
-
-    let pattern = "([a-zA-z0-9!@#$%^&*(),.;'\\_\\\\]{6,})"
 </script>
 
 <svelte:head>
@@ -33,6 +106,7 @@
 </svelte:head>
 
 <NavbarSolo/>
+<NotificationContainer />
 
 <div class="container">
     <div class="columns  pt-5 is-multiline has-text-centered">
@@ -73,7 +147,7 @@
             <p class="pText has-text-link ml-4 mb-1">
                 <span>*</span> Password
             </p>
-            <input class="pText input is-rounded" type="password" pattern="{pattern}" title="6 or more characters" bind:value={customer.customerPassword} required/>
+            <input class="pText input is-rounded" type="password" title="6 or more characters" bind:value={customer.customerPassword} required/>
         </div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">

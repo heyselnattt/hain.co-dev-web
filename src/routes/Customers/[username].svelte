@@ -25,6 +25,9 @@
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
     import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
     import {goto} from "$app/navigation";
+  import { notifs } from "$lib/stores/notificationStore";
+  import NotificationContainer from "$lib/components/systemNotification/notification-container.svelte";
+  import validators from "$lib/validators";
 
     export let customer;
     export let oldEmail;
@@ -41,13 +44,94 @@
         customerIsActive: true
     };
 
+    const isEmailValid = (email) => {
+        const emailRegexp = new RegExp(
+            /^[a-zA-Z0-9][\~\!\$\%\^\&\*_\=\+\}\{\'\?\-\.\\\#\/\`\|]{0,1}([a-zA-Z0-9][\~\!\$\%\^\&\*_\=\+\}\{\'\?\-\.\\\#\/\`\|]{0,1})*[a-zA-Z0-9]@[a-zA-Z0-9][-\.]{0,1}([a-zA-Z][-\.]{0,1})*[a-zA-Z0-9]\.[a-zA-Z0-9]{1,}([\.\-]{0,1}[a-zA-Z]){0,}[a-zA-Z0-9]{0,}$/i
+        )
+        return emailRegexp.test(email)
+    }
+
+    const isPassValid = (pass) => {
+        const passRegexp = new RegExp(/([a-zA-z0-9!@#$%^&*(),.;'\\_\\]{6,})/)
+        return passRegexp.test(pass)
+    }
+
     const updateCustomerToDatabase = async () => {
+        let msg = ''
+        let errors = 0
+        Object.keys(newCustomer).map(prop => {
+            if(!newCustomer[prop]) {
+                msg += !errors ? `${prop.split('customer').join('')}` : `, ${prop.split('customer').join('')}`
+                errors++
+            }
+        })
+        msg += errors > 1 ? ' are required fields' : ' is a required field'
+
+        if(errors) {
+            $notifs = [...$notifs, {
+                msg,
+                type: 'error',
+                id: `${Math.random() * 99}${new Date().getTime()}`
+            }]
+            return
+        }
+
+        if(!validators.isEmailValid(newCustomer.customerEmail)) {
+            $notifs = [...$notifs, {
+                msg: 'Email is invalid',
+                type: 'error',
+                id: `${(Math.random() * 99) + 1}${new Date().getTime()}`
+            }]
+            return
+        }
+
+        if(!validators.isPassValid(newCustomer.customerPassword)) {
+            $notifs = [...$notifs, {
+                msg: 'Password does not meet the criteria for the security',
+                type: 'error',
+                id: `${(Math.random() * 99) + 1}${new Date().getTime()}`
+            }]
+            return
+        }
+
+        if(validators.containsLettersAndCharacters(newCustomer.customerGcashNumber)) {
+            $notifs = [...$notifs, {
+                msg: 'Gash number cannot have a letter or special characters',
+                type: 'error',
+                id: `${(Math.random() * 99) + 1}${new Date().getTime()}`
+            }]
+            return
+        }
+
+        if(newCustomer.customerGcashNumber.length != 11) {
+            $notifs = [...$notifs, {
+                msg: 'Gash number must be exactly 11 numbers e.g 09xx-xxx-xxxx',
+                type: 'error',
+                id: `${(Math.random() * 99) + 1}${new Date().getTime()}`
+            }]
+            return
+        }
+
+        if(!newCustomer.customerGcashNumber.substring(0, 2).match('09')) {
+            $notifs = [...$notifs, {
+                msg: 'Gcash number must be start with 09 e.g 09xx-xxx-xxxx',
+                type: 'error',
+                id: `${(Math.random() * 99) + 1}${new Date().getTime()}`
+            }]
+            return
+        }
+
         try {
             console.log(newCustomer)
             let response = await axios.put(`/customer/updateCustomer/${oldEmail}`, newCustomer)
             console.log(response)
             await goto('../Customers');
         } catch (e) {
+            $notifs = [...$notifs, {
+                msg: `Error in updating customer data`,
+                type: 'error',
+                id: `${Math.random() * 99}${new Date().getTime()}`
+            }]
             console.log(e);
         }
     }
@@ -57,6 +141,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Karla:wght@600&display=swap" rel="stylesheet"/>
 </svelte:head>
 <NavbarSolo/>
+<NotificationContainer />
 
 <div class="container">
     <div class="columns  pt-5 is-multiline has-text-centered">

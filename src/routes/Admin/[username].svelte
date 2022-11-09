@@ -25,6 +25,9 @@
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
     import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
     import {goto} from "$app/navigation";
+    import NotificationContainer from "$lib/components/systemNotification/notification-container.svelte";
+    import { notifs } from "$lib/stores/notificationStore";
+    import validators from "$lib/validators";
 
     export let admin;
     export let oldUsername;
@@ -40,11 +43,43 @@
     }
 
     const updateAdminToDatabase = async () => {
+        let msg = ''
+        let errors = 0
+        Object.keys(newAdmin).map(prop => {
+            if(!newAdmin[prop] && prop !== 'admin_is_active') {
+                msg += !errors ? `${prop.split('admin_').join('').split('_').join(' ')}` : `, ${prop.split('admin_').join('')}`
+                errors++
+            }
+        })
+        msg += errors ? ' are a required fields' : 'is a required field'
+        if(errors) {
+            $notifs = [...$notifs, {
+                msg,
+                type: 'error',
+                id: `${Math.random() * 99}${new Date().getTime()}`
+            }]
+            return
+        }
+
+        if(!validators.isPassValid(newAdmin.admin_password)) {
+            $notifs = [...$notifs, {
+                msg: 'Password does not meet the criteria for security',
+                type: 'error',
+                id: `${Math.random() * 99}${new Date().getTime()}`
+            }]
+            return
+        }
+
         try {
             let response = await axios.put(`/admin/updateAdmin/${oldUsername}`, newAdmin)
             console.log(response)
             await goto('../Admin');
         } catch (e) {
+            $notifs = [...$notifs, {
+                msg: 'Error in updating an admin',
+                type: 'error',
+                id: `${Math.random() * 99}${new Date().getTime()}`
+            }]
             console.log(e);
         }
     }
@@ -55,6 +90,7 @@
 </svelte:head>
 
 <NavbarSolo/>
+<NotificationContainer />
 
 <div class="container">
     <div class="columns  pt-5 is-multiline has-text-centered">
