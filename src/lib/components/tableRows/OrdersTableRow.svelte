@@ -48,10 +48,6 @@
     }
 </script>
 
-<svelte:head>
-    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@600&display=swap" rel="stylesheet"/>
-</svelte:head>
-
 <tbody>
     <tr class="text is-clickable">
         <th>{orderNumber}</th>
@@ -92,7 +88,7 @@
     }
 
     option, select {
-        font-family: Karla, sans-serif;
+        font-family: 'Montserrat', sans-serif;
         font-size: 14px;
     }
 </style>

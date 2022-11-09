@@ -23,6 +23,7 @@
 
 <style>
     .text {
+        font-family: 'Montserrat', sans serif;
         font-size: 17px;
     }
 </style>

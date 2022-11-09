@@ -4,9 +4,9 @@
     import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
     import axios from "$lib/api";
     import {goto} from "$app/navigation";
-  import NotificationContainer from "$lib/components/systemNotification/notification-container.svelte";
-  import { notifs } from "$lib/stores/notificationStore";
-  import validators from "$lib/validators";
+    import NotificationContainer from "$lib/components/systemNotification/notification-container.svelte";
+    import { notifs } from "$lib/stores/notificationStore";
+    import validators from "$lib/validators";
 
     let staff = {
         staffFullName: null,
@@ -95,10 +95,6 @@
     }
 </script>
 
-<svelte:head>
-    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@600&display=swap" rel="stylesheet"/>
-</svelte:head>
-
 <NavbarSolo/>
 <NotificationContainer />
 
@@ -166,16 +162,16 @@
 
 <style>
     .text1 {
-        font-family: 'Karla', sans-serif;
+        font-family: 'Montserrat', sans-serif;
         font-size: 40px;
     }
     .pText {
-        font-family: 'Karla', sans-serif;
+        font-family: 'Montserrat', sans-serif;
         font-size: 20px;
     }
     .btn-txt {
         font-size: 20px;
-        font-family: 'Karla', sans-serif;
+        font-family: 'Montserrat', sans-serif;
     }
 
     span {
