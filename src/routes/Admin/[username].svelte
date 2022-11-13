@@ -5,12 +5,12 @@
         try {
             const username = params.username;
             const admin = await axios.get(`/admin/auth/${username}`);
-            const oldUsername = admin.data.adminDetails.admin_username
+            // const oldUsername = admin.data.adminDetails.adminUsername
             console.log(admin)
             return {
                 props: {
                     admin,
-                    oldUsername
+                    oldUsername: username
                 }
             }
         } catch (e) {
@@ -35,18 +35,18 @@
     let adminDetails = admin.data.adminDetails;
 
     let newAdmin = {
-        admin_full_name: null,
-        admin_username: null,
-        admin_password: null,
-        admin_position: 1,
-        admin_is_active: true,
+        adminFullName: null,
+        adminUsername: null,
+        adminPassword: null,
+        adminIsSuperadmin: true,
+        adminIsActive: true,
     }
 
     const updateAdminToDatabase = async () => {
         let msg = ''
         let errors = 0
         Object.keys(newAdmin).map(prop => {
-            if(!newAdmin[prop] && prop !== 'admin_is_active') {
+            if(!newAdmin[prop] && prop !== 'adminIsActive') {
                 msg += !errors ? `${prop.split('admin_').join('').split('_').join(' ')}` : `, ${prop.split('admin_').join('')}`
                 errors++
             }
@@ -61,7 +61,7 @@
             return
         }
 
-        if(!validators.isPassValid(newAdmin.admin_password)) {
+        if(!validators.isPassValid(newAdmin.adminPassword)) {
             $notifs = [...$notifs, {
                 msg: 'Password does not meet the criteria for security',
                 type: 'error',
@@ -71,7 +71,10 @@
         }
 
         try {
+            // console.log(newAdmin)
+            // return
             let response = await axios.put(`/admin/updateAdmin/${oldUsername}`, newAdmin)
+            alert("Admin updated successfully!")
             console.log(response)
             await goto('../Admin');
         } catch (e) {
@@ -120,19 +123,19 @@
                 <p class="pText has-text-link ml-4 mb-1">
                     <span>*</span> Current Name: {adminDetails.admin_full_name}
                 </p>
-                <input class="pText input is-rounded" type="text" bind:value={newAdmin.admin_full_name}/>
+                <input class="pText input is-rounded" type="text" bind:value={newAdmin.adminFullName}/>
             </div>
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
                     <span>*</span> Current Username: {adminDetails.admin_username}
                 </p>
-                <input class="pText input is-rounded" type="text" bind:value={newAdmin.admin_username}/>
+                <input class="pText input is-rounded" type="text" bind:value={newAdmin.adminUsername}/>
             </div>
             <div class="column is-3 is-offset-2">
                 <p class="pText has-text-link ml-4 mb-1">
                     <span>*</span> Current Password: {adminDetails.admin_password}
                 </p>
-                <input class="pText input is-rounded" type="password" bind:value={newAdmin.admin_password}/>
+                <input class="pText input is-rounded" type="password" bind:value={newAdmin.adminPassword}/>
             </div>
         {:catch e}
             {e}
@@ -152,8 +155,8 @@
                                type="checkbox"
                                name="switchLarge switchColorDefault switchRoundedDefault"
                                class="switch is-large is-link is-rounded"
-                               bind:checked={newAdmin.admin_is_active}>
-                        {#if newAdmin.admin_is_active}
+                               bind:checked={newAdmin.adminIsActive}>
+                        {#if newAdmin.adminIsActive}
                             <label for="switchLarge switchColorDefault switchRoundedDefault">Active</label>
                         {:else}
                             <label for="switchLarge switchColorDefault switchRoundedDefault">Inactive</label>
