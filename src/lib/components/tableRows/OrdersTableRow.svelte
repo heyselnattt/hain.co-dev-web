@@ -1,48 +1,45 @@
 <script lang="ts">
     import axios from '$lib/api/index';
-    export let productCode;
-    export let customerEmail;
-    export let orderRequest;
-    export let orderDate;
-    export let staffUsername;
-    export let orderStatus;
-    export let orderNumber;
-
-
-    let orderStatuses = [
-        {value: 1, label: "INCOMING"},
-        {value: 2, label: "UNFULFILLED"},
-        {value: 3, label: "PROCESSING"},
-        {value: 4, label: "FULFILLED"}
-    ]
-
-    const identifyType = (code: number): string => {
-        switch(code) {
-            case 1:
-                return "Incoming"
-
-            case 2:
-                return "Unfulfilled"
-
-            case 3:
-                return "Processing"
-
-            case 4:
-                return "Fulfilled"
-        }
-    }
+    import { notifs } from '$lib/stores/notificationStore';
+    export let productCode: string;
+    export let customerEmail: string;
+    export let orderRequest: string;
+    export let orderDate: Date;
+    export let staffUsername: string;
+    export let orderStatus: number;
+    export let orderNumber: number;
 
     let newStatus;
+    let updating = false
 
     const updateOrderStatus = async () => {
         try {
+            updating = true
             const newStatusInt = parseInt(newStatus);
             const response = await axios.patch(`/order/updateOrderStatus/${orderNumber}`, {
                 orderStatus: newStatusInt
             })
-            alert("Order status updated successfully")
-            console.log(response)
+            if(response.status == 200) {
+                $notifs = [...$notifs, {
+                    msg: `Order #${orderNumber} status updated to ${newStatus == 1 ? 'INCOMING' : newStatus == 2 ? 'UNFULFILLED' : newStatus == 3 ? 'PROCESSING' : newStatus == 4 ? 'READY' : 'FULFILLED'}`,
+                    type: 'success',
+                    id: (Math.random() * 99) + 1
+                }]
+            }else{
+                $notifs = [...$notifs, {
+                    msg: `Updating order #${orderNumber} failed`,
+                    type: 'error',
+                    id: (Math.random() * 99) + 1
+                }]
+            }
+            updating = false
         } catch (e) {
+            updating = false
+            $notifs = [...$notifs, {
+                msg: `Updating order #${orderNumber} failed`,
+                type: 'error',
+                id: (Math.random() * 99) + 1
+            }]
             console.log(e)
         }
     }
@@ -57,7 +54,7 @@
         <th>{new Date(orderDate).toLocaleString()}</th>
         <th>{staffUsername}</th>
         <td>
-            <div class="select is-small">
+            <div class="select {updating ? 'is-loading' : ''} is-small">
                 <select bind:value={newStatus}
                         on:change={updateOrderStatus}>
                     {#if orderStatus === 1}

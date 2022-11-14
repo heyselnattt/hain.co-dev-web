@@ -6,6 +6,7 @@
     import {onMount} from "svelte";
     import {goto} from "$app/navigation";
     import AllOrdersTableRow from "$lib/components/tableRows/AllOrdersTableRow.svelte";
+    import NotificationContainer from "$lib/components/systemNotification/notification-container.svelte";
 
     export let link: string = " ";
 
@@ -51,6 +52,7 @@
 </script>
 
 <NavbarWithSearch/>
+<NotificationContainer />
 
 <div class="container">
     <div class="columns has-text-centered pt-5">

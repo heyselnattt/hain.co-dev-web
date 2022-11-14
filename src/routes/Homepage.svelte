@@ -6,6 +6,7 @@
     import LoadingScreen from "$lib/components/otherComponents/LoadingScreen.svelte";
     import { notifs } from "$lib/stores/notificationStore";
     import validators from "$lib/validators";
+    import NotificationContainer from "$lib/components/systemNotification/notification-container.svelte";
 
     let userInfo = {
         username: "",
@@ -78,6 +79,7 @@
 <LoadingScreen infinite={true}/>
 {:else}
 <HomeNavbar/>
+<NotificationContainer />
 
 <div class="container">
     <div class="columns is-multiline">

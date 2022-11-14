@@ -31,6 +31,7 @@
 
     export let canteenStaff;
     export let oldUsername;
+    let updating = false
 
     let canteenStaffDetails = canteenStaff.data.staffDetails;
 
@@ -117,12 +118,29 @@
             return
         }
         try {
-            console.log(newStaff)
+            updating = true
+            // console.log(newStaff)
             let response = await axios.put(`/staff/updateStaff/${oldUsername}`, newStaff);
-            console.log(response)
-            alert('Staff updated successfully!')
-            await goto('../CanteenStaff');
+            if(response.status == 200) {
+                updating = false
+                $notifs = [...$notifs, {
+                    msg: `Canteen staff: ${newStaff.staffFullName} is updated`,
+                    type: 'success',
+                    id: (Math.random() * 100) + 1
+                }]
+                await goto('../CanteenStaff');
+            }else{
+                updating = false
+                $notifs = [...$notifs, {
+                    msg: `Error in updating staff`,
+                    type: 'error',
+                    id: `${(Math.random() * 99) + 1}${new Date().getTime()}`
+                }]
+            }
+            // console.log(response)
+            // alert('Staff updated successfully!')
         } catch (e) {
+            updating = false
             $notifs = [...$notifs, {
                 msg: `Error in updating staff`,
                 type: 'error',
@@ -147,8 +165,8 @@
             </p>
         </div>
         <div class="column is-3 ml-6">
-            <button class="button is-rounded is-info btn-txt" on:click={updateStaffToDatabase}>
-                <p class="ml-4 mr-4 has-text-white">
+            <button class="button {updating ? 'is-loading' : ''} is-rounded is-info btn-txt" on:click={updateStaffToDatabase}>
+                <p class="{updating ? 'is-hidden' : ''} ml-4 mr-4 has-text-white">
                     Save
                 </p>
             </button>

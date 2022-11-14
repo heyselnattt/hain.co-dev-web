@@ -6,6 +6,7 @@
     import {orderToday} from "$lib/stores/orderStore";
     import {onMount} from "svelte";
     import {goto} from "$app/navigation";
+    import NotificationContainer from "$lib/components/systemNotification/notification-container.svelte";
 
     const link: string = " ";
 
@@ -48,6 +49,7 @@
 </script>
 
 <NavbarWithSearch/>
+<NotificationContainer />
 
 <div class="container">
     <div class="columns has-text-centered pt-5">

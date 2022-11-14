@@ -16,6 +16,7 @@
         staffPosition: 1,
         staffIsActive: true
     }
+    let adding = false
 
     let positions = [
         {value: 1, position: "CHEF"},
@@ -79,12 +80,29 @@
         }
 
         try {
-            console.log(staff)
+            adding = true
+            // console.log(staff)
             let response = await axios.post('/staff/createStaff', staff)
-            console.log(response)
-            alert('Staff added successfully!')
-            await goto("../CanteenStaff")
+            if(response.status == 200) {
+                adding = false
+                $notifs = [...$notifs, {
+                    msg: `New canteen staff: ${staff.staffFullName}`,
+                    type: 'success',
+                    id: `${(Math.random() * 99) + 1}${new Date().getTime()}`
+                }]
+                await goto("../CanteenStaff")
+            }else{
+                adding = false
+                $notifs = [...$notifs, {
+                    msg: `Error in adding new staff`,
+                    type: 'error',
+                    id: `${(Math.random() * 99) + 1}${new Date().getTime()}`
+                }]
+            }
+            // console.log(response)
+            // alert('Staff added successfully!')
         } catch (e) {
+            adding = false
             $notifs = [...$notifs, {
                 msg: `Error in adding new staff`,
                 type: 'error',
@@ -156,7 +174,7 @@
     </div>
     <!-- Add record button -->
     <div class="mb- has-text-centered">
-        <button class="btn-txt button is-link is-rounded" on:click={addStaffToDatabase}>Add Canteen Staff</button>
+        <button class="btn-txt button {adding ? 'is-loading' : ''} is-link is-rounded" on:click={addStaffToDatabase}>Add Canteen Staff</button>
     </div>
 </div>
 

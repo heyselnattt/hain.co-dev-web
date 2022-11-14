@@ -25,12 +25,13 @@
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
     import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
     import {goto} from "$app/navigation";
-  import { notifs } from "$lib/stores/notificationStore";
-  import NotificationContainer from "$lib/components/systemNotification/notification-container.svelte";
-  import validators from "$lib/validators";
+    import { notifs } from "$lib/stores/notificationStore";
+    import NotificationContainer from "$lib/components/systemNotification/notification-container.svelte";
+    import validators from "$lib/validators";
 
     export let customer;
     export let oldEmail;
+    let updating = false
 
     let customerDetails = customer.data.customerDetails;
 
@@ -122,11 +123,28 @@
         }
 
         try {
+            updating = true
             console.log(newCustomer)
             let response = await axios.put(`/customer/updateCustomer/${oldEmail}`, newCustomer)
-            console.log(response)
-            await goto('../Customers');
+            if(response.status == 200) {
+                updating = false
+                $notifs = [...$notifs, {
+                    msg: `Canteen customer: ${newCustomer.customerFirstName} ${newCustomer.customerLastName} is updated`,
+                    type: 'success',
+                    id: (Math.random() * 100) + 1
+                }]
+                await goto('../Customers');
+            }else {
+                updating = false
+                $notifs = [...$notifs, {
+                    msg: `Error in updating customer data`,
+                    type: 'error',
+                    id: `${Math.random() * 99}${new Date().getTime()}`
+                }]
+            }
+            // console.log(response)
         } catch (e) {
+            updating = false
             $notifs = [...$notifs, {
                 msg: `Error in updating customer data`,
                 type: 'error',
@@ -151,8 +169,8 @@
             </p>
         </div>
         <div class="column is-3 ml-6">
-            <button class="button is-rounded is-info btn-txt" on:click={updateCustomerToDatabase}>
-                <p class="ml-4 mr-4 has-text-white">
+            <button class="button {updating ? 'is-loading' : ''} is-rounded is-info btn-txt" on:click={updateCustomerToDatabase}>
+                <p class="ml-4 mr-4 has-text-white {updating ? 'is-hidden' : ''}">
                     Save
                 </p>
             </button>

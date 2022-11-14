@@ -26,8 +26,8 @@
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
     import {goto} from "$app/navigation";
     import uploadImageToAPI from "$lib/helper/uploadImageToAPI.js";
-  import { notifs } from "$lib/stores/notificationStore";
-  import NotificationContainer from "$lib/components/systemNotification/notification-container.svelte";
+    import { notifs } from "$lib/stores/notificationStore";
+    import NotificationContainer from "$lib/components/systemNotification/notification-container.svelte";
 
     const identifyType = (code) => {
         switch (code) {
@@ -49,7 +49,7 @@
     export let oldProductCode;
 
     let productDetails = product.data.product;
-
+    let updating = false
     let newProduct = {
         productCode: oldProductCode,
         productName: "",
@@ -98,11 +98,29 @@
         }
 
         try {
+            updating = true
             newProduct.productImage = await uploadImageToAPI(selectedImage);
             let response = await axios.put(`/product/updateProduct/${oldProductCode}`, newProduct)
-            console.log(response)
-            await goto('../Food');
+            if(response.status == 200) {
+                updating = false
+                // alert(`Canteen product: ${newProduct.productName} (${newProduct.productCode}) is updated`)
+                $notifs = [...$notifs, {
+                    msg: `Canteen product: ${newProduct.productName} (${newProduct.productCode}) is updated`,
+                    type: 'success',
+                    id: `${Math.random() * 99}${new Date().getTime()}`
+                }]
+                await goto('../Food');
+            }else{
+                updating = false
+                $notifs = [...$notifs, {
+                    msg: 'Error in updating product',
+                    type: 'error',
+                    id: `${Math.random() * 99}${new Date().getTime()}`
+                }]
+            }
+            // console.log(response)
         } catch (e) {
+            updating = false
             $notifs = [...$notifs, {
                 msg: 'Error in updating product',
                 type: 'error',
@@ -133,8 +151,8 @@
             </p>
         </div>
         <div class="column is-3 ml-6">
-            <button class="button is-rounded is-info btn-txt" on:click={updateProductToDatabase}>
-                <p class="ml-4 mr-4 has-text-white">
+            <button class="button {updating ? 'is-loading' : ''} is-rounded is-info btn-txt" on:click={updateProductToDatabase}>
+                <p class="ml-4 mr-4 has-text-white {updating ? 'is-hidden' : ''}">
                     Save
                 </p>
             </button>

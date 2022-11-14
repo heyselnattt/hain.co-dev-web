@@ -19,6 +19,7 @@
     }
 
     let selectedImage;
+    let adding = false
 
     let types = [
         {value: 1, type: "BREAKFAST"},
@@ -56,13 +57,30 @@
         }
 
         try {
+            adding = false
             product.productImage = await uploadImageToAPI(selectedImage);
-            console.log(product.productImage);
+            // console.log(product.productImage);
             let response = await axios.post('/product/createProduct', product)
-            console.log(response)
-            alert("Product Added Successfully")
-            await goto("../Food")
+            if(response.status == 200) {
+                adding = false
+                $notifs = [...$notifs, {
+                    msg: `New canteen product: ${product.productName} (${product.productCode})`,
+                    type: 'success',
+                    id: `${Math.random() * 99}${new Date().getTime()}`
+                }]
+                await goto("../Food")
+            }else{
+                adding = false
+                $notifs = [...$notifs, {
+                    msg: `Error in adding new product`,
+                    type: 'error',
+                    id: `${Math.random() * 99}${new Date().getTime()}`
+                }]
+            }
+            // console.log(response)
+            // alert("Product Added Successfully")
         } catch (e) {
+            adding = false
             $notifs = [...$notifs, {
                 msg: `Error in adding new product`,
                 type: 'error',
@@ -75,7 +93,7 @@
     function onImageSelect(e) {
         selectedImage = e.target.files[0]
         product.productImage = selectedImage
-        console.log(selectedImage)
+        // console.log(selectedImage)
     }
 </script>
 
@@ -149,7 +167,7 @@
     </div>
     <div class="has-text-centered">
         <div class="mb- has-text-centered">
-            <button class="btn-txt button is-link is-rounded" on:click={addProductToDatabase}>Add Product</button>
+            <button class="btn-txt button {adding ? 'is-loading' : ''} is-link is-rounded" on:click={addProductToDatabase}>Add Product</button>
         </div>
     </div>
 

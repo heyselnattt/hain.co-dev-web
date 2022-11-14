@@ -31,6 +31,7 @@
 
     export let admin;
     export let oldUsername;
+    let updating = false
 
     let adminDetails = admin.data.adminDetails;
 
@@ -73,11 +74,28 @@
         try {
             // console.log(newAdmin)
             // return
+            updating = true
             let response = await axios.put(`/admin/updateAdmin/${oldUsername}`, newAdmin)
-            alert("Admin updated successfully!")
-            console.log(response)
-            await goto('../Admin');
+            // alert("Admin updated successfully!")
+            //console.log(response)
+            if(response.status == 200) {
+                updating = false
+                $notifs = [...$notifs, {
+                    msg: `Canteen admin: ${newAdmin.adminFullName} is updated`,
+                    type: 'success',
+                    id: `${Math.random() * 99}${new Date().getTime()}`
+                }]
+                await goto('../Admin');
+            }else{
+                updating = false
+                $notifs = [...$notifs, {
+                    msg: 'Error in updating an admin',
+                    type: 'error',
+                    id: `${Math.random() * 99}${new Date().getTime()}`
+                }]
+            }
         } catch (e) {
+            updating = false
             $notifs = [...$notifs, {
                 msg: 'Error in updating an admin',
                 type: 'error',
@@ -102,8 +120,8 @@
             </p>
         </div>
         <div class="column is-3 ml-6">
-            <button class="button is-rounded is-info btn-txt" on:click={updateAdminToDatabase}>
-                <p class="ml-4 mr-4 has-text-white">
+            <button class="button {updating ? 'is-loading' : ''} is-rounded is-info btn-txt" on:click={updateAdminToDatabase}>
+                <p class="ml-4 mr-4 has-text-white {updating ? 'is-hidden' : ''}">
                     Save
                 </p>
             </button>

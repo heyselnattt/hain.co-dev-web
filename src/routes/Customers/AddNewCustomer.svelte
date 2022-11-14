@@ -17,6 +17,7 @@
         customerGcashName: null,
         customerIsActive: true
     };
+    let adding = false
 
     const addCustomerToDatabase = async () => {
         let msg = ''
@@ -86,13 +87,29 @@
         }
 
         try {
+            adding = true
             let response = await axios.post('/customer/createCustomer', customer);
-            console.log(response);
-            goto("../Customers");
+            // console.log(response);
+            if(response.status == 200) {
+                adding = false
+                $notifs = [...$notifs, {
+                    msg: `New canteen customer: ${customer.customerFirstName} ${customer.customerLastName} (${customer.customerEmail})`,
+                    type: 'error',
+                    id: `${Math.random() * 99}${new Date().getTime()}`
+                }]
+                goto("../Customers");
+            }else{
+                adding = false
+                $notifs = [...$notifs, {
+                    msg: `Error in adding a new customer`,
+                    type: 'error',
+                    id: `${Math.random() * 99}${new Date().getTime()}`
+                }]
+            }
         } catch (e) {
+            adding = false
             $notifs = [...$notifs, {
-                // customize the msg for the client
-                msg: `${e}`,
+                msg: `Error in adding a new customer`,
                 type: 'error',
                 id: `${Math.random() * 99}${new Date().getTime()}`
             }]
@@ -161,7 +178,7 @@
     </div>
     <!-- Add record button -->
     <div class="mb- has-text-centered">
-        <button class="btn-txt button is-link is-rounded" type="submit" on:click={addCustomerToDatabase}>Add Customer</button>
+        <button class="btn-txt button {adding ? 'is-loading' : ''} is-link is-rounded" type="submit" on:click={addCustomerToDatabase}>Add Customer</button>
     </div>
 </div>
 

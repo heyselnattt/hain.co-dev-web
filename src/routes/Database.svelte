@@ -6,6 +6,7 @@
     import FixedLoadingScreen from "$lib/components/otherComponents/FixedLoadingScreen.svelte";
     import {goto} from "$app/navigation";
     import {onMount} from "svelte";
+    import NotificationContainer from "$lib/components/systemNotification/notification-container.svelte";
 
     onMount(async () => {
         if (!localStorage.getItem("admin")) {
@@ -19,6 +20,7 @@
 </svelte:head>
 
 <LogoutNavbar/>
+<NotificationContainer />
 
 <div class="container">
     <p class="text has-text-centered has-text-link has-text-weight-bold mt-5">

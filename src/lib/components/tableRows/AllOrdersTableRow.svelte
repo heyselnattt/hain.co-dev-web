@@ -1,46 +1,11 @@
 <script lang="ts">
-    import axios from '$lib/api/index';
-    export let productCode;
-    export let customerEmail;
-    export let orderRequest;
-    export let orderDate;
-    export let staffUsername;
-    export let orderStatus;
-    export let orderNumber;
-
-
-    let orderStatuses = [
-        {value: 1, label: "INCOMING"},
-        {value: 2, label: "UNFULFILLED"},
-        {value: 3, label: "PROCESSING"},
-        {value: 4, label: "FULFILLED"}
-    ]
-
-    const identifyType = (code: number): string => {
-        switch(code) {
-            case 1:
-                return "Incoming"
-
-            case 2:
-                return "Unfulfilled"
-
-            case 3:
-                return "Processing"
-
-            case 4:
-                return "Fulfilled"
-        }
-    }
-
-    let newStatus;
-
-    const updateOrderStatus = async () => {
-        const newStatusInt = parseInt(newStatus);
-        const response = await axios.patch(`/order/updateOrderStatus/${orderNumber}`, {
-            orderStatus: newStatusInt
-        })
-        console.log(response)
-    }
+    export let productCode      : string
+    export let customerEmail    : string
+    export let orderRequest     : string
+    export let orderDate        : Date
+    export let staffUsername    : string
+    export let orderStatus      : number
+    export let orderNumber      : number
 </script>
 
 <tbody>

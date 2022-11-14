@@ -4,9 +4,11 @@
     import ButtonSwitch from "$lib/components/buttons/ButtonSwitch.svelte";
     import FieldWithValue from "$lib/components/otherComponents/FieldWithValue.svelte";
     import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
+    import NotificationContainer from "$lib/components/systemNotification/notification-container.svelte";
 </script>
 
 <NavbarSolo/>
+<NotificationContainer />
 
 <div class="container">
     <div class="columns  pt-5 is-multiline has-text-centered">

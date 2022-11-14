@@ -8,6 +8,7 @@
     import {onMount} from "svelte";
     import {goto} from "$app/navigation";
     import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
+    import NotificationContainer from "$lib/components/systemNotification/notification-container.svelte";
 
     onMount(async () => {
         if (!localStorage.getItem("admin")) {
@@ -35,9 +36,8 @@
         }
     }
 </script>
-
 <NavbarSolo/>
-
+<NotificationContainer />
 
 <div class="container">
     <div class="columns has-text-centered pt-5">

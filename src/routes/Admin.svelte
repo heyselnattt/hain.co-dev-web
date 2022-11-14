@@ -7,6 +7,7 @@
     import {admins} from "$lib/stores/adminStore";
     import {onMount} from "svelte";
     import {goto} from "$app/navigation";
+    import NotificationContainer from "$lib/components/systemNotification/notification-container.svelte";
 
     onMount(async () => {
         if (!localStorage.getItem("admin")) {
@@ -21,6 +22,7 @@
 </script>
 
 <NavbarSolo/>
+<NotificationContainer />
 
 <div class="container">
     <div class="columns has-text-centered pt-5">

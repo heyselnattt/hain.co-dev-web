@@ -16,6 +16,7 @@
         adminIsSuperadmin: true,
         adminIsActive: true,
     }
+    let adding = false
 
     const addAdminToDatabase = async () => {
         let msg = ''
@@ -45,10 +46,27 @@
             return
         }
         try {
+            adding = true
             let response = await axios.post('/admin/createAdmin', admin)
-            alert("Admin added successfully")
-            await goto("../Admin")
+            if(response.status == 200) {
+                adding = false
+                $notifs = [...$notifs, {
+                    msg: `New canteen admin: ${admin.adminFullName}`,
+                    type: 'success',
+                    id: `${Math.random() * 99}${new Date().getTime()}`
+                }]
+                await goto("../Admin")
+            }else{
+                adding = false
+                $notifs = [...$notifs, {
+                    msg: 'Error adding a new admin',
+                    type: 'error',
+                    id: `${Math.random() * 99}${new Date().getTime()}`
+                }]
+            }
+            // alert("Admin added successfully")
         } catch (e) {
+            adding = false
             $notifs = [...$notifs, {
                 msg: 'Error adding a new admin',
                 type: 'error',
@@ -107,7 +125,7 @@
     </div>
     <!-- Add record button -->
     <div class="mb- has-text-centered">
-        <button class="btn-txt button is-link is-rounded" on:click={addAdminToDatabase}>Add Admin</button>
+        <button class="btn-txt button {adding ? 'is-loading' : ''} is-link is-rounded" on:click={addAdminToDatabase}>Add Admin</button>
     </div>
 </div>
 

@@ -1,7 +1,7 @@
 <script lang="ts">
     import ButtonEditTable from "../buttons/ButtonEditTable.svelte";
 
-    export let num;
+    export let num: number;
     export let name: string;
     export let customerLastName: string;
     export let email: string;
