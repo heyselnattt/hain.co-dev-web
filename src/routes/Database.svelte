@@ -47,7 +47,7 @@
                     </div>
                     <!-- today's amount -->
                     <div class="montserrat has-text-link txt-weight-900 txt-size-70">
-                        {revenue.dayRevenue}
+                        {revenue.day}
                     </div>
                     <!-- this week's sales -->
                     <div class="montserrat has-text-black txt-size-30 w-100p pl-5">

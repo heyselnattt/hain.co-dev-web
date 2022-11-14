@@ -61,6 +61,13 @@
                 localStorage.setItem("admin", JSON.stringify(userInfo));
                 loading = false;
                 goto("/Database");
+            } else {
+                $notifs = [...$notifs, {
+                    msg: 'Invalid password',
+                    type: 'error',
+                    id: `${(Math.random() * 99) + 1}${new Date().getTime()}`
+                }]
+                loading = false;
             }
         } catch (e) {
             // Change msg for the client
