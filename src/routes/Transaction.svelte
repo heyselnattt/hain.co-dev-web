@@ -14,7 +14,7 @@
         }
     })
 
-    const binderLink = "http://localhost:8888/lab/tree/reports.ipynb"
+    const binderLink = "https://mybinder.org/v2/gh/rence-salaveria/reports-py/cffd3464bcbe54164a77eda53fa6113f1fac56b3?urlpath=lab%2Ftree%2Freports.ipynb"
 
     let recordNumber = 1;
     const counter = (): number => {
