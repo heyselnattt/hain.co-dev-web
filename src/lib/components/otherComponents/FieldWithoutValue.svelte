@@ -38,7 +38,7 @@
 
 <style>
     .pText {
-        font-family: 'Karla', sans-serif;
+        font-family: 'Montserrat', sans-serif;
         font-size: 20px;
     }
 </style>

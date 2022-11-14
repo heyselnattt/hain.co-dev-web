@@ -9,15 +9,11 @@
     }, 5000);
 </script>
 
-<svelte:head>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"/>
-</svelte:head>
-
 {#if !hide}
 <div out:fade class="hero is-white is-flex is-justify-content-center is-align-items-center">
     <div class="hero-body">
             <div class="container">
-                <Rainbow size="100" color="#1042C1" unit="px" duration="1.7s"></Rainbow>
+                <Rainbow size="100" color="#EA6227" unit="px" duration="1.7s"></Rainbow>
             </div>
             <p class="has-text-link">Loading</p>
     </div>
@@ -34,7 +30,7 @@
 
     p {
         position: absolute;
-        font-family: 'Lobster', cursive;
+        font-family: 'Titan One', cursive;
         font-size: 30px;
         top: 37%;
         left: 50%;

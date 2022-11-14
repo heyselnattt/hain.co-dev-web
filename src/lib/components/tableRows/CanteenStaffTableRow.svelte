@@ -3,8 +3,7 @@
 
     export let num: string;
     export let name: string;
-    // TODO add position enum
-    export let position;
+    export let position: string;
     export let contactNum: string;
     export let link: string;
 </script>
@@ -15,13 +14,13 @@
         <td>{name}</td>
         <td>{position}</td>
         <td>{contactNum}</td>
-<!--        <td>{address}</td>-->
         <td><ButtonEditTable link={link}/></td>
     </tr>
 </tbody>
 
 <style>
     .text {
+        font-family: 'Montserrat', sans serif;
         font-size: 17px;
     }
 </style>

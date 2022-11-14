@@ -30,6 +30,6 @@
 
     .btn-txt {
         font-size: 20px;
-        font-family: 'Karla', sans-serif;
+        font-family: 'Montserrat', sans-serif;
     }
 </style>

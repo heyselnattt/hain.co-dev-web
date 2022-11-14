@@ -12,7 +12,8 @@ export const staffs = readable(null, function start(set) {
 
 async function getStaffs() {
     try {
-        return await axios.get('/staff');
+        const {data} = await axios.get('/staff');
+        return data.staffs
     } catch (e) {
         console.log(e);
     }

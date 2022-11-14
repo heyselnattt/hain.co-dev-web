@@ -5,6 +5,15 @@
     import ButtonAddRecord from "$lib/components/buttons/ButtonAddRecord.svelte";
     import FixedLoadingScreen from "$lib/components/otherComponents/FixedLoadingScreen.svelte";
     import {admins} from "$lib/stores/adminStore";
+    import {onMount} from "svelte";
+    import {goto} from "$app/navigation";
+    import NotificationContainer from "$lib/components/systemNotification/notification-container.svelte";
+
+    onMount(async () => {
+        if (!localStorage.getItem("admin")) {
+            await goto("/");
+        }
+    })
 
     let adminNumber = 1;
     const counter = (): number => {
@@ -12,11 +21,8 @@
     }
 </script>
 
-<svelte:head>
-    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@600&display=swap" rel="stylesheet"/>
-</svelte:head>
-
 <NavbarSolo/>
+<NotificationContainer />
 
 <div class="container">
     <div class="columns has-text-centered pt-5">
@@ -24,7 +30,7 @@
             <ButtonBack link="Database"/>
         </div>
         <div class="column is-4">
-            <p class="text has-text-link">
+            <p class="text has-text-link has-text-weight-bold">
                 Administrators
             </p>
         </div>
@@ -37,7 +43,7 @@
         {#await $admins}
             <FixedLoadingScreen/>
         {:then admin}
-            {#each admin.data as info}
+            {#each admin as info}
                 <Card
                     name={info.admin_username}
                     sub={info.admin_full_name}
@@ -53,7 +59,7 @@
 
 <style>
     .text {
-        font-family: 'Karla', sans-serif;
+        font-family: 'Montserrat', sans serif;
         font-size: 40px;
     }
 </style>

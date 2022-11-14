@@ -5,6 +5,16 @@
     import FoodTableRow from "$lib/components/tableRows/FoodTableRow.svelte";
     import {products} from "$lib/stores/productStore";
     import TableLoadingScreen from "$lib/components/otherComponents/TableLoadingScreen.svelte";
+    import {onMount} from "svelte";
+    import {goto} from "$app/navigation";
+    import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
+    import NotificationContainer from "$lib/components/systemNotification/notification-container.svelte";
+
+    onMount(async () => {
+        if (!localStorage.getItem("admin")) {
+            await goto("/");
+        }
+    })
 
     let itemNumber = 1;
     const counter = (): number => {
@@ -26,9 +36,8 @@
         }
     }
 </script>
-
-<NavbarWithSearch/>
-
+<NavbarSolo/>
+<NotificationContainer />
 
 <div class="container">
     <div class="columns has-text-centered pt-5">
@@ -36,7 +45,7 @@
             <ButtonBack link="Database"/>
         </div>
         <div class="column is-4">
-            <p class="text has-text-link">
+            <p class="text has-text-link has-text-weight-bold">
                 Food
             </p>
         </div>
@@ -64,7 +73,7 @@
             {#await $products}
                 <TableLoadingScreen/>
             {:then food}
-                {#each food.data as product}
+                {#each food as product}
                     <FoodTableRow
                         num={counter()}
                         productName={product.product_name}
@@ -83,12 +92,12 @@
 
 <style>
     .text {
-        font-family: 'Karla', sans-serif;
+        font-family: 'Montserrat', sans-serif;
         font-size: 40px;
     }
 
     table {
-        font-family: 'Karla', sans-serif;
+        font-family: 'Montserrat', sans-serif;
         font-size: 20px;
     }
 </style>

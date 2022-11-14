@@ -1,14 +1,14 @@
 <script lang="ts">
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
     import NavbarWithSearch from "$lib/components/navbars/NavbarWithSearch.svelte";
-    import OrdersTableRow from "$lib/components/tableRows/OrdersTableRow.svelte";
     import TableLoadingScreen from "$lib/components/otherComponents/TableLoadingScreen.svelte"
-    import {orderToday} from "$lib/stores/orderStore";
+    import {orders} from "$lib/stores/orderStore";
     import {onMount} from "svelte";
     import {goto} from "$app/navigation";
+    import AllOrdersTableRow from "$lib/components/tableRows/AllOrdersTableRow.svelte";
     import NotificationContainer from "$lib/components/systemNotification/notification-container.svelte";
 
-    const link: string = " ";
+    export let link: string = " ";
 
     onMount(async () => {
         if (!localStorage.getItem("admin")) {
@@ -33,6 +33,9 @@
                 return "Processing"
 
             case 4:
+                return "Ready"
+
+            case 5:
                 return "Fulfilled"
         }
     }
@@ -54,21 +57,12 @@
 <div class="container">
     <div class="columns has-text-centered pt-5">
         <div class="column is-4 has-text-centered">
-            <ButtonBack link="Database"/>
+            <ButtonBack link="Orders"/>
         </div>
         <div class="column is-4">
             <p class="text has-text-link has-text-weight-bold">
-                Orders Today
+                Orders
             </p>
-        </div>
-        <div class="column is-4">
-            <a href="/ViewAllOrders">
-                <button class="button is-rounded is-link btn-txt">
-                    <p class="ml-4 mr-4">
-                        View all orders
-                    </p>
-                </button>
-            </a>
         </div>
     </div>
 
@@ -85,22 +79,23 @@
                     <th>Order Status</th>
                 </tr>
             </thead>
-            {#await $orderToday}
+            {#await $orders}
                 <TableLoadingScreen/>
             {:then order}
                 {#each order as info}
-                    <OrdersTableRow
+                    <AllOrdersTableRow
                         productCode={info.order_product_code}
                         customerEmail={info.order_customer_email}
                         orderRequest={info.order_requests}
                         orderDate={info.order_date}
                         staffUsername={identifyPaymentMethod(info.order_payment_method)}
-                        orderStatus={info.order_status}
-                        orderNumber={info.order_number}/>
+                        orderStatus={identifyType(info.order_status)}
+                        orderNumber={counter()}/>
                 {/each}
             {:catch err}
                 <p>{err.message}</p>
             {/await}
+
         </table>
     </div>
 </div>

@@ -12,7 +12,8 @@ export const audits = readable(null, function start(set) {
 
 async function getTransaction() {
     try {
-        return await axios.get('/transaction');
+        const {data} = await axios.get('/transaction');
+        return data.transactions
     } catch (e) {
         console.log(e);
     }

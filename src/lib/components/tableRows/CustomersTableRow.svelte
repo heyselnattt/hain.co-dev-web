@@ -1,9 +1,9 @@
 <script lang="ts">
     import ButtonEditTable from "../buttons/ButtonEditTable.svelte";
 
-    export let num;
+    export let num: number;
     export let name: string;
-    export let contactNum: string;
+    export let customerLastName: string;
     export let email: string;
     export let link: string;
 </script>
@@ -12,7 +12,7 @@
     <tr class="text is-clickable">
         <th>{num}</th>
         <td>{name}</td>
-        <td>{contactNum}</td>
+        <td>{customerLastName}</td>
         <td>{email}</td>
         <td><ButtonEditTable link={link}/></td>
     </tr>
@@ -20,6 +20,7 @@
 
 <style>
     .text {
+        font-family: 'Montserrat', sans serif;
         font-size: 17px;
     }
 </style>

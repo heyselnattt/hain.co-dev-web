@@ -2,6 +2,7 @@
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
     import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
     import Discard from "$lib/components/buttons/Discard.svelte";
+    import NotificationContainer from "$lib/components/systemNotification/notification-container.svelte";
 </script>
 
 <svelte:head>
@@ -9,6 +10,7 @@
 </svelte:head>
 
 <NavbarSolo />
+<NotificationContainer />
 
 <div class="container">
     <div class="columns  pt-5 is-multiline has-text-centered">

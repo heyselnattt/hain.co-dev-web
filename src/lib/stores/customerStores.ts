@@ -12,7 +12,8 @@ export const customers = readable(null, function start(set) {
 
 async function getCustomer() {
     try {
-        return await axios.get('/customer');
+        const {data} = await axios.get('/customer');
+        return data.customers
     } catch (e) {
         console.log(e);
     }

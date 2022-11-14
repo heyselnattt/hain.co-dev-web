@@ -1,11 +1,19 @@
 <script lang="ts">
-
     import NavbarWithSearch from "$lib/components/navbars/NavbarWithSearch.svelte";
     import CustomersTableRow from "$lib/components/tableRows/CustomersTableRow.svelte";
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
     import ButtonAddRecord from "$lib/components/buttons/ButtonAddRecord.svelte";
     import {customers} from "$lib/stores/customerStores";
     import TableLoadingScreen from "$lib/components/otherComponents/TableLoadingScreen.svelte";
+    import {onMount} from "svelte";
+    import {goto} from "$app/navigation";
+    import NotificationContainer from "$lib/components/systemNotification/notification-container.svelte";
+
+    onMount(async () => {
+        if (!localStorage.getItem("admin")) {
+            await goto("/");
+        }
+    })
 
     let itemNumber = 1;
     const counter = (): number => {
@@ -14,6 +22,7 @@
 </script>
 
 <NavbarWithSearch />
+<NotificationContainer />
 
 <div class="container">
     <div class="columns has-text-centered pt-5">
@@ -21,7 +30,7 @@
             <ButtonBack link="Database" />
         </div>
         <div class="column is-4">
-            <p class="text has-text-link">
+            <p class="text has-text-link has-text-weight-bold">
                 Customers
             </p>
         </div>
@@ -35,8 +44,8 @@
             <thead>
                 <tr>
                     <th>No.</th>
-                    <th>Name</th>
-                    <th>Contact No.</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
                     <th>Email</th>
                     <th></th>
                 </tr>
@@ -44,13 +53,12 @@
             {#await $customers}
                 <TableLoadingScreen/>
             {:then customer}
-
-                {#each customer.data as info}
+                {#each customer as info}
                     <!--TODO add property for the link for the individual product-->
                     <CustomersTableRow
                         num={counter()}
-                        name={`${info.customer_first_name} ${info.customer_middle_name} ${info.customer_last_name}`}
-                        contactNum={info.customer_contact_number}
+                        name={info.customer_first_name}
+                        customerLastName={info.customer_last_name}
                         email={info.customer_email}
                         link={`/Customers/${info.customer_email}`}/>
                 {/each}
@@ -63,12 +71,12 @@
 
 <style>
     .text {
-        font-family: 'Karla', sans-serif;
+        font-family: 'Montserrat', sans serif;
         font-size: 40px;
     }
 
     table {
-        font-family: 'Karla', sans-serif;
+        font-family: 'Montserrat', sans serif;
         font-size: 20px;
     }
 </style>

@@ -4,18 +4,16 @@
     import ButtonSwitch from "$lib/components/buttons/ButtonSwitch.svelte";
     import FieldWithValue from "$lib/components/otherComponents/FieldWithValue.svelte";
     import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
+    import NotificationContainer from "$lib/components/systemNotification/notification-container.svelte";
 </script>
 
-<svelte:head>
-    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@600&display=swap" rel="stylesheet"/>
-</svelte:head>
-
 <NavbarSolo/>
+<NotificationContainer />
 
 <div class="container">
     <div class="columns  pt-5 is-multiline has-text-centered">
         <div class="column is-4">
-                <ButtonBack link="../Customers"/>
+            <ButtonBack link="../Customers"/>
         </div>
         <div class="column is-4">
             <p class="text has-text-link">
@@ -49,12 +47,12 @@
 
 <style>
     .text {
-        font-family: 'Karla', sans-serif;
+        font-family: 'Montserrat', sans-serif;
         font-size: 40px;
     }
 
     .switch-labels {
-        font-family: 'Karla', sans-serif;
+        font-family: 'Montserrat', sans-serif;
         font-size: 25px;
     }
 </style>

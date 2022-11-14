@@ -1,24 +1,27 @@
 <script>
     import Discard from "$lib/components/buttons/Discard.svelte";
-    import FieldWithoutValue from "$lib/components/otherComponents/FieldWithoutValue.svelte";
     import NavbarSolo from "$lib/components/navbars/NavbarSolo.svelte";
     import ButtonBack from "$lib/components/buttons/ButtonBack.svelte";
-    import ButtonAddRecord from "$lib/components/buttons/ButtonAddRecord.svelte";
     import axios from "$lib/api/index";
     import {goto} from "$app/navigation";
+    import uploadImageToAPI from "../../lib/helper/uploadImageToAPI.js";
+    import { notifs } from "$lib/stores/notificationStore";
+    import NotificationContainer from "$lib/components/systemNotification/notification-container.svelte";
 
     let product = {
-        product_name: null,
-        product_price: null,
-        product_image_link: null,
-        product_stock: null,
-        product_description: null,
-        product_type: null,
-        product_is_active: true,
-        product_code: null
+        productCode: "",
+        productName: "",
+        productDescription: "",
+        productPrice: 0,
+        productIsActive: true,
+        productImage: "",
+        productType: 1
     }
 
-    let foodTypes = [
+    let selectedImage;
+    let adding = false
+
+    let types = [
         {value: 1, type: "BREAKFAST"},
         {value: 2, type: "LUNCH"},
         {value: 3, type: "DESSERT"},
@@ -26,24 +29,76 @@
     ]
 
     const addProductToDatabase = async () => {
+        let msg = 'Product '
+        let errors = 0
+        Object.keys(product).map(prop => {
+            if(prop === 'productPrice') {
+                if(product[prop] <= 0) {
+                    msg += !errors ? `${prop.split('product').join('')}` : `, ${prop.split('product').join('')}`
+                    errors++
+                }
+            }
+            if(prop !== 'productIsActive' && prop !== 'productType' && prop !== 'productPrice') {
+                if(!product[prop]) {
+                    msg += !errors ? `${prop.split('product').join('')}` : `, ${prop.split('product').join('')}`
+                    errors++
+                }
+            }
+        })
+        msg += errors ? ' are a required fields' : ' is a required field'
+
+        if(errors) {
+            $notifs = [...$notifs, {
+                msg,
+                type: 'error',
+                id: `${Math.random() * 99}${new Date().getTime()}`
+            }]
+            return
+        }
+
         try {
-            let response = await axios.post('/product/new_product', product)
-            console.log(response)
-            await goto("../Food")
+            adding = false
+            product.productImage = await uploadImageToAPI(selectedImage);
+            // console.log(product.productImage);
+            let response = await axios.post('/product/createProduct', product)
+            if(response.status == 200) {
+                adding = false
+                $notifs = [...$notifs, {
+                    msg: `New canteen product: ${product.productName} (${product.productCode})`,
+                    type: 'success',
+                    id: `${Math.random() * 99}${new Date().getTime()}`
+                }]
+                await goto("../Food")
+            }else{
+                adding = false
+                $notifs = [...$notifs, {
+                    msg: `Error in adding new product`,
+                    type: 'error',
+                    id: `${Math.random() * 99}${new Date().getTime()}`
+                }]
+            }
+            // console.log(response)
+            // alert("Product Added Successfully")
         } catch (e) {
+            adding = false
+            $notifs = [...$notifs, {
+                msg: `Error in adding new product`,
+                type: 'error',
+                id: `${Math.random() * 99}${new Date().getTime()}`
+            }]
             console.log(e)
         }
     }
 
-    let input;
-    let container;
+    function onImageSelect(e) {
+        selectedImage = e.target.files[0]
+        product.productImage = selectedImage
+        // console.log(selectedImage)
+    }
 </script>
 
-<svelte:head>
-    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@600&display=swap" rel="stylesheet"/>
-</svelte:head>
-
 <NavbarSolo/>
+<NotificationContainer />
 
 <div class="container">
     <div class="columns  pt-5 is-multiline has-text-centered">
@@ -65,28 +120,22 @@
             <p class="pText has-text-link ml-4 mb-1">
                 <span>*</span> Product Name
             </p>
-            <input class="pText input is-rounded" type="text" bind:value={product.product_name}/>
+            <input class="pText input is-rounded" type="text" bind:value={product.productName}/>
         </div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
                 <span>*</span> Product Price
             </p>
-            <input class="pText input is-rounded" type="number" bind:value={product.product_price}/>
-        </div>
-        <div class="column is-3 is-offset-2">
-            <p class="pText has-text-link ml-4 mb-1">
-                <span>*</span> Product Stock
-            </p>
-            <input class="pText input is-rounded" type="number" bind:value={product.product_stock}/>
+            <input min={0} class="pText input is-rounded" type="number" bind:value={product.productPrice}/>
         </div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
                 <span>*</span> Product Type
             </p>
-            <select bind:value={product.product_type} class="pText input is-rounded">
-                {#each foodTypes as pos}
+            <select bind:value={product.productType} class="pText input is-rounded">
+                {#each types as pos}
                     <option value={pos.value}>
-                        {pos.position}
+                        {pos.type}
                     </option>
                 {/each}
             </select>
@@ -95,50 +144,30 @@
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
                 <span>*</span> Product Code
+                <br>
+                <span class="note">You cannot modify product code once set</span>
             </p>
-            <input class="pText input is-rounded" type="text" bind:value={product.product_code}/>
-        </div>
-        <div class="column is-3 is-offset-2">
-            <p class="pText has-text-link ml-4 mb-1">
-                <span>*</span> Product Image Link
-            </p>
-            <input class="pText input is-rounded" type="text" bind:value={product.product_image_link}/>
+            <input class="pText input is-rounded" type="text" bind:value={product.productCode}/>
         </div>
         <div class="column is-3 is-offset-2">
             <p class="pText has-text-link ml-4 mb-1">
                 <span>*</span> Product Description
             </p>
-            <textarea class="pText input tall-textarea" bind:value={product.product_description}></textarea>
+            <textarea class="pText input tall-textarea" bind:value={product.productDescription}></textarea>
         </div>
         <div class="column is-3 is-offset-2">
-            <div class="pText has-text-link ml-4 mb-1">
-                <p>Image Preview</p>
-                <figure class="mt-4 avatar food-image">
-                    {#if isNaN(product.product_image_link)}
-                        <img src="{product.product_image_link}" alt=""
-                             style="border-radius: 20px; border: hsl(223, 85%, 41%)  5px double"/>
-                    {/if}
-                </figure>
-            </div>
-        </div>
-    </div>
-    <div class="has-text-centered">
-        <div class="field">
-            <input id="switchLarge switchColorDefault switchRoundedDefault"
-                   type="checkbox"
-                   name="switchLarge switchColorDefault switchRoundedDefault"
-                   class="switch is-large is-link is-rounded"
-                   bind:checked={product.product_is_active}>
-            {#if product.product_is_active}
-                <label for="switchLarge switchColorDefault switchRoundedDefault"> <span>*</span> Active</label>
-            {:else}
-                <label for="switchLarge switchColorDefault switchRoundedDefault"> <span>*</span> Inactive</label>
-            {/if}
+            <p class="pText has-text-link ml-4 mb-1">
+                <span>*</span> Product Image
+            </p>
+            <input class="pText input is-rounded"
+                   type="file"
+                   accept="image/*"
+                   on:change={onImageSelect}/>
         </div>
     </div>
     <div class="has-text-centered">
         <div class="mb- has-text-centered">
-            <button class="btn-txt button is-link is-rounded" on:click={addProductToDatabase}>Add Product</button>
+            <button class="btn-txt button {adding ? 'is-loading' : ''} is-link is-rounded" on:click={addProductToDatabase}>Add Product</button>
         </div>
     </div>
 
@@ -147,12 +176,12 @@
 
 <style>
     .text {
-        font-family: 'Karla', sans-serif;
+        font-family: 'Montserrat', sans-serif;
         font-size: 40px;
     }
 
     .pText {
-        font-family: 'Karla', sans-serif;
+        font-family: 'Montserrat', sans-serif;
         font-size: 20px;
     }
 
@@ -165,7 +194,7 @@
 
     .btn-txt {
         font-size: 20px;
-        font-family: 'Karla', sans-serif;
+        font-family: 'Montserrat', sans-serif;
     }
 
     .tall-textarea {
@@ -175,5 +204,11 @@
 
     span {
         color: red
+    }
+
+    .note {
+        color: gray;
+        display: block;
+        font-size: 13px;
     }
 </style>

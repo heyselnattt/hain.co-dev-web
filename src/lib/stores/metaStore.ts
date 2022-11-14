@@ -18,7 +18,9 @@ async function getRowCounts() {
      * and the corresponding records won't be broken
      */
     try {
-        return await axios.get('/meta/row_count')
+        const {data} = await axios.get('/meta/rowCount')
+        console.log(data)
+        return data
     } catch (e) {
         console.log(e);
     }
