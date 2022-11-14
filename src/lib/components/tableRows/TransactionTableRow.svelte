@@ -1,5 +1,5 @@
 <script lang="ts">
-    import moment from "moment/moment";
+    import moment from "moment/moment.js";
     export let id;
     export let agent;
     export let description;
